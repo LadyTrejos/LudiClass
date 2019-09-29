@@ -19,8 +19,8 @@ SECRET_KEY = '*(@i56!vox9z6)#*9d535pbyf1rzuke7syi0h9%1d=9f^x$ctv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
+SITE_ID = 1
 
 # Application definition
 
@@ -31,10 +31,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Third party
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'corsheaders',
+    'rest_auth',
+    'rest_auth.registration',
+    'allauth.socialaccount',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'django_filters',
+    'storages',
+    # Apps
     'users'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -110,11 +124,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_URL = '/static/'
-
 # User model
 AUTH_USER_MODEL = 'users.User'
 
@@ -123,3 +132,34 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USER_EMAIL_FIELD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 EMAIL_REQUIRED = True
+
+# Rest framework config
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
+    "DATE_INPUT_FORMATS": [("%d-%m-%Y"),],
+}
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'users.api.serializers.UserSerializer',
+    'TOKEN_SERIALIZER': 'users.api.serializers.TokenSerializer',
+    
+}
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
