@@ -1,0 +1,2 @@
+# LudiClass
+Proyecto de emprendimiento
