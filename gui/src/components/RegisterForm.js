@@ -226,40 +226,9 @@ class RegisterForm extends React.Component {
                 />)}
             </Form.Item>
             
-            <Form.Item>
-                {getFieldDecorator('agreement', {
-                    valuePropName: 'checked',
-                    rules: [
-                    {validator: this.validatePrivacyCheck}]
-                })(
-                    <Checkbox>
-                        Acepto la <a href="/privacy" target="_blank">política de privacidad</a>
-                    </Checkbox>
-                )}
-            </Form.Item>
-            
-            <Form.Item>
-                {getFieldDecorator('captcha', {
-                    rules: [
-                    {
-                        required: true,
-                        message: 'Confirme el CAPTCHA',
-                    }
-                    ],
-                })(
-                    <ReCAPTCHA
-                        sitekey="6LctmasUAAAAANjaXDT7KQ2poDUbNRmY97QX4ygP"
-                        onChange={this.onChangeCaptcha}
-                    />
-                )}
-            </Form.Item>
-            <br/>
-            <Button type="primary" htmlType="submit" size='large' disabled={!this.state.captcha} >
+            <Button type="primary" htmlType="submit">
                 Registrarse
             </Button>
-            <div>
-                {this.state.success_message}
-            </div>
         </Form>
     );
   }
