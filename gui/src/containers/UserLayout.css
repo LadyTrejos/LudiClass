@@ -5,5 +5,9 @@
   }
 
 .ant-layout-sider-children .menu {
-    background: '#fa8c16';
+    background: '#faad14';
+}
+
+.ant-menu .ant-menu-sub {
+  background: '#faad14';
 }

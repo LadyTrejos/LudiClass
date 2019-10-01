@@ -6,6 +6,8 @@ import { Spin } from 'antd';
 import UserLayout from '../containers/UserLayout';
 import LoginForm from './LoginForm';
 import HOSTNAME from '../helpers/hostname';
+import Activity from './Activity';
+import RegisterForm from './RegisterForm';
 
 class Home extends React.Component {
     constructor(props) {
@@ -18,6 +20,7 @@ class Home extends React.Component {
         const userID = localStorage.getItem('user');
         axios.get(`${HOSTNAME}/api/users/${userID}/`)
         .then(res => {
+            console.log(res.data)
             this.setState({
                 user: res.data
             })
@@ -25,19 +28,12 @@ class Home extends React.Component {
     }
 
     getRoutes = () => {
-        if(this.state.user.is_superuser){
-            return (
-              <UserLayout>
-              </UserLayout>)
-              } else if (this.state.user.is_admin){
-              return (
-              <UserLayout>
-              </UserLayout>)
-            }  else if (this.state.user.is_user ){
+        if(this.state.user.is_user){
               console.log('is user')
               return (
               <UserLayout>
                 <Route exact path="/login" component={LoginForm}/>
+                <Route exact path='/activity' component={Activity}/>
               </UserLayout>)
               }
               }

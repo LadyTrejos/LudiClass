@@ -1,8 +1,9 @@
-import React from 'react';
+ import React from 'react';
 import { Row, Col, Form, Input, Icon, Button } from 'antd';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
+import history from '../helpers/history';
 
 
 class LoginForm extends React.Component {

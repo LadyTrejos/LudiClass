@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import Home from './components/Home';
 import Index from './containers/Index';
+import Activity from './components/Activity';
 
 
 const BaseRouter = () => (
