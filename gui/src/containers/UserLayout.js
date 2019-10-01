@@ -46,7 +46,7 @@ class UserLayout extends React.Component {
         >
           <div className="logo" />
           
-          <div style={{fontWeight:'bold'}}>{this.state.username.toUpperCase()}</div>
+          
           <Menu  mode="inline" defaultSelectedKeys={['7']} style={{backgroundColor:'#faad14'}}>
           
             <SubMenu
@@ -82,7 +82,9 @@ class UserLayout extends React.Component {
           </Menu>
         </Sider>
         <Layout>
-          <Header style={{ background: '#faad14', padding: 0 }} />
+          <Header style={{ background: '#faad14', paddingRight: 40, textAlign:'end' }} >
+          <div style={{fontWeight:'bold'}}>{this.state.username.toUpperCase()}</div>
+          </Header>
           <Content style={{ margin: '24px 16px 0' }}>
             <div style={{ padding: 24, background: '#E5E9FF', minHeight: 360}}>
                 {this.props.children}

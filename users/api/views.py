@@ -1,5 +1,5 @@
 from users.models import User, Topic, Material,Activity
-from .serializers import UserSerializer, ActivitySerializer
+from .serializers import UserSerializer, ActivitySerializer,TopicSerializer
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
@@ -18,3 +18,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
     filter_fields = ('name', 'topics')
     ordering_fields = ('created_at',)
     search_fields = ('name','topics')
+
+class TopicViewSet(viewsets.ModelViewSet):
+    serializer_class = TopicSerializer
+    queryset = Topic.objects.all()

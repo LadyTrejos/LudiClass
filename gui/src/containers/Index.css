@@ -4,12 +4,50 @@
     margin:  5px;
     float: left;
     background: none
-  }
+}
+
 .message-container {
     margin-left: 10vw;
+    margin-top: 5vh;
 }
+
 .welcome-message {
     font-family: 'Poppins', sans-serif;;
-    font-size: 6vh;
+    font-size: 3vw;
     font-style: normal;
 }
+
+.login-container {
+    font-family: 'Roboto', sans-serif;
+    padding: 35px;
+    border-radius: 15px 50px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+}
+
+#grad-login {
+    background-color: #fffbe6; /* For browsers that do not support gradients */
+    background-image: linear-gradient(0deg,#fffbe6, #ffd666 ); 
+}
+
+/* For desktop: */
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="col-"] {
+      width: 100%;
+    }
+
+  }
+
