@@ -17,9 +17,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '*(@i56!vox9z6)#*9d535pbyf1rzuke7syi0h9%1d=9f^x$ctv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['ludiclass.herokuapp.com', 'localhost']
 SITE_ID = 1
 
 # Application definition
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'ludiclass.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'build'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,8 +85,10 @@ WSGI_APPLICATION = 'ludiclass.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'ludiclass',
-        'HOST': 'localhost'
+        'NAME': 'LudiClass',
+        'USER': 'ludiclass_admin',
+        'PASSWORD': 'emprendimiento',
+        'HOST': 'mongodb://ludiclass_admin:emprendimiento@ludiclass-shard-00-00-u85rm.mongodb.net:27017,ludiclass-shard-00-01-u85rm.mongodb.net:27017,ludiclass-shard-00-02-u85rm.mongodb.net:27017/test?ssl=true&replicaSet=ludiclass-shard-0&authSource=admin&retryWrites=true&w=majority'
     }
 }
 
@@ -159,7 +161,22 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'build/static')
+]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+# AWS storage
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = 'AKIASNWJXNEZE7U3Z2XB'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'ludiclass'
+
+AWS_DEFAULT_ACL = None
+AWS_S3_FILE_OVERWRITE = False

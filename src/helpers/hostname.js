@@ -1,2 +1,2 @@
-const HOSTNAME = "http://localhost:8000"
+const HOSTNAME = "http://ludiclass.herokuapp.com/"
 export default HOSTNAME;
