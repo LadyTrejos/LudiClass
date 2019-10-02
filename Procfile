@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn observatorio.wsgi --log-file -
+web: gunicorn ludiclass.wsgi --log-file -
