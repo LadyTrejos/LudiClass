@@ -1,17 +1,14 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Row, Col, Icon, Button  } from 'antd';
+import { Row, Col, Icon, Button  } from 'antd';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
 import './Index.css'
 import logo from '../static/img/logo.png'
-import marca from '../static/img/Sin.png'
 import brandname from '../static/img/ludiclass.png'
 
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
-const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
 
 class Index extends React.Component {
     state = {
@@ -26,12 +23,12 @@ class Index extends React.Component {
             <div className='bg-container'>
                 <Row justify="space-between">
                     <Col xs={7} sm={8} md={8} lg={7} xl={5}>
-                        <img src={logo} className='logo'/>
+                        <img src={logo} className='logo' alt="logo"/>
                     </Col>
                     
                     <Col xs={17} sm={16} md={16} lg={8} xl={11}>
                         <Row className='message-container '>
-                            <img src={brandname} className='brand'/>
+                            <img src={brandname} className='brand' alt="LudiClass"/>
                         </Row>
                         <Row>
                             <h1 className='welcome-message'>La aplicación que te ayuda a planear clases más divertidas</h1>
@@ -62,13 +59,13 @@ class Index extends React.Component {
                     </Col>
                 </Row>
                 
-                <Row type="flex">
-                    <Col xs={3} sm={3} md={2} lg={7} xl={5}>
+                <Row type="flex" justify="center">
+                    <Col xs={12} sm={12} md={12} lg={10} xl={9}>
                         <h3 className='white p-5'>Síguenos en nuestras redes sociales: </h3>
                     </Col>
                 </Row>
                 
-                <Row type="flex" gutter={20}>
+                <Row type="flex" gutter={20} justify="center">
                     <Col xs={3} sm={3} md={2} lg={1} xl={1}>
                         <a href='https://www.facebook.com/121172999280716/'>
                             <Icon type="facebook" style={{ fontSize: '28px', color: '#d3f261' }}/>
