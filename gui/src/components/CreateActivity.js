@@ -111,7 +111,6 @@ componentDidMount(){
   };
 
   handleCreate = (e) => {
-    console.log(this.state.activityInfo)
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
@@ -170,6 +169,7 @@ componentDidMount(){
     );
     return (
       <div>
+        <h1 style={{textAlign:'center',fontSize:'2em'}}>Crear actividad</h1>
             <Form>
                 <Form.Item label='Nombre'>
                     <Input placeholder='Nombre de la actividad'
