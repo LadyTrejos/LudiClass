@@ -13,5 +13,6 @@ urlpatterns = [
         TemplateView.as_view(template_name="password_reset_confirm.html"),
         name='password_reset_confirm'),
     path('admin/', admin.site.urls),
-    path('api/', include('users.api.urls'))
+    path('api/', include('users.api.urls')),
+    re_path('.*', TemplateView.as_view(template_name='index.html'))
     ]
