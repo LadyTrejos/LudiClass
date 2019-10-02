@@ -6,11 +6,15 @@ import { Spin } from 'antd';
 import UserLayout from '../containers/UserLayout';
 import LoginForm from './LoginForm';
 import HOSTNAME from '../helpers/hostname';
+import Activity from './CreateActivity';
+import ActivityListView from '../containers/ActivityListView'
+import RegisterForm from './RegisterForm';
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            activity:'',
         };
       }
 
@@ -22,22 +26,15 @@ class Home extends React.Component {
                 user: res.data
             })
         })
+
     }
 
     getRoutes = () => {
-        if(this.state.user.is_superuser){
-            return (
-              <UserLayout>
-              </UserLayout>)
-              } else if (this.state.user.is_admin){
+        if(this.state.user.is_user){
               return (
-              <UserLayout>
-              </UserLayout>)
-            }  else if (this.state.user.is_user ){
-              console.log('is user')
-              return (
-              <UserLayout>
-                <Route exact path="/login" component={LoginForm}/>
+              <UserLayout >
+                <Route exact path="/activityListView/" component={ActivityListView} />
+                <Route exact path='/activity' component={Activity}/>
               </UserLayout>)
               }
               }
