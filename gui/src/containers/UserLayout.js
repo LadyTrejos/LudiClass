@@ -53,9 +53,7 @@ class UserLayout extends React.Component {
           onCollapse={(collapsed, type) => {
             console.log(collapsed, type);
           }}
-        >
-          <div className="logo" />
-          
+        >         
           
           <Menu  mode="inline" defaultSelectedKeys={['7']} style={{backgroundColor:'#4F14A1', justifyContent: 'center'}}>
           <h1 style={{color:'#fff', marginTop:'20px'}}>Menú</h1>
