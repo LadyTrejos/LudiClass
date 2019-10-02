@@ -1,14 +1,12 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import {Form, Button, List, Input, Upload, Icon, Modal, Avatar, Select, Divider, message } from 'antd';
-import moment from 'moment';
+import {Form, Button, List, Input, Upload, Icon, Modal, message, Select } from 'antd';
 import axios from 'axios';
 import HOSTNAME from '../helpers/hostname';
 import { withRouter } from 'react-router-dom';
 
 const { TextArea } = Input;
 const { Option } = Select;
-
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {

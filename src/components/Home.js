@@ -3,12 +3,10 @@ import { Route } from 'react-router-dom';
 import axios from 'axios';
 import { Spin } from 'antd';
 
-import UserLayout from '../containers/UserLayout';
-import LoginForm from './LoginForm';
-import HOSTNAME from '../helpers/hostname';
 import Activity from './CreateActivity';
+import UserLayout from '../containers/UserLayout';
 import ActivityListView from '../containers/ActivityListView'
-import RegisterForm from './RegisterForm';
+import HOSTNAME from '../helpers/hostname';
 
 class Home extends React.Component {
     constructor(props) {

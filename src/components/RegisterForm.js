@@ -1,17 +1,12 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Spin, Select, DatePicker, Checkbox, Tooltip, notification } from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
 import axios from 'axios';
-import moment from 'moment';
-import ReCAPTCHA from 'react-google-recaptcha';
 
 import HOSTNAME from '../helpers/hostname';
 
-const { Option } = Select;
-
-const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 class RegisterForm extends React.Component {
     constructor(props) {
