@@ -6,7 +6,7 @@ import * as actions from '../store/actions/auth';
 import './Index.css'
 import logo from '../static/img/logo.png'
 import marca from '../static/img/Sin.png'
-import ludiclass from '../static/img/ludiclass.png'
+import brandname from '../static/img/ludiclass.png'
 
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
@@ -23,62 +23,65 @@ class Index extends React.Component {
     }
   render(){
     return(
-        <Layout>
-            <Header style={{ position: 'fixed', zIndex: 1, width: '100%', backgroundColor: '#faad14', display:'flex' }}>
-                <div>
-                    <img src={logo} className="logo"/>
-                    <img src={marca}/>
-                </div>
-            </Header>
-            <Content style={{ marginTop: 64 }}>
-            <div style={{ background: '#fff', padding: 24, minHeight: 380 }}>
-                <Row gutter={24} type="flex" justify="center">
-                    <div className='message-container col-3'>
-                        <img src={ludiclass} className='col-10'/>
-                        <h1 className='welcome-message'>La aplicación que te ayuda a planear clases más divertidas</h1>
-                    </div>
-                    <div className='col-3'>
-                        <img src={logo} style={{height: '30vh', width: '30vh'}}/>
-                    </div>
-                    <div className='col-3'>
-                        <div id='grad-login' className='login-container'>
-                            <h1 style={{fontFamily: 'Righteous, sanserif', fontSize: '30px'}}>
-                                { this.state.login ? 'Iniciar sesión' : 'Registrarse' }
-                            </h1>
-                            
-                            {this.state.login ? <LoginForm/> : <RegisterForm/>}
-                            
-                            <div style={{display: 'flex', flexDirection: 'row', paddingTop: '20px'}}>
-                                <p>{ this.state.login ? '¿No tienes una cuenta?' : '¿Ya tienes una cuenta?' } </p>
-                                <Button type="link" onClick={this.changeContent} size='small'>
-                                    { this.state.login ? 'Regístrate aquí' : 'Inicia sesión' }
-                                </Button>
-                            </div>
+            <div className='bg-container'>
+                <Row justify="space-between">
+                    <Col xs={7} sm={8} md={8} lg={7} xl={5}>
+                        <img src={logo} className='logo'/>
+                    </Col>
+                    
+                    <Col xs={17} sm={16} md={16} lg={8} xl={11}>
+                        <Row className='message-container '>
+                            <img src={brandname} className='brand'/>
+                        </Row>
+                        <Row>
+                            <h1 className='welcome-message'>La aplicación que te ayuda a planear clases más divertidas</h1>
+                        </Row>
+
+                    </Col>
+
+                    <Col xs={24} sm={24} md={24} lg={9} xl={8}>
+                        <div className='login-container'>
+                                <h1 className='login-title'>
+                                    { this.state.login ? 'Iniciar sesión' : 'Registrarse' }
+                                </h1>
+                                
+                                {this.state.login ? <LoginForm/> : <RegisterForm/>}
+                                
+                                <div style={{display: 'flex', flexDirection: 'row', paddingTop: '20px'}}>
+                                    <p>{ this.state.login ? '¿No tienes una cuenta?' : '¿Ya tienes una cuenta?' } </p>
+                                    <Button 
+                                        type="link" 
+                                        onClick={this.changeContent} 
+                                        size='small'
+                                        style={{color:'#ff530e'}}
+                                    >
+                                        { this.state.login ? 'Regístrate aquí' : 'Inicia sesión' }
+                                    </Button>
+                                </div>
                         </div>
-                    </div>
+                    </Col>
                 </Row>
                 
-                
-            </div>
-            </Content>
-            <Footer style={{ textAlign: 'center', backgroundColor: '#ffc53d' }}>
-                <Row>
-                    <h3>Síguenos en nuestras redes sociales: </h3>
+                <Row type="flex">
+                    <Col xs={3} sm={3} md={2} lg={7} xl={5}>
+                        <h3 className='white p-5'>Síguenos en nuestras redes sociales: </h3>
+                    </Col>
                 </Row>
-                <Row gutter={24} type="flex" justify="center">
-                    <Col>
+                
+                <Row type="flex" gutter={20}>
+                    <Col xs={3} sm={3} md={2} lg={1} xl={1}>
                         <a href='https://www.facebook.com/121172999280716/'>
-                            <Icon type="facebook" style={{ fontSize: '28px', color: '#10239e' }}/>
+                            <Icon type="facebook" style={{ fontSize: '28px', color: '#d3f261' }}/>
                         </a>
                     </Col>
-                    <Col>
+                    <Col xs={3} sm={3} md={2} lg={1} xl={1}>
                         <a href='https://www.instagram.com/ludiclass/'>
-                            <Icon type="instagram" style={{ fontSize: '28px', color: '#9254de' }}/>
+                            <Icon type="instagram" style={{ fontSize: '28px', color: '#d3f261' }}/>
                         </a>
                     </Col>
                 </Row>
-            </Footer>
-        </Layout>
+            </div>
+            
   );
   }
 }

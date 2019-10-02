@@ -20,7 +20,7 @@ class LoginForm extends React.Component {
             const { getFieldDecorator } = this.props.form;
             return( 
                 <Form onSubmit={this.handleSubmit} className="login-form">
-                    <Form.Item label="Correo electrónico">
+                    <Form.Item label="Correo electrónico" colon hasFeedback>
                     {getFieldDecorator('email', {
                         rules: [{ required: true, message: 'Ingresa tu correo electrónico' }],
                     })(
@@ -31,20 +31,26 @@ class LoginForm extends React.Component {
                         />,
                     )}
                     </Form.Item>
-                    <Form.Item label="Contraseña">
-                    {getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Ingresa tu contraseña' }],
-                    })(
-                        <Input.Password
-                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        type="password"
-                        size='large'
-                        placeholder="Contraseña"
-                        />
-                    )}
-                        <a href="">Olvidé mi contraseña </a>
+                    <Form.Item label="Contraseña" colon hasFeedback>
+                        {getFieldDecorator('password', {
+                            rules: [{ required: true, message: 'Ingresa tu contraseña' }],
+                        })(
+                            <Input.Password
+                            prefix={<Icon type="lock" style={{ color: '#391085' }} />}
+                            type="password"
+                            size='large'
+                            placeholder="Contraseña"
+                            />
+                        )}
+                        {/*<a href="">Olvidé mi contraseña </a>*/}
                         <br/>
-                        <Button type="primary" htmlType="submit">
+                        <Button 
+                            type="primary" 
+                            htmlType="submit" 
+                            block
+                            size='large'
+                            style={{backgroundColor: '#52c41a', marginTop: '2em'}}
+                        >
                             Entrar
                         </Button>
                     </Form.Item>
