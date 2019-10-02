@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'LudiClass',
         'USER': 'ludiclass_admin',
         'PASSWORD': 'emprendimiento',
-        'HOST': 'mongodb://ludiclass_admin:emprendimiento@ludiclass-shard-00-00-u85rm.mongodb.net:27017,ludiclass-shard-00-01-u85rm.mongodb.net:27017,ludiclass-shard-00-02-u85rm.mongodb.net:27017/test?ssl=true&replicaSet=ludiclass-shard-0&authSource=admin&retryWrites=true&w=majority'
+        'HOST': 'mongodb://ludiclass_admin:emprendimiento@ludiclass-shard-00-00-u85rm.mongodb.net:27017,ludiclass-shard-00-01-u85rm.mongodb.net:27017,ludiclass-shard-00-02-u85rm.mongodb.net:27017/test?ssl=true&replicaSet=LudiClass-shard-0&authSource=admin&retryWrites=true&w=majority'
     }
 }
 
