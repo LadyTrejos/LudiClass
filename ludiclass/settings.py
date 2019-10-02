@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '*(@i56!vox9z6)#*9d535pbyf1rzuke7syi0h9%1d=9f^x$ctv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['ludiclass.herokuapp.com', 'localhost']
 SITE_ID = 1

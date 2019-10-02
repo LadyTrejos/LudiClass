@@ -1,2 +1,2 @@
-const HOSTNAME = "http://ludiclass.herokuapp.com/"
+const HOSTNAME = "https://ludiclass.herokuapp.com"
 export default HOSTNAME;
