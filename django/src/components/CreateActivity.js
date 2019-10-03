@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import {Form, Button, List, Input, Upload, Icon, Modal, message, Select } from 'antd';
 import axios from 'axios';
 import HOSTNAME from '../helpers/hostname';
+import history from '../helpers/history';
 import { withRouter } from 'react-router-dom';
 
 const { TextArea } = Input;
@@ -106,6 +107,7 @@ componentDidMount(){
         fileList:[]
         })
     )
+    history.push('/activityListView');
   };
 
   handleCreate = (e) => {

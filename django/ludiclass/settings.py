@@ -19,7 +19,7 @@ SECRET_KEY = '*(@i56!vox9z6)#*9d535pbyf1rzuke7syi0h9%1d=9f^x$ctv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ludiclass.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['ludiclass.herokuapp.com', 'localhost', '104.248.9.57']
 SITE_ID = 1
 
 # Application definition
