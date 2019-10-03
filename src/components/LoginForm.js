@@ -49,7 +49,7 @@ class LoginForm extends React.Component {
                             htmlType="submit" 
                             block
                             size='large'
-                            style={{backgroundColor: '#52c41a', marginTop: '2em'}}
+                            style={{backgroundColor: '#531dab', marginTop: '2em'}}
                         >
                             Entrar
                         </Button>

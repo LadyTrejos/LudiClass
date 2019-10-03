@@ -3,10 +3,11 @@ import { Route } from 'react-router-dom';
 import axios from 'axios';
 import { Spin } from 'antd';
 
+import UserLayout from '../containers/UserLayout';
+import HOSTNAME from '../helpers/hostname';
 import Activity from './CreateActivity';
 import UserLayout from '../containers/UserLayout';
 import ActivityListView from '../containers/ActivityListView'
-import HOSTNAME from '../helpers/hostname';
 
 class Home extends React.Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class Home extends React.Component {
         if(this.state.user.is_user){
               return (
               <UserLayout >
-                <Route exact path="/activityListView/" component={ActivityListView} />
+                <Route exact path="/activityListView" component={ActivityListView} />
                 <Route exact path='/activity' component={Activity}/>
               </UserLayout>)
               }

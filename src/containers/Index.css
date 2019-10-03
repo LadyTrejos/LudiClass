@@ -1,18 +1,10 @@
-label, a, p{
-    color: white !important;
-}
-
-.white {
-    color: white;
-}
-
 .justify-center {
     display: flex;
     justify-content: center;
 }
 
 .bg-container {
-    background-color: #4F14A1;
+    background-color: #ffffb8;
     min-height: 100vh;
     min-width: 100vw; 
     overflow: hidden;
@@ -39,14 +31,13 @@ label, a, p{
     font-family: 'Poppins', sans-serif;;
     font-size: 1.5rem;
     font-style: normal;
-    color: white;
 }
 
 .login-container {
     font-family: 'Roboto', sans-serif;
     padding: 35px;
-    background: #471291;
-    border-color: #471291;
+    background: #ffe58f;
+    border-color: #ffe58f;
     right: 0px;
     position: absolute;
     min-width: 7vw;
@@ -57,7 +48,6 @@ label, a, p{
     font-family: 'Righteous', sans-serif;
     font-size: 2rem; 
     text-align: center;
-    color: white;
 }
 
 /* For desktop: */
