@@ -6,7 +6,6 @@ import { Spin } from 'antd';
 import UserLayout from '../containers/UserLayout';
 import HOSTNAME from '../helpers/hostname';
 import Activity from './CreateActivity';
-import UserLayout from '../containers/UserLayout';
 import ActivityListView from '../containers/ActivityListView'
 
 class Home extends React.Component {

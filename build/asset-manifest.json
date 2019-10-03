@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "https://ludiclass.herokuapp.com/static/css/main.049cc49d.chunk.css",
+    "main.js": "https://ludiclass.herokuapp.com/static/js/main.8e7d73bb.chunk.js",
+    "main.js.map": "https://ludiclass.herokuapp.com/static/js/main.8e7d73bb.chunk.js.map",
+    "runtime-main.js": "https://ludiclass.herokuapp.com/static/js/runtime-main.257627e7.js",
+    "runtime-main.js.map": "https://ludiclass.herokuapp.com/static/js/runtime-main.257627e7.js.map",
+    "static/css/2.653462cc.chunk.css": "https://ludiclass.herokuapp.com/static/css/2.653462cc.chunk.css",
+    "static/js/2.332e3664.chunk.js": "https://ludiclass.herokuapp.com/static/js/2.332e3664.chunk.js",
+    "static/js/2.332e3664.chunk.js.map": "https://ludiclass.herokuapp.com/static/js/2.332e3664.chunk.js.map",
+    "index.html": "https://ludiclass.herokuapp.com/index.html",
+    "precache-manifest.5ac34a5d58813b088231891ee2a412fe.js": "https://ludiclass.herokuapp.com/precache-manifest.5ac34a5d58813b088231891ee2a412fe.js",
+    "service-worker.js": "https://ludiclass.herokuapp.com/service-worker.js",
+    "static/css/2.653462cc.chunk.css.map": "https://ludiclass.herokuapp.com/static/css/2.653462cc.chunk.css.map",
+    "static/css/main.049cc49d.chunk.css.map": "https://ludiclass.herokuapp.com/static/css/main.049cc49d.chunk.css.map",
+    "static/media/logo.png": "https://ludiclass.herokuapp.com/static/media/logo.30f12b5a.png"
+  }
+}
