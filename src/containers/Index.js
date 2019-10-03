@@ -53,7 +53,7 @@ class Index extends React.Component {
                                         type="link" 
                                         onClick={this.changeContent} 
                                         size='small'
-                                        style={{color:'#ff530e'}}
+                                        style={{color:'#531dab', fontWeight:'bold'}}
                                     >
                                         { this.state.login ? 'Regístrate aquí' : 'Inicia sesión' }
                                     </Button>
@@ -61,22 +61,28 @@ class Index extends React.Component {
                         </div>
                     </Col>
                 </Row>
-                
-                <Row type="flex">
-                    <Col xs={3} sm={3} md={2} lg={7} xl={5}>
-                        <h3 className='white p-5'>Síguenos en nuestras redes sociales: </h3>
+
+                <Row type="flex" justify="center">
+                    <Col xs={24} sm={24} md={24} lg={3} xl={24}>
+                        <h2>Conoce más acerca de LudiClass </h2>
                     </Col>
                 </Row>
                 
-                <Row type="flex" gutter={20}>
+                <Row type="flex" justify="center">
+                    <Col xs={12} sm={12} md={12} lg={10} xl={9}>
+                        <h3>Síguenos en nuestras redes sociales: </h3>
+                    </Col>
+                </Row>
+                
+                <Row type="flex" gutter={20} justify="center">
                     <Col xs={3} sm={3} md={2} lg={1} xl={1}>
                         <a href='https://www.facebook.com/121172999280716/'>
-                            <Icon type="facebook" style={{ fontSize: '28px', color: '#d3f261' }}/>
+                            <Icon type="facebook" style={{ fontSize: '28px', color: '#531dab' }}/>
                         </a>
                     </Col>
                     <Col xs={3} sm={3} md={2} lg={1} xl={1}>
                         <a href='https://www.instagram.com/ludiclass/'>
-                            <Icon type="instagram" style={{ fontSize: '28px', color: '#d3f261' }}/>
+                            <Icon type="instagram" style={{ fontSize: '28px', color: '#531dab' }}/>
                         </a>
                     </Col>
                 </Row>

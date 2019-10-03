@@ -231,7 +231,7 @@ class RegisterForm extends React.Component {
               htmlType="submit" 
               block
               size='large'
-              style={{backgroundColor: '#52c41a'}}
+              style={{backgroundColor: '#531dab'}}
             >
               Registrarse
             </Button>

@@ -169,28 +169,35 @@ componentDidMount(){
     );
     return (
       <div>
-        <h1 style={{textAlign:'center',fontSize:'2em'}}>Crear actividad</h1>
+        <h1 style={{textAlign:'center',fontSize:'2em', color:'#fa541c'}}>Crear actividad</h1>
             <Form>
                 <Form.Item label='Nombre'>
                     <Input placeholder='Nombre de la actividad'
+                      className='col-5'
                         size='large'
                         onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, name: e.target.value } })}>
                         
                     </Input>
                 </Form.Item >
                 <Form.Item label='Descripción de la actividad'>
-                    <TextArea placeholder='Descripción de la actividad' rows={3} onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, description: e.target.value } })} />
+                    <TextArea 
+                      placeholder='Descripción de la actividad' 
+                      rows={3} 
+                      onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, description: e.target.value } })} 
+                      className='col-5'
+                      />
                 </Form.Item>
 {/*---------------------------------------------------------------------------------------------------------------*/}
-                <Form.Item label="Topics" extra="Para añadir una nueva palabra clave escribe el nombre en este espacio y finaliza con la tecla Enter">
+                <Form.Item label="Palabras clave" extra="Para añadir una nueva palabra clave escribe el nombre en este espacio y finaliza con la tecla Enter">
                     {getFieldDecorator('topics', {
                         rules: [
                         { required: true, message: 'Usa al menos una palabra clave para que los demás usuarios puedan encontrar tu actividad más fácil', type: 'array' },
-                        
                         ],
                     })(
                         <Select 
                         size='large'
+                        style={{width:'40%'}}
+                        className='col-6'
                         mode="tags"
                         placeholder="Selecciona palabras clave para tu actividad"
                         tokenSeparators={[","]}
@@ -218,7 +225,14 @@ componentDidMount(){
                     </div>
                 </Form.Item>
                 <Form.Item>
-                <Button htmlType="submit" loading={submitting} onClick={this.handleCreate} type="primary">
+                <Button 
+                  htmlType="submit" 
+                  loading={submitting} 
+                  onClick={this.handleCreate} 
+                  style={{backgroundColor:'#531dab', borderColor: '#531dab'}}
+                  type="primary"
+                  size='large'
+                  >
                     Publicar
                 </Button>
                 </Form.Item>

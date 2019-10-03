@@ -21,7 +21,7 @@ class LoginForm extends React.Component {
             const { getFieldDecorator } = this.props.form;
             return( 
                 <Form onSubmit={this.handleSubmit} className="login-form">
-                    <Form.Item label="Correo electrónico" colon hasFeedback>
+                    <Form.Item label="Correo electrónico" colon>
                     {getFieldDecorator('email', {
                         rules: [{ required: true, message: 'Ingresa tu correo electrónico' }],
                     })(
@@ -32,7 +32,7 @@ class LoginForm extends React.Component {
                         />,
                     )}
                     </Form.Item>
-                    <Form.Item label="Contraseña" colon hasFeedback>
+                    <Form.Item label="Contraseña" colon>
                         {getFieldDecorator('password', {
                             rules: [{ required: true, message: 'Ingresa tu contraseña' }],
                         })(
@@ -50,7 +50,7 @@ class LoginForm extends React.Component {
                             htmlType="submit" 
                             block
                             size='large'
-                            style={{backgroundColor: '#52c41a', marginTop: '2em'}}
+                            style={{backgroundColor: '#531dab', marginTop: '2em'}}
                         >
                             Entrar
                         </Button>
