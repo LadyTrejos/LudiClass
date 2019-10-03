@@ -130,3 +130,4 @@ yarn-debug.log*
 yarn-error.log*
 
 gui/
+staticfiles/
