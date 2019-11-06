@@ -3,4 +3,5 @@
 body {
   font-stretch: condensed;
   object-fit: contain;
+  display: ruby;
 }

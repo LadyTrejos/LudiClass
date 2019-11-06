@@ -16,11 +16,22 @@ const Que = () => {
           <br />
           <p>
             Creemos que el juego nos ayuda a crear experiencias que nos permitan
-            aprender al mismo tiempo que salimos de la rutina. ​ ¿Haz creado
-            actividades? ¿Tienes tu propia versión de una dinámica? En LudiClass
-            podrás compartir tus ideas con otras personas, para que entre todos
-            cambiemos la manera tradicional de enseñar. ​ Ánimate a incluir la
-            lúdica en cualquier tema que enseñes y para cualquier edad.
+            <span className="green">
+              {" "}
+              aprender al mismo tiempo que salimos de la rutina .
+            </span>
+            <br /> ​ ¿Haz creado actividades? ¿Tienes tu propia versión de una
+            dinámica?
+          </p>
+          <br />
+          <p>
+            <span className="green">
+              En LudiClass podrás compartir tus ideas con otras personas,
+            </span>{" "}
+            para que entre todos cambiemos la manera tradicional de enseñar. ​
+            <br /> Ánimate a incluir la lúdica en{" "}
+            <span className="green">cualquier tema</span> que enseñes y para{" "}
+            <span className="green">cualquier edad.</span>
           </p>
         </div>
       </div>
@@ -28,7 +39,7 @@ const Que = () => {
         {`
           .main {
             height: 750px;
-            background: #ff8da3;
+            background: #cbd0ef;
           }
           .header {
             margin-top: 0.5rem;
@@ -38,16 +49,29 @@ const Que = () => {
             align-items: center;
             justify-content: center;
             font-family: "Chelsea Market";
-            color: #fff8ec;
+            color: #25b334;
             font-style: italic;
           }
 
           .main-content {
             display: grid;
             width: 100%;
-            grid-template-columns: repeat(5, 1fr) 50px;
-            grid-gap: 10px;
+            grid-template-columns: repeat(1, 1fr) 100px;
+            grid-gap: 15px;
             margin-left: 1.5em;
+          }
+          .main-content p {
+            margin-left: auto;
+            margin-right: auto;
+            font-family: "Delius";
+            color: #000;
+            font-size: 1.5rem;
+            text-align: center;
+          }
+          .green {
+            color: #ff8b1c;
+            font-family: "Chelsea Market";
+            font-style: italic;
           }
         `}
       </style>

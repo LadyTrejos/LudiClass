@@ -62,7 +62,7 @@ const Layout = ({ children, title, main }) => {
           body {
             margin: 0;
             font-family: system-ui;
-            background: #388af3;
+            background: #f6f4ea;
           }
         `}
       </style>

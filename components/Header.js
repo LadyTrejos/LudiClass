@@ -1,8 +1,12 @@
 import React from "react";
-import { Link, Element } from "react-scroll";
+import Link from "next/link";
+import { Link as LinkScroll, Element } from "react-scroll";
 
 import Beneficios from "./mainPage/Beneficios";
 import Que from "./mainPage/Que";
+import Frases from "./mainPage/Frases";
+import Team from "./mainPage/Team";
+import Sugerencias from "./mainPage/Sugerencias";
 
 export default function Header() {
   return (
@@ -11,7 +15,7 @@ export default function Header() {
         <nav>
           <ul>
             <li className="nav-item">
-              <Link
+              <LinkScroll
                 activeClass="active"
                 to="beneficios"
                 spy={true}
@@ -20,10 +24,10 @@ export default function Header() {
                 duration={500}
               >
                 Beneficios
-              </Link>
+              </LinkScroll>
             </li>
             <li className="nav-item">
-              <Link
+              <LinkScroll
                 activeClass="active"
                 to="que"
                 spy={true}
@@ -32,10 +36,10 @@ export default function Header() {
                 duration={500}
               >
                 ¿Qué es ludiclass?
-              </Link>
+              </LinkScroll>
             </li>
             <li className="nav-item">
-              <Link
+              <LinkScroll
                 activeClass="active"
                 to="equipo"
                 spy={true}
@@ -44,10 +48,10 @@ export default function Header() {
                 duration={500}
               >
                 Equipo
-              </Link>
+              </LinkScroll>
             </li>
             <li className="nav-item">
-              <Link
+              <LinkScroll
                 activeClass="active"
                 to="sug"
                 spy={true}
@@ -56,6 +60,16 @@ export default function Header() {
                 duration={500}
               >
                 Sugerencias
+              </LinkScroll>
+            </li>
+            <li className="nav-item">
+              <Link href="/login">
+                <button>Ingresar</button>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/registro">
+                <button>Registrarse</button>
               </Link>
             </li>
           </ul>
@@ -72,7 +86,9 @@ export default function Header() {
               Encuentra actividades lúdicas para cualquier tema que enseñes y
               ¡comparte las tuyas!
             </p>
-            <button>Empieza Ahora!</button>
+            <Link href="/registro">
+              <button>Empieza Ahora!</button>
+            </Link>
           </div>
           <div className="bigLogo">
             <img src={`static/img/logo.png`} alt="logo" />
@@ -98,24 +114,38 @@ export default function Header() {
               font-family: "Chelsea Market";
               font-size: 1.3rem;
             }
+            nav li button {
+              border: 1px solid #ff8b1c;
+              border-radius: 50px;
+              padding: 0.3rem 1.1rem;
+              background: #ff8b1c;
+              color: #fff;
+              font-family: "Delius";
+            }
             header {
               color: #fff;
 
-              background: #5433ff; /* fallback for old browsers */
+              background: rgb(36, 17, 144); /* fallback for old browsers */
               background: -webkit-linear-gradient(
                 to right,
-                #5433ff,
-                #20bdff,
-                #1d2671
+                rgba(36, 17, 144, 1) 0%,
+                rgba(70, 42, 213, 1) 48%,
+                rgba(52, 174, 222, 1) 100%
               ); /* Chrome 10-25, Safari 5.1-6 */
-              background: linear-gradient(to right, #5433ff, #20bdff, #1d2671);
+              background: linear-gradient(
+                to right,
+                rgba(36, 17, 144, 1) 0%,
+                rgba(70, 42, 213, 1) 48%,
+                rgba(52, 174, 222, 1) 100%
+              );
               padding: 15px;
               text-align: center;
             }
             button {
-              background: transparent;
+              background: #25b334;
               color: #fff;
-              border: 3px solid #fff;
+
+              border: 3px solid #25b334;
               border-radius: 50px;
               padding: 0.8rem 2rem;
               font: 24px "Margarine", sans-serif;
@@ -167,38 +197,17 @@ export default function Header() {
       </Element>
       <Element name="que" className="element">
         <Que />
+        <Frases />
       </Element>
+
       <Element name="equipo" className="element">
-        <div className="text">
-          <h1>This is a tes3t</h1>
-          <style jsx>
-            {`
-              .text {
-                height: 300px;
-              }
-              h1 {
-                font-size: 10px;
-              }
-            `}
-          </style>
-        </div>
+        <Team />
       </Element>
       <Element name="sug" className="element">
-        <div className="text">
-          <h1>This is a test2</h1>
-          <style jsx>
-            {`
-              .text {
-                height: 400px;
-              }
-              h1 {
-                font-size: 10px;
-              }
-            `}
-          </style>
-        </div>
+        <footer>
+          <Sugerencias />
+        </footer>
       </Element>
-      <footer></footer>
     </div>
   );
 }
