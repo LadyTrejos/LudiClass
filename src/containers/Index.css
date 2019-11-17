@@ -38,10 +38,13 @@
     padding: 35px;
     background: #ffe58f;
     border-color: #ffe58f;
-    right: 0px;
+    /* right: 0px;
     position: absolute;
     min-width: 7vw;
-    min-height: 100vh;
+    min-height: 100vh; */
+    border-radius: 15px 50px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+    margin: 10%;
 }
 
 .login-title {
