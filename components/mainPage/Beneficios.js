@@ -52,16 +52,16 @@ const Beneficios = () => {
             align-items: center;
             justify-content: center;
             font-family: "Chelsea Market";
-            color: #d74850;
+            color: #ff8b1c;
             font-style: italic;
           }
           .header p {
             margin-top: 10px;
             font-family: "Delius";
             font-size: 1.5rem;
-            color: #d74850;
+            color: #ff8b1c;
             font-weight: bold;
-            text-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
             justify-content: space-between;
           }
           .main-content {
@@ -70,16 +70,18 @@ const Beneficios = () => {
             grid-template-columns: repeat(5, 1fr) 50px;
             grid-gap: 10px;
             margin-left: 1.5em;
+            text-align: center;
           }
           .item {
             display: grid;
             grid-template-rows: 1fr min-content;
+            border-radius: 25px;
             box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
             align-items: center;
             justify-content: center;
             height: 50vh;
             flex-wrap: wrap;
-            background: rgba(70, 42, 213, 1) 48%;
+            background: rgba(70, 42, 213, 0.8);
             margin: 15px 15px;
           }
           .item h3 {

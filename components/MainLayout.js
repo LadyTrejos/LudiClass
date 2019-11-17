@@ -3,6 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 
 import Header from "./Header";
+
 const Layout = ({ children, title, main }) => {
   return (
     <div>
@@ -59,8 +60,10 @@ const Layout = ({ children, title, main }) => {
           @import url("https://fonts.googleapis.com/css?family=Chelsea+Market&display=swap");
           @import url("https://fonts.googleapis.com/css?family=Delius&display=swap");
           @import url("https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap");
+
           body {
             margin: 0;
+            width: 100%;
             font-family: system-ui;
             background: #f6f4ea;
           }
