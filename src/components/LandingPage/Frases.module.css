@@ -1,0 +1,43 @@
+.main {
+    height: 70vh;
+    background: #fff;
+  }
+  .maincontent {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr) 50px;
+    grid-gap: 150px;
+    margin-left: 3.5em;
+  }
+  .item {
+    display: block;
+    border-radius: 10%;
+    grid-template-rows: 1fr min-content;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 50vh;
+    flex-wrap: wrap;
+    background: rgba(70, 42, 213) 48%;
+    margin: 30px 15px;
+    padding-bottom: 15px;
+  }
+  .item h2 {
+    font-family: "Boogaloo";
+    font-size: 2rem;
+    justify-content: center;
+    text-align: center;
+    margin: 2.5rem 10px;
+    color: #ff530e;
+    font-style: italic;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+    letter-spacing: 1px;
+  }
+  .item h3 {
+    text-align: center;
+    font-family: "Delius";
+    padding: 0 1rem;
+    color: #fff;
+    font-size: 1.2rem;
+  }
