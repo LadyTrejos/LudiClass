@@ -1,0 +1,67 @@
+.main {
+    height: 90vh;
+    background: #fff;
+}
+.header h1{
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Boogaloo";
+  color: #ff530e;
+  padding: 5px 0px;
+}
+.header p {
+  margin-top: 10px;
+  font-family: "Delius";
+  font-size: 1.5rem;
+  color: black;
+  font-weight: bold;
+  text-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+  justify-content: space-between;
+  text-align: center;
+}
+.maincontent {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(5, 1fr) 50px;
+  grid-gap: 10px;
+  margin-left: 1.5em;
+  text-align: center;
+}
+.item {
+  align-items: center;
+  background: #452ed5;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  display: grid;
+  flex-wrap: wrap;
+  grid-template-rows: 1fr min-content;
+  border-radius: 25px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  flex-wrap: wrap;
+  margin: 15px 15px;
+  text-align: center;
+}
+.item p {
+  font-family: "Delius";
+  font-size: 1rem;
+  justify-content: center;
+  margin: 0 12px;
+  margin-bottom: 15px;
+  padding-bottom: 1rem;
+  color: #fff;
+}
+.item img {
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  height: 60%;
+}

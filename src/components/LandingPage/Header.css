@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Delius&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Boogaloo&display=swap");
+
+div[id^="section"]:target::before {
+	content: " ";
+	display: block;
+	height: 100px;
+  margin-top: -70px;
+}
+.navbrand {
+  height: 60px;
+  position: fixed;
+  left: 10px;
+  top: 0;
+  align-items: left;
+}
+.topnav {
+    background: rgb(36, 17, 144); /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      rgba(36, 17, 144, 1) 0%,
+      rgba(70, 42, 213, 1) 48%,
+      rgba(52, 174, 222, 1) 100%
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      rgba(36, 17, 144, 1) 0%,
+      rgba(70, 42, 213, 1) 48%,
+      rgba(52, 174, 222, 1) 100%
+    );
+    width: 100%;
+    height: 60px;
+    position: fixed; 
+    top: 0; 
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+  .topnav a {
+    display: inline-block;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    padding: 7px 10px;
+    font-family: "Delius";
+    font-size: 1.1rem;
+  }
+  .topnav a:hover {
+    background-color: rgb(39, 20, 151);
+    color: white;
+    text-decoration: none;
+    border-radius: 15px;
+  }
+  .topnav .button {
+    border: none;
+    border-radius: 15px;
+    background: #ff530e;
+    color: #fff;
+    font-family: "Delius";
+    font-size: 1.1rem;
+    margin: 0 5px;
+  }
+header {
+    color: #fff;
+    background: rgb(36, 17, 144); /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      rgba(36, 17, 144, 1) 0%,
+      rgba(70, 42, 213, 1) 48%,
+      rgba(52, 174, 222, 1) 100%
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      rgba(36, 17, 144, 1) 0%,
+      rgba(70, 42, 213, 1) 48%,
+      rgba(52, 174, 222, 1) 100%
+    );
+    padding: 15px;
+    text-align: center;
+  }
+
+.button {
+    background: #25b334;
+    color: #fff;
+    border: 3px solid #25b334;
+    border-radius: 15px;
+    padding: 0.3rem 1rem;
+    font-size: 1.2rem;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s ease-in-out;
+    font-family: "Delius";
+    letter-spacing: 1px;
+  }
+  .info {
+    display: grid;
+    grid-gap: 1rem;
+    padding: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    margin-top: 60px;
+  }
+  .infoText {
+    margin-top: 0.5rem;
+    margin-left: 5rem;
+    text-align: center;
+  }
+  .p1 {
+    font-family: "Delius";
+    font-size: 2rem;
+    color: #fff8ec;
+    font-weight: bold;
+    text-shadow: 0 6px 25px rgba(0, 0, 0, 0.7);
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-color: white;
+    box-shadow: 0 1em 1em -1em rgba(255, 255, 255, .3);
+  }
+  .p2 {
+    font-family: "Poppins";
+    font-size: 1rem;
+    font-weight: 100;
+    justify-content: space-between;
+  }
+  br {
+    height: 5px;
+  }
+  .bigLogo img {
+    width: 400px;
+    height: 400px;
+  }
+  
+footer {
+    background: rgb(36, 17, 144, 0.7);
+    text-align: center;
+    margin: 0 0;
+    padding: 10px 0;
+  }
+  .social-wrapper {
+    text-align: center;
+    color: #fff;
+  }
+  .social-wrapper ul li {
+    display: inline;
+    margin: 0 5px;
+  }
+  .twitter-icon,
+  .facebook-icon,
+  .instagram-icon,
+  .linkedin-icon,
+  .googleplus-icon,
+  .youtube-icon,
+  .foursquare-icon {
+    margin-top: 0.625em;
+    width: 40px;
+    height: 40px;
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
+    border-radius: 25px;
+  }
+  .twitter-icon:hover,
+  .facebook-icon:hover,
+  .instagram-icon:hover,
+  .linkedin-icon:hover,
+  .googleplus-icon:hover,
+  .youtube-icon:hover,
+  .foursquare-icon:hover {
+    opacity: 1;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+  }
+  .footer-nav p {
+    text-align: center;
+    color: #fff;
+  }
+
+  @media screen and (max-width: 600px) {
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  }

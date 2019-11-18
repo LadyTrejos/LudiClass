@@ -1,0 +1,32 @@
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
+.main {
+height: 800px;
+background: rgba(70, 42, 213, 0.8);
+width: 100%;
+}
+.header {
+margin: 0.5rem 1rem;
+text-align: center;
+font-family: "Delius";
+display: flex;
+align-items: center;
+justify-content: center;
+color: #ff8b1c;
+font-style: italic;
+}
+.header h1 {
+font-size: 3.5rem;
+}
+.form {
+color: #fff;
+}
+.form h3,
+h2 {
+color: #fff;
+font-family: "Kaushan Script";
+}
+.btn-green {
+color: #ff8b1c;
+border-color: #ff8b1c;
+border-width: 0.21rem;
+}
