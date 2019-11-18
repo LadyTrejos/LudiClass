@@ -206,10 +206,85 @@ export default function Header() {
         <Team />
       </Element>
       <Element name="sug" className="element">
-        <footer>
-          <Sugerencias />
-        </footer>
+        <Sugerencias />
       </Element>
+      <footer style={{ height: "150px" }}>
+        <div className="social-wrapper">
+          <h3>Síguenos en nuestras redes sociales!</h3>
+          <ul>
+            <li>
+              <a href="https://instagram.com/ludiclass" target="_blank">
+                <img
+                  src="https://www.mchenryvillage.com/images/instagram-icon.png"
+                  alt="Instagram Logo"
+                  className="instagram-icon"
+                />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/ludiclass/" target="_blank">
+                <img
+                  src="http://www.iconarchive.com/download/i54037/danleech/simple/facebook.ico"
+                  alt="Facebook Logo"
+                  className="facebook-icon"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+        <nav className="footer-nav" role="navigation">
+          <p>ludiclass &copy;{new Date().getFullYear().toString()}.</p>
+        </nav>
+        <style jsx>
+          {`
+            footer {
+              background: rgb(36, 17, 144, 0.7);
+              text-align: center;
+              margin: 0 0;
+              padding: 10px 0;
+            }
+            .social-wrapper {
+              text-align: center;
+              color: #fff;
+            }
+
+            .social-wrapper ul li {
+              display: inline;
+              margin: 0 5px;
+            }
+
+            .twitter-icon,
+            .facebook-icon,
+            .instagram-icon,
+            .linkedin-icon,
+            .googleplus-icon,
+            .youtube-icon,
+            .foursquare-icon {
+              margin-top: 0.625em;
+              width: 40px;
+              height: 40px;
+              opacity: 0.6;
+              filter: alpha(opacity=60); /* For IE8 and earlier */
+              border-radius: 25px;
+            }
+
+            .twitter-icon:hover,
+            .facebook-icon:hover,
+            .instagram-icon:hover,
+            .linkedin-icon:hover,
+            .googleplus-icon:hover,
+            .youtube-icon:hover,
+            .foursquare-icon:hover {
+              opacity: 1;
+              filter: alpha(opacity=100); /* For IE8 and earlier */
+            }
+            .footer-nav p {
+              text-align: center;
+              color: #fff;
+            }
+          `}
+        </style>
+      </footer>
     </div>
   );
 }

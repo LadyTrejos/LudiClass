@@ -8,21 +8,21 @@ export default function Team() {
           <h1>¡Conoce al equipo!</h1>
         </div>
         <div className="main-content">
-        <div className="item">
-          <img src="/static/img/" alt='pic' />
-          <h2>Lady Trejos</h2>
-          <h3></h3>
-        </div>
-        <div className="item">
-          <img src="/static/img/" alt='pic' />
-          <h2>Ivan Lizarazo</h2>
-          <h3></h3>
-        </div>
-        <div className="item">
-          <img src="/static/img/" alt='pic' />
-          <h2>Germán Grandas</h2>
-          <h3></h3>
-        </div>
+          <div className="item">
+            <img src="/static/img/team/lady.jpeg" alt="pic" />
+            <h2>Lady Trejos</h2>
+            <h3></h3>
+          </div>
+          <div className="item">
+            <img src="/static/img/team/ivan.jpeg" alt="pic" />
+            <h2>Ivan Lizarazo</h2>
+            <h3></h3>
+          </div>
+          <div className="item">
+            <img src="/static/img/team/german.jfif" alt="pic" />
+            <h2>Germán Grandas</h2>
+            <h3></h3>
+          </div>
         </div>
       </div>
       <style jsx>
@@ -48,6 +48,22 @@ export default function Team() {
             grid-gap: 150px;
             margin-left: 3.5em;
             background: transparent;
+            text-align: center;
+          }
+
+          .item h2 {
+            font-family: "Kaushan Script";
+            font-size: 1.5rem;
+            margin: 1.5em 0.2em;
+          }
+          .item img {
+            border-radius: 50%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 60%;
+            height: 60%;
+            padding: 0 20px;
           }
         `}
       </style>

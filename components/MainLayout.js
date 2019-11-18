@@ -3,6 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 
 import Header from "./Header";
+
 const Layout = ({ children, title, main }) => {
   return (
     <div>
@@ -61,6 +62,7 @@ const Layout = ({ children, title, main }) => {
           @import url("https://fonts.googleapis.com/css?family=Boogaloo&display=swap");
           body {
             margin: 0;
+            width: 100%;
             font-family: system-ui;
             background: #fff;
           }

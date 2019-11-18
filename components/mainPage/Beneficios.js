@@ -69,6 +69,7 @@ const Beneficios = () => {
             grid-template-columns: repeat(5, 1fr) 50px;
             grid-gap: 10px;
             margin-left: 1.5em;
+            text-align: center;
           }
           .item {
             align-items: center;
@@ -78,8 +79,13 @@ const Beneficios = () => {
             display: grid;
             flex-wrap: wrap;
             grid-template-rows: 1fr min-content;
-            height: 50vh;
+            border-radius: 25px;
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+            align-items: center;
             justify-content: center;
+            height: 50vh;
+            flex-wrap: wrap;
+            background: rgba(70, 42, 213, 0.8);
             margin: 15px 15px;
             text-align: center;
           }

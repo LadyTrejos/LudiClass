@@ -39,6 +39,7 @@ const Frases = () => (
         }
         .item {
           display: block;
+          border-radius: 25%;
           grid-template-rows: 1fr min-content;
           box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
           align-items: center;
@@ -46,7 +47,7 @@ const Frases = () => (
           text-align: center;
           height: 50vh;
           flex-wrap: wrap;
-          background: rgba(70, 42, 213, 1) 48%;
+          background: rgba(70, 42, 213, 0.6) 48%;
           margin: 30px 15px;
           padding-bottom: 15px;
         }
