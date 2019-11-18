@@ -56,13 +56,13 @@ const Layout = ({ children, title, main }) => {
       </style>
       <style jsx global>
         {`
-          @import url("https://fonts.googleapis.com/css?family=Chelsea+Market&display=swap");
+          @import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
           @import url("https://fonts.googleapis.com/css?family=Delius&display=swap");
-          @import url("https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap");
+          @import url("https://fonts.googleapis.com/css?family=Boogaloo&display=swap");
           body {
             margin: 0;
             font-family: system-ui;
-            background: #f6f4ea;
+            background: #fff;
           }
         `}
       </style>

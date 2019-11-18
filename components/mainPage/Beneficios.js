@@ -11,23 +11,23 @@ const Beneficios = () => {
         <div className="main-content">
           <div className="item">
             <img src="static/img/variedad.JPG" alt="variedad" />
-            <h3>Variedad de temas</h3>
+            <p>Variedad de temas</p>
           </div>
           <div className="item">
             <img src="static/img/compartir.JPG" alt="compartir" />
-            <h3>Comparte tus lúdicas</h3>
+            <p>Comparte tus lúdicas</p>
           </div>
           <div className="item">
             <img src="static/img/sugerencias.JPG" alt="sugerencias" />
-            <h3>Obtén sugerencias según tus intereses</h3>
+            <p>Obtén sugerencias según tus intereses</p>
           </div>
           <div className="item">
             <img src="static/img/facil.JPG" alt="facil" />
-            <h3>Fácil de usar</h3>
+            <p>Fácil de usar</p>
           </div>
           <div className="item">
             <img src="static/img/favorito.JPG" alt="favorito" />
-            <h3>Guarda en tus favoritos las actividades que más te gusten</h3>
+            <p>Guarda en tus favoritos las actividades que más te gusten</p>
           </div>
         </div>
         <div className="header">
@@ -41,27 +41,26 @@ const Beneficios = () => {
       <style jsx>
         {`
           .main {
-            height: 750px;
-            background: #f6f4ea;
+            height: 100vh;
+            background: #fff;
           }
           .header {
             margin-top: 0.5rem;
-            text-aling: center;
+            text-align: center;
             font-size: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: "Chelsea Market";
-            color: #d74850;
-            font-style: italic;
+            font-family: "Boogaloo";
+            color: #ff530e;
           }
           .header p {
             margin-top: 10px;
             font-family: "Delius";
             font-size: 1.5rem;
-            color: #d74850;
+            color: black;
             font-weight: bold;
-            text-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
             justify-content: space-between;
           }
           .main-content {
@@ -72,23 +71,26 @@ const Beneficios = () => {
             margin-left: 1.5em;
           }
           .item {
-            display: grid;
-            grid-template-rows: 1fr min-content;
-            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
             align-items: center;
-            justify-content: center;
-            height: 50vh;
-            flex-wrap: wrap;
             background: rgba(70, 42, 213, 1) 48%;
+            border-radius: 20px;
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+            display: grid;
+            flex-wrap: wrap;
+            grid-template-rows: 1fr min-content;
+            height: 50vh;
+            justify-content: center;
             margin: 15px 15px;
+            text-align: center;
           }
-          .item h3 {
-            font-family: "Kaushan Script";
-            font-size: 1.5rem;
+          .item p {
+            font-family: "Delius";
+            font-size: 1rem;
             justify-content: center;
             margin: 0 12px;
             margin-bottom: 15px;
-            color: #f6f4ea;
+            padding-bottom: 1rem;
+            color: #fff;
           }
           .item img {
             border-radius: 50%;
@@ -97,7 +99,6 @@ const Beneficios = () => {
             margin-right: auto;
             width: 60%;
             height: 60%;
-            padding: 0 20px;
           }
         `}
       </style>

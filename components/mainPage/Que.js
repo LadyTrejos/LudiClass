@@ -38,19 +38,20 @@ const Que = () => {
       <style jsx>
         {`
           .main {
-            height: 750px;
-            background: #cbd0ef;
+            height: 90vh;
+            background: #35aade;
           }
           .header {
-            margin-top: 0.5rem;
-            text-aling: center;
+            margin-top: 2rem;
+            text-align: center;
             font-size: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: "Chelsea Market";
-            color: #25b334;
-            font-style: italic;
+            font-family: "Boogaloo";
+            color: #ff530e;
+            font-weight:100;
+            background-color: white;
           }
 
           .main-content {
@@ -69,9 +70,9 @@ const Que = () => {
             text-align: center;
           }
           .green {
-            color: #ff8b1c;
-            font-family: "Chelsea Market";
-            font-style: italic;
+            color: #fff;
+            font-size: 1.5rem;
+            font-family: "Delius";
           }
         `}
       </style>

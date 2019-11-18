@@ -5,7 +5,7 @@ export default function Team() {
     <div>
       <div className="main">
         <div className="header">
-          <h1>Conoce al equipo!</h1>
+          <h1>¡Conoce al equipo!</h1>
         </div>
         <div className="main-content">
         <div className="item">
@@ -29,7 +29,7 @@ export default function Team() {
         {`
           .main {
             height: 500px;
-            background: #e4ddd3;
+            background: #000D80;
           }
           .header {
             margin-top: 0.5rem;
@@ -38,9 +38,8 @@ export default function Team() {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: "Chelsea Market";
-            color: #d74850;
-            font-style: italic;
+            font-family: "Boogaloo";
+            color: #ff530e;
           }
           .main-content {
             display: grid;

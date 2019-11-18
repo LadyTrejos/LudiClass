@@ -35,7 +35,7 @@ export default function Header() {
                 offset={50}
                 duration={500}
               >
-                ¿Qué es ludiclass?
+                ¿Qué es LudiClass?
               </LinkScroll>
             </li>
             <li className="nav-item">
@@ -76,7 +76,7 @@ export default function Header() {
         </nav>
         <div className="info">
           <div className="infoText">
-            <img src={`static/img/ludiclass.png`} alt="ludi" />
+            <img src={`static/img/ludiclass.png`} alt="LudiClass" />
             <p className="p1">
               La aplicación que te ayuda a hacer tus clases{" "}
               <span>más divertidas</span>
@@ -87,11 +87,11 @@ export default function Header() {
               ¡comparte las tuyas!
             </p>
             <Link href="/registro">
-              <button>Empieza Ahora!</button>
+              <button>¡Empieza ahora!</button>
             </Link>
           </div>
           <div className="bigLogo">
-            <img src={`static/img/logo.png`} alt="logo" />
+            <img src={`static/img/logo.png`} alt="Logo de LudiClass" />
           </div>
         </div>
         <style jsx>
@@ -111,20 +111,20 @@ export default function Header() {
               text-decoration: none;
               text-align: center;
               padding: 7px 10px;
-              font-family: "Chelsea Market";
-              font-size: 1.3rem;
+              font-family: "Delius";
+              font-size: 1.1rem;
             }
             nav li button {
-              border: 1px solid #ff8b1c;
-              border-radius: 50px;
-              padding: 0.3rem 1.1rem;
-              background: #ff8b1c;
+              border: 1px solid #ff530e;
+              border-radius: 15px;
+              padding: 0.3rem 1rem;
+              background: #ff530e;
               color: #fff;
               font-family: "Delius";
+              font-size: 1.1rem;
             }
             header {
               color: #fff;
-
               background: rgb(36, 17, 144); /* fallback for old browsers */
               background: -webkit-linear-gradient(
                 to right,
@@ -144,26 +144,26 @@ export default function Header() {
             button {
               background: #25b334;
               color: #fff;
-
               border: 3px solid #25b334;
-              border-radius: 50px;
-              padding: 0.8rem 2rem;
-              font: 24px "Margarine", sans-serif;
+              border-radius: 15px;
+              padding: 0.3rem 1rem;
+              font: 1.2rem "Poppins", sans-serif;
               outline: none;
               cursor: pointer;
               position: relative;
               transition: 0.2s ease-in-out;
-              font-family: "Chelsea Market";
-              letter-spacing: 2px;
+              font-family: "Delius";
+              letter-spacing: 1px;
             }
             .info {
               display: grid;
-              grid-gap: 250px;
+              grid-gap: 1rem;
               padding: 15px;
               grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
             }
             .infoText {
               margin-top: 0.5rem;
+              margin-left: 5rem;
               text-aling: center;
             }
             .p1 {
@@ -171,13 +171,15 @@ export default function Header() {
               font-size: 2rem;
               color: #fff8ec;
               font-weight: bold;
-              text-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
+              text-shadow: 0 6px 25px rgba(0, 0, 0, 0.7);
               justify-content: space-between;
+              padding-bottom: 15px;
+              border-color: white;
+              box-shadow: 0 1em 1em -1em rgba(255, 255, 255, .3);
             }
             .p2 {
-              font-family: "Kaushan Script";
-              font-size: 1.5rem;
-              font-style: italic;
+              font-family: "Poppins";
+              font-size: 1rem;
               font-weight: 100;
               font-height: 100;
               justify-content: space-between;

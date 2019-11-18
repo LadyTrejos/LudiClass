@@ -27,8 +27,8 @@ const Frases = () => (
     <style jsx>
       {`
         .main {
-          height: 500px;
-          background: #f6f4ea;
+          height: 70vh;
+          background: #fff;
         }
         .main-content {
           display: grid;
@@ -48,20 +48,22 @@ const Frases = () => (
           flex-wrap: wrap;
           background: rgba(70, 42, 213, 1) 48%;
           margin: 30px 15px;
+          padding-bottom: 15px;
         }
         .item h2 {
-          font-family: "Kaushan Script";
+          font-family: "Boogaloo";
           font-size: 2.5rem;
           justify-content: center;
           text-align: center;
           margin: 2.5rem 10px;
           color: #ff8b1c;
+          font-style: italic;
         }
         .item h3 {
           text-align: center;
-          font-family: "Chelsea Market";
-          padding: 0 1px;
-          color: #f6f4ea;
+          font-family: "Delius";
+          padding: 0 1rem;
+          color: #fff;
         }
       `}
     </style>
