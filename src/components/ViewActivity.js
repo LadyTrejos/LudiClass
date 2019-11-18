@@ -82,7 +82,7 @@ class ViewActivity extends React.Component {
                       <div
                         style={{display:"flex", justifyContent:"center", alignItems:"center", marginTop:"5%" }}>
                         <img
-                            style={{width: '90%', height: '90%'}}
+                            style={{width: '90%', height: '90%', borderRadius:'5px'}}
                             alt="Foto de la actividad"
                             src={item.picture}
                         />
@@ -91,18 +91,18 @@ class ViewActivity extends React.Component {
                   >
                     <Meta
                       style={{textAlign:'center'}}
-                      title= {<a href={`/activity/${item.id}/`}>{item.name}</a>}
+                      title= {<a style={{fontSize:'1.2rem'}} href={`/activity/${item.id}/`}>{item.name[0].toUpperCase().concat(item.name.substring(1,))}</a>}
                     />
                     <br/>
                     <Meta
                       style={{color:'#2F3E9E', overflowWrap: 'break-word'}}
-                      description={item.description}
+                      description={<p style={{color:'#149', fontWeight:'bold'}}>{item.description.substring(0, 100).concat(' . . .')}</p>}
                     />
                     <br/>
                     <br/>
 
                     { item.topics.map( item => (
-                      <Tag key={item}>{this.state.topics[item]}</Tag>
+                      <Tag style={{background:'#DAC6FF', fontWeight:'bold'}} key={item}>{this.state.topics[item]}</Tag>
                       ))
                     }
                   

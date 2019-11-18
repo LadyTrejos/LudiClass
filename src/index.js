@@ -22,7 +22,7 @@ const store = createStore(reducer, composeEnhances(
 
 const app = (
     <Provider store={store}>
-        <LocaleProvider locale={es_ES}><App /></LocaleProvider>
+        <LocaleProvider locale={es_ES}><App/></LocaleProvider>
     </Provider>
 )
 

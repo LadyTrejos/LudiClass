@@ -5,8 +5,9 @@ import { Spin } from 'antd';
 
 import UserLayout from '../containers/UserLayout';
 import HOSTNAME from '../helpers/hostname';
-import Activity from './CreateActivity';
+import CreateActivity from './CreateActivity';
 import ActivityListView from '../containers/ActivityListView'
+import Activity from './Activity' 
 
 class Home extends React.Component {
     constructor(props) {
@@ -32,7 +33,8 @@ class Home extends React.Component {
               return (
               <UserLayout >
                 <Route exact path="/activityListView" component={ActivityListView} />
-                <Route exact path='/activity' component={Activity}/>
+                <Route exact path='/createActivity' component={CreateActivity}/>
+                <Route exact path="/activity/:id" component={Activity}/> />
               </UserLayout>)
               }
               }

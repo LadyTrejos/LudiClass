@@ -60,7 +60,7 @@ class UserLayout extends React.Component {
             <div><Divider style={{backgroundColor:'black'}}/></div>
             <Menu.Item key="1">
               <span className="nav-text">Crear actividad</span>
-              <Link to='/activity'></Link>
+              <Link to='/createActivity'></Link>
             </Menu.Item>
 
             <Menu.Item key="2">
@@ -98,12 +98,9 @@ class UserLayout extends React.Component {
               </Col>
             </Row>
           </Header>
-          <Content style={{ margin: '24px 16px 0' }}>
+          <Content style={{ margin: '24px 16px 0'}}>
             <div style={{ padding: 24, minHeight: 360, backgroundColor:'white'}}>
-                
-                {this.props.location.pathname === '/' ?<ActivityListView data={this.state.activity} loadData={this.loadData} />:this.props.children}
-                
-
+                {this.props.location.pathname === '/' ?<ActivityListView data={this.state.activity} loadData={this.loadData}/>:this.props.children}
             </div>
             
           </Content>
