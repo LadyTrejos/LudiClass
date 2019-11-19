@@ -4,10 +4,16 @@ import {Form, Button, List, Input, Upload, Icon, Modal, Avatar, Select, Divider,
 import moment from 'moment';
 import axios from 'axios';
 import HOSTNAME from '../helpers/hostname';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+import history from '.././helpers/history';
 
 const { TextArea } = Input;
 const { Option } = Select;
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+
 
 
 function getBase64(file) {
@@ -110,6 +116,8 @@ componentDidMount(){
     )
   };
 
+  
+
   handleCreate = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -120,22 +128,30 @@ componentDidMount(){
             if(topic.includes('>')) {
                 data = topic.split('>')
                 topics.push(data[0])
+                
+                //window.location.reload(true);
+                
             } else {
                 promises.push(axios.post(`${HOSTNAME}/api/topic/`,
                             `{"name": "${topic}"}`,
                             { headers: {"Content-type": "application/json"}}
                             )
                 )
+                //window.location.reload(true);
             }
         })
         axios.all(promises)
         .then(results => {
           results.forEach(item => topics.push(item.data.id))
           this.handleSubmit(topics)
+          sleep(3000)
+          history.push("/activityListView")
         }
         )
       }
+      
     });
+    
   }
 
   handleDeletePost = (id) => {
@@ -233,7 +249,7 @@ componentDidMount(){
                   type="primary"
                   size='large'
                   >
-                    Publicar
+                      Publicar
                 </Button>
                 </Form.Item>
             </Form>
