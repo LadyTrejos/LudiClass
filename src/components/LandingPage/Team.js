@@ -8,21 +8,30 @@ export default function Team() {
         <div className={styles.header}>
           <h1>¡Conoce al equipo!</h1>
         </div>
-        <div className={styles.maincontent}>
-          <div className={styles.item}>
-            <img src={require("../../static/img/team/lady.jpeg")} alt="pic" />
-            <h2>Lady Trejos</h2>
-            <h3></h3>
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <div className={styles.item}>
+              <img src={require("../../static/img/team/lady.jpeg")} alt="pic" />
+              <h2>Lady Trejos</h2>
+              <h3>Desarrolladora full-stack
+                <br/>Community manager</h3>
+            </div>
           </div>
-          <div className={styles.item}>
-            <img src={require("../../static/img/team/ivan.jpeg")} alt="pic" />
-            <h2>Ivan Lizarazo</h2>
-            <h3></h3>
+
+          <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <div className={styles.item}>
+              <img src={require("../../static/img/team/ivan.jpeg")} alt="pic" />
+              <h2>Ivan Lizarazo</h2>
+              <h3>Desarrollador backend</h3>
+            </div>
           </div>
-          <div className={styles.item}>
-            <img src={require("../../static/img/team/german.jfif")} alt="pic" />
-            <h2>Germán Grandas</h2>
-            <h3></h3>
+
+          <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <div className={styles.item}>
+              <img src={require("../../static/img/team/german.jfif")} alt="pic" />
+              <h2>Germán Grandas</h2>
+              <h3>Desarrollador frontend</h3>
+            </div>
           </div>
         </div>
       </div>

@@ -1,10 +1,18 @@
 @import url("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
 
-.bgwhite {
-    background: white;
+
+.btn {
+    background: #25b334;
+    border: none;
+    border-radius: 15px;
+    transition: 0.2s ease-in-out;
+    color: white;
+    outline: none;
+    width: 100%;
+    padding: 0.2rem;
 }
 .main {
-    height: 100vh;
+    min-height: 100vh;
     background: rgba(70, 42, 213, 0.3);
     width: 100%;
 }
@@ -42,20 +50,9 @@ p {
     color: rgba(70, 42, 213);
     font-family: "Delius";
     text-align: center;
-    font-size: 1.2rem;
-    padding-top: 15px;
+    font-size: 1.1rem;
+    padding: 15px 20px;
     font-weight: bold;
-}
-
-.btn {
-    background: #25b334;
-    border: none;
-    border-radius: 15px;
-    transition: 0.2s ease-in-out;
-    color: white;
-    outline: none;
-    width: 100%;
-    padding: 0.2rem;
 }
 
 .formulario {

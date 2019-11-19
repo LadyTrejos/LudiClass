@@ -2,12 +2,16 @@
     margin: 0 auto;
     padding: 0.5rem 2rem 2rem;
     background: #fafafa;
-    width: 40vw;
+    width: 90vw;
+    max-width: 600px;
     margin-top: 2vh;
     border-radius: 5px;
+    
 }
 
 .profile {
+    min-width: 80px;
+    min-height: 80px;
     width: 10vw;
     height: 10vw;
     border-radius: 50%;
