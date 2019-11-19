@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import BaseRouter from './routes';
 import 'antd/dist/antd.css';
 import history from './helpers/history';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import * as actions from './store/actions/auth';
   
