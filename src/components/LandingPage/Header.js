@@ -54,7 +54,7 @@ export default function Header() {
         <Sugerencias />
       </div>
       <footer style={{ height: "150px" }}>
-        <div classid="social-wrapper">
+        <div classID="social-wrapper">
           <h3>Síguenos en nuestras redes sociales!</h3>
           <ul>
             <li>

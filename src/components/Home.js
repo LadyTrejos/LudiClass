@@ -34,7 +34,7 @@ class Home extends React.Component {
               <UserLayout >
                 <Route exact path="/activityListView" component={ActivityListView} />
                 <Route exact path='/createActivity' component={CreateActivity}/>
-                <Route exact path="/activity/:id" component={Activity}/> />
+                <Route exact path="/activity/:id" component={Activity}/> 
               </UserLayout>)
               }
               }

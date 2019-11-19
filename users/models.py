@@ -58,6 +58,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, primary_key=True, unique=True)
     email = models.EmailField(unique=True)
+    activities = models.ManyToManyField('Activity', related_name="activities",blank=True)
 
     is_user = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

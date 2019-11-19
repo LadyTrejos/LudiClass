@@ -102,7 +102,7 @@ class ViewActivity extends React.Component {
                     <br/>
 
                     { item.topics.map( item => (
-                      <Tag style={{background:'#DAC6FF', fontWeight:'bold'}} key={item}>{this.state.topics[item]}</Tag>
+                      <Tag style={{background:'#DAC6FF', fontWeight:'bold', fontSize:'medium'}} key={item}>{this.state.topics[item]}</Tag>
                       ))
                     }
                   

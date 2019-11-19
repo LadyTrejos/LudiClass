@@ -10,6 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             "username",
             "email",
+            "activities",
             "password",
             "is_user",
             "is_admin",

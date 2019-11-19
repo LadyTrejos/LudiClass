@@ -29,5 +29,11 @@
 }
 
 .gr {
-    background: linear-gradient(rgb(51, 75, 255, 0.1),rgb(86, 167, 255, 0.1));
+    background: #fff;
+}
+
+.tag {
+    font-weight: 'bold';
+    background:#DAC6FF;
+    font-size: medium;
 }

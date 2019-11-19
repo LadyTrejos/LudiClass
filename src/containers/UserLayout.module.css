@@ -1,0 +1,11 @@
+.header {
+    padding-left: 1rem;
+    width: 100vw;
+    height: 10vh ;
+    background: linear-gradient(
+      to right,
+      rgba(36, 17, 144, 1) 0%,
+      rgba(70, 42, 213, 1) 48%,
+      rgba(52, 174, 222, 1) 100%
+    );
+}

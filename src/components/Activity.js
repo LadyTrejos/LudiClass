@@ -10,6 +10,7 @@ import {
     Modal,
     message
   } from 'antd';
+
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
@@ -21,6 +22,7 @@ import PostList from './PostList';
 import Styles from './Activity.module.css';
 
 const confirm = Modal.confirm;
+const { CheckableTag } = Tag;
 
 class ActivityDetail extends React.Component {
   constructor(props) {
@@ -34,7 +36,7 @@ class ActivityDetail extends React.Component {
             image:'',
             id:'',
         },
-        activitys:[],
+        activities:[],
         submitting: false,
         previewVisible: false,
         previewImage: '',
@@ -47,6 +49,15 @@ class ActivityDetail extends React.Component {
 componentDidMount(){
     const userID = localStorage.getItem('user');
     console.log(userID)
+
+    axios.get(`${HOSTNAME}/api/users/${userID}/`)
+    .then(res => {
+        this.setState({
+        activities:res.data.activities
+        })
+    })
+
+
    
     const activityID = this.props.match.params.id;
     console.log(activityID)
@@ -71,7 +82,7 @@ componentDidMount(){
         res.data.map( item => 
           topics[item.id] = item.name
         )
-        this.setState({ all_topics: topics }, ()=>console.log("YAAAA"))
+        this.setState({ all_topics: topics })
       })
     }
 
@@ -104,23 +115,23 @@ componentDidMount(){
     });
   }
 
-  ToSuscribe = () => {
+  Favorite = () => {
       const id = this.state.activityInfo.id;
-    if(!this.state.activitys.includes(id)){
-      this.state.activitys.push(id)
-      this.setState({suscrito: !this.state.suscrito})
-      message.success('Acabas de suscribirte al evento.')
+    if(!this.state.activities.includes(id)){
+      this.state.activities.push(id)
+      this.setState({favorito: !this.state.favorito})
+      message.success('¡Actividad agregada a tus favoritos! ❤')
     }else{
-      for( var i = 0; i < this.state.activitys.length; i++){ 
-        if ( this.state.activitys[i] === id) {
-          this.state.activitys.splice(i, 1); 
+      for( var i = 0; i < this.state.activities.length; i++){ 
+        if ( this.state.activities[i] === id) {
+          this.state.activities.splice(i, 1); 
         }
      }
-     this.setState({suscrito: !this.state.suscrito})
-     message.info('Haz eliminado la suscripción al evento.')
+     this.setState({favorito: !this.state.favorito})
+     message.info('Eliminaste esta actividad de tu lista de favoritos 💔')
     }
     const userID = localStorage.getItem('user')
-    const ActivityData = JSON.stringify({activitys:this.state.activitys});
+    const ActivityData = JSON.stringify({activities:this.state.activities});
     console.log(ActivityData)
     axios.patch(`${HOSTNAME}/api/users/${userID}/`,
         ActivityData,
@@ -132,6 +143,10 @@ componentDidMount(){
     
   
     }
+
+  searchTag = (a) => {
+    console.log('Estoy en searchTag ',a)
+  }
 
   render() {
     return (
@@ -152,7 +167,7 @@ componentDidMount(){
                     <Descriptions
                         
                         title={<span style={{display:"flex", justifyContent:"center", alignItems:"center",fontSize:'2rem', color:'#FA541C'}}>{this.state.activityInfo.name.toUpperCase()}</span>}
-                        column={{ xxl: 1, xl: 1, lg: 3, md: 3, sm: 2, xs: 1 }}
+                        column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
                         
                     >
                         
@@ -168,21 +183,21 @@ componentDidMount(){
                         </Descriptions.Item>
                         
                         <Descriptions.Item className={Styles.descriptionItem} label='Temas'>{ this.state.activityInfo.topics.map( item => (
-                                <Tag style={{fontWeight:'bold' }} key={item}>{this.state.all_topics[item]}</Tag>
+                                <CheckableTag className={Styles.tag} key={item} onChange={()=> this.searchTag(this.state.all_topics[item])}>{this.state.all_topics[item]}</CheckableTag>
                                 ))
                                 }</Descriptions.Item>
                         
                     </Descriptions>
-                    {/* <Row type="flex" justify="center" align="middle" gutter={20}>
+                    <Row type="flex" justify="center" align="middle" gutter={20}>
                         <Col>
                             <Button size='large' 
-                                style={{width:'100%', borderRadius:'10%', color:'#fff', backgroundColor:'#FF5126', borderColor:'FF5126'}}
-                                onClick={()=>this.ToSuscribe()}
+                                style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', backgroundColor:'#25b334', borderColor:'#25b334'}}
+                                onClick={()=>this.Favorite()}
                             >
-                                 {this.state.activitys.includes(this.state.activityInfo.id) ? "Eliminar suscripción" : "Suscribirse"}
+                                 {this.state.activities.includes(this.state.activityInfo.id) ? "Eliminar de favoritos 💔" : "Favorito ❤"}
                             </Button>
                         </Col>
-                    </Row> */}
+                    </Row>
                     <br/>
                     <span style={{fontSize:20, color:'#001870'}}>Publicaciones</span>
                     {/*<PostList {...this.props} admin={false}/>*/}

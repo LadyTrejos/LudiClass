@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Row, Input } from 'antd';
 import ViewActivity from '../components/ViewActivity'
 import HOSTNAME from '../helpers/hostname';
+import Styles from './ActivityListView.module.css';
 
 const Search = Input.Search;
 
@@ -38,7 +39,7 @@ render(){
     return(
         <div>
             <Row type="flex" justify="center" align="middle">
-                <h2 style={{fontSize:30, color:'#001870'}}>Actividades</h2>
+                <h2 className={Styles.h2}>Actividades</h2>
             </Row>
             <Row >
                 <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>

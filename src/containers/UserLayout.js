@@ -9,6 +9,7 @@ import HOSTNAME from '../helpers/hostname';
 import ActivityListView from './ActivityListView';
 import brand from '../static/img/ludiclass.png';
 import logo from '../static/img/logo.png';
+import Styles from './UserLayout.module.css';
 const { Header, Content, Footer, Sider } = Layout;
 
 class UserLayout extends React.Component {
@@ -44,7 +45,7 @@ class UserLayout extends React.Component {
     return(
       <Layout >
         <Sider
-          style={{backgroundColor: '#ffe58f', flex:1, justifyContent:'flex-end', alignContent:'left'}}
+          style={{backgroundColor: '#271496', flex:1, justifyContent:'flex-end', alignContent:'left'}}
           breakpoint="lg"
           collapsedWidth="0"
           onBreakpoint={broken => {
@@ -55,27 +56,18 @@ class UserLayout extends React.Component {
           }}
         >         
           
-          <Menu  mode="inline" defaultSelectedKeys={['7']} style={{backgroundColor:'#ffe58f', justifyContent: 'center'}}>
-          <h1 style={{marginTop:'6vh', textAlign: 'center', fontWeight:'bold'}}>Menú</h1>
+          <Menu  mode="inline" defaultSelectedKeys={['7']} style={{backgroundColor:'#271496', justifyContent: 'center'}}>
+          <h1 style={{marginTop:'6vh', textAlign: 'center', fontWeight:'bold', color:'white'}}>Menú</h1>
             <div><Divider style={{backgroundColor:'black'}}/></div>
             <Menu.Item key="1">
-              <span className="nav-text">Crear actividad</span>
+              <span style={{marginTop:'6vh', textAlign: 'center', fontWeight:'1.1rem', color:'white'}} className="nav-text">Crear actividad</span>
               <Link to='/createActivity'></Link>
             </Menu.Item>
 
             <Menu.Item key="2">
-              <span className="nav-text">Ver actividades</span>
+              <span style={{marginTop:'6vh', textAlign: 'center', fontWeight:'1.1rem', color:'white'}} className="nav-text">Ver actividades</span>
               <Link to="/activityListView"></Link>
             </Menu.Item>
-
-            {/*<Menu.Item key="3">
-              <Icon type="upload" />
-              <span className="nav-text">nav 3</span>
-            </Menu.Item>
-            <Menu.Item key="4">
-              <Icon type="user" />
-              <span className="nav-text">nav 4</span>
-        </Menu.Item>*/}
           </Menu>
         <Button
             type="primary"
@@ -85,16 +77,16 @@ class UserLayout extends React.Component {
         </Button>
         </Sider>
         <Layout style={{backgroundColor:'white'}}>
-          <Header style={{ background: '#ffd666', paddingRight: 40}} >
+          <Header className={Styles.header} >
             <Row type="flex">
-              <Col xs={8} sm={2} md={2} lg={2} xl={2}>
-                <img src={logo} alt="logo" style={{height:'4em'}}/>
-              </Col>
-              <Col xs={8} sm={2} md={2} lg={21} xl={21}>
-                <img src={brand} alt="LudiClass" style={{height:'2em'}}/>
-              </Col>
               <Col xs={8} sm={1} md={1} lg={1} xl={1}>
-                <h3>{this.state.username.toUpperCase()}</h3>
+                <img src={logo} alt="logo" style={{height:'4em', marginLeft:'1rem' }}/>
+              </Col>
+              <Col xs={8} sm={22} md={21} lg={13} xl={18}>
+                <img src={brand} alt="LudiClass" style={{height:'6vh'}}/>
+              </Col>
+              <Col xs={8} sm={1} md={2} lg={10} xl={1}>
+                <h3 style={{marginTop:'2vh', fontSize:'5vh' , color:'white'}} >{this.state.username.toUpperCase()}</h3>
               </Col>
             </Row>
           </Header>
