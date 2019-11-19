@@ -1,11 +1,11 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import {Form, Button, List, Input, Upload, Icon, Modal, Avatar, Select, Divider, message } from 'antd';
-import moment from 'moment';
+import {Form, Button, Input, Upload, Icon, Modal, Select, message } from 'antd';
 import axios from 'axios';
 import HOSTNAME from '../helpers/hostname';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter,} from 'react-router-dom';
 import history from '.././helpers/history';
+import Styles from './CreateActivity.module.css';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -185,8 +185,8 @@ componentDidMount(){
     );
     return (
       <div>
-        <h1 style={{textAlign:'center',fontSize:'2em', color:'#fa541c'}}>Crear actividad</h1>
-            <Form>
+        <h1 className={Styles.title}>Crear actividad</h1>
+            <Form className={Styles.labels}>
                 <Form.Item label='Nombre'>
                     <Input placeholder='Nombre de la actividad'
                       className='col-5'
@@ -198,9 +198,9 @@ componentDidMount(){
                 <Form.Item label='Descripción de la actividad'>
                     <TextArea 
                       placeholder='Descripción de la actividad' 
-                      rows={3} 
+                      rows={10} 
                       onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, description: e.target.value } })} 
-                      className='col-5'
+                      class='col-4 col-md-6'
                       />
                 </Form.Item>
 {/*---------------------------------------------------------------------------------------------------------------*/}
@@ -212,7 +212,6 @@ componentDidMount(){
                     })(
                         <Select 
                         size='large'
-                        style={{width:'40%'}}
                         className='col-6'
                         mode="tags"
                         placeholder="Selecciona palabras clave para tu actividad"
@@ -224,8 +223,8 @@ componentDidMount(){
                     )}
                 </Form.Item>
 {/*---------------------------------------------------------------------------------------------------------------*/}
-                <Form.Item>
-                    <div className="clearfix">
+                <Form.Item className={Styles.upload}>
+                    <div className={"clearfix"}>
                         <Upload
                         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                         listType="picture-card"
@@ -236,7 +235,7 @@ componentDidMount(){
                         {fileList.length >= 1 ? null : uploadButton}
                         </Upload>
                         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-                        <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                        <img alt="example" style={{ width: '150%' }} src={previewImage} />
                         </Modal>
                     </div>
                 </Form.Item>

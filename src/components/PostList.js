@@ -4,6 +4,7 @@ import { Comment, Form, Button, List, Input, Upload, Icon, Modal, Avatar, Toolti
 import moment from 'moment';
 import axios from 'axios';
 import HOSTNAME from '../helpers/hostname';
+import Styles from './PostList.module.css';
 
 const { TextArea } = Input;
 
@@ -55,16 +56,17 @@ class PostList extends React.Component {
     this.setState({
       submitting: true,
     });
-    const admin = localStorage.getItem('user');
+    const user = localStorage.getItem('user');
     let postData = new FormData();
     const url = this.state.fileList[0] ? this.state.fileList[0].originFileObj : '';
     const type = this.state.fileList[0] ? this.state.fileList[0].type : '';
+    console.log('type:',type)
     postData.append('description', this.state.value);
-    postData.append('admin', admin);
+    postData.append('user', user);
     postData.append('file_url', url);
     postData.append('file_type', type);
-    postData.append('event', this.props.match.params.id);
-    axios.post(`${HOSTNAME}/api/posts/`,
+    postData.append('activity', this.props.match.params.id);
+    axios.post(`${HOSTNAME}/api/post/`,
         postData,
         { headers: {"Content-type": 'multipart/form-data'}}
     )
@@ -83,8 +85,8 @@ class PostList extends React.Component {
   };
 
   loadComments = () => {
-      const eventID = this.props.match.params.id;
-      axios.get(`${HOSTNAME}/api/posts/?event=${eventID}&ordering=-created_at`)
+      const activityID = this.props.match.params.id;
+      axios.get(`${HOSTNAME}/api/post/?activity=${activityID}&ordering=-created_at`)
       .then(res => {
            this.setState({ comments: res.data})
       })
@@ -99,7 +101,7 @@ class PostList extends React.Component {
   handleChange = ({ fileList }) => this.setState({ fileList });
 
   handleDeletePost = (id) => {
-    axios.delete(`${HOSTNAME}/api/posts/${id}/`)
+    axios.delete(`${HOSTNAME}/api/post/${id}/`)
     .then(() => {
         window.location.reload();
         message.success('La publicación ha sido eliminada.')
@@ -107,6 +109,7 @@ class PostList extends React.Component {
   }
 
   render() {
+    const username = localStorage.getItem('user');
     const { comments, submitting, value } = this.state;
     const { previewVisible, previewImage, fileList } = this.state;
     const uploadButton = (
@@ -118,7 +121,7 @@ class PostList extends React.Component {
     return (
       <div>
             <div>
-                { this.props.admin ? 
+                { this.props.user ? 
                 <React.Fragment>
                     <Form.Item>
                         <TextArea rows={3} onChange={this.handleCommentChange} value={value} />
@@ -158,20 +161,21 @@ class PostList extends React.Component {
                         <React.Fragment>
                             <Divider/> 
                             <Comment 
-                                actions={this.props.admin? [<Button type="danger" onClick={() => this.handleDeletePost(item.id)}>Eliminar</Button>] : null}
-                                author="Administrador"
+                                actions={username === item.user ? [<Button type="danger" onClick={() => this.handleDeletePost(item.id)}>Eliminar</Button>] : null}
+                                author={item.user[0].toUpperCase().concat(item.user.substring(1,).toLowerCase())}
                                 avatar={<Avatar  style={{backgroundColor: '#f56a00', verticalAlign: 'middle' }} size='large'>
-                                A
+                                {item.user[0].toUpperCase()}
                                 </Avatar>}
                                 content={
-                                    <div>
-                                        {item.description}
+                                    <div className={Styles.comment}>
+                                        {item.description[0].toUpperCase().concat(item.description.substring(1,))}
+                                        <br/>
                                         <br/>
                                         {
                                             ((/audio\/.*/).test(item.file_type)) ?
                                             <embed src={item.file_url} ></embed>
                                             :
-                                            <embed src={item.file_url} style={{maxHeight:"60vh", maxWidth:"60vw",minHeight:"30vh", minWidth:"30vw"}}></embed>
+                                            <embed src={item.file_url} style={{borderRadius:'10px', maxHeight:"60vh", maxWidth:"60vw",minHeight:"30vh", minWidth:"30vw"}}></embed>
                                         }
                                     </div>
                                 }

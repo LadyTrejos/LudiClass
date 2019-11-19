@@ -97,6 +97,15 @@ class Material(models.Model):
     file_url = models.FileField(upload_to="local_comments", blank=True)
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE, related_name='material_activity')
 
+class Post(models.Model):
+    description = models.TextField(blank=True)
+    file_url = models.FileField(upload_to="local_comments", blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE, related_name='activity_post')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_user')
+    file_type = models.CharField(max_length=50, default="image/jpeg", blank=True)
+
+
 # FORMS
 
 class UserForm(ModelForm):
@@ -110,3 +119,4 @@ class UserForm(ModelForm):
             'email',
             'is_admin'
         )
+    

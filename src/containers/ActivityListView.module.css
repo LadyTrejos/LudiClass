@@ -3,4 +3,10 @@
     font-size:30;
     font-weight: bolder;
     color:#001870;
+    padding-top: 5vh;
+}
+
+.button{
+    background: #44a7f8 ;
+    
 }

@@ -1,17 +1,11 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import axios from 'axios'
-import { Card, Icon, Tag, Divider, Row, Col, Button, List, Empty, message } from 'antd';
+import { Card, Tag, Row, List, Empty,} from 'antd';
 import HOSTNAME from '../helpers/hostname';
 
 const { Meta } = Card;
 
-const IconText = ({ type, text }) => (
-    <span>
-      <Icon type={type} style={{ marginRight: 8 }} />
-      {text}
-    </span>
-  );
 
 class ViewActivity extends React.Component {
 

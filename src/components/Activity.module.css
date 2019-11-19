@@ -2,12 +2,6 @@
 @import url("https://fonts.googleapis.com/css?family=Delius&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Boogaloo&display=swap");
 
-.image{
-    max-width: 70vw;
-    max-height: 70vh;
-    border-radius: 10px;
-}
-
 .descriptionItem{
     text-align: justify;
     font-weight: initial;
@@ -20,6 +14,17 @@
 
 }
 
+.gr {
+    background: #fff;
+}
+
+
+.image{
+    max-width: 70vw;
+    max-height: 70vh;
+    border-radius: 10px;
+}
+
 
 .label {
     text-align: justify;
@@ -28,8 +33,12 @@
     
 }
 
-.gr {
-    background: #fff;
+.span{
+    
+    font-family: "Delius";
+    font-size:1.5rem;
+    color:#001870;
+    font-weight: bold;
 }
 
 .tag {
