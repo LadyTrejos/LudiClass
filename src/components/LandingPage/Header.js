@@ -6,36 +6,47 @@ import Que from "./Que";
 import Frases from "./Frases";
 import Team from "./Team";
 import Sugerencias from "./Sugerencias";
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
 export default function Header() {
   return (
     <div>
-        <div className="topnav">
+      <Navbar collapseOnSelect expand="md" bg="primary" variant="dark" fixed="top">
+        <Navbar.Brand href="#home">
           <img className="navbrand" src={require('../../static/img/brand_logo.png')} />
-          <a href="#section-beneficios">Beneficios</a>
-          <a href="#section-que">¿Qué es LudiClass?</a>
-          <a href="#section-equipo">Equipo</a>
-          <a href="#section-sug">Sugerencias</a>
-          <a className="button" href="/login">Ingresar</a>
-          <a className="button" href="/registro">Registrarse</a>
-        </div>
-      <header style={{ height: "550px" }}>
-        <div className="info">
-          <div className="infoText">
-            <img src={require(`../../static/img/ludiclass.png`)} alt="LudiClass" />
-            <p className="p1">
-              La aplicación que te ayuda a hacer tus clases{" "}
-              <span>más divertidas</span>
-            </p>
-            <br />
-            <p className="p2">
-              Encuentra actividades lúdicas para cualquier tema que enseñes y
-              ¡comparte las tuyas!
-            </p>
-            <button className="button" href="/registro">¡Empieza ahora!</button>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav " className="justify-content-end">
+          <Nav>
+            <Nav.Link href="#section-beneficios">Beneficios</Nav.Link>
+            <Nav.Link eventKey={2} href="#section-que">¿Qué es LudiClass?</Nav.Link>
+            <Nav.Link eventKey={3} href="#section-equipo">Equipo</Nav.Link>
+            <Nav.Link eventKey={4} href="#section-sug">Sugerencias</Nav.Link>
+            <a className="btn-outline" href="/iniciar">Ingresar</a>
+            <a className="button" href="/registro">Registrarse</a>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      <header >
+        <div class="row">
+          <div className=" col-12 col-sm-12 col-md-8 col-lg-7 col-xl-7">
+            <div className="infoText">
+              <img src={require(`../../static/img/ludiclass.png`)} alt="LudiClass" class="brand"/>
+              <p className="p1">
+                La aplicación que te ayuda a hacer tus clases{" "}
+                <span>más divertidas</span>
+              </p>
+              <br />
+              <p className="p2">
+                Encuentra actividades lúdicas para cualquier tema que enseñes y
+                ¡comparte las tuyas!
+              </p>
+              <a className="button" href="/iniciar">¡Empieza ahora!</a>
+            </div>
           </div>
-          <div className="bigLogo">
-            <img src={require(`../../static/img/logo.png`)} alt="Logo de LudiClass" />
+          <div className=" col-12 col-sm-12 col-md-4 col-lg-5 col-xl-5">
+            <img src={require(`../../static/img/logo.png`)} alt="Logo de LudiClass" className="bigLogo"/>
           </div>
         </div>
       </header>
@@ -53,34 +64,10 @@ export default function Header() {
       <div id="section-sug">
         <Sugerencias />
       </div>
-      <footer style={{ height: "150px" }}>
-        <div classID="social-wrapper">
-          <h3>Síguenos en nuestras redes sociales!</h3>
-          <ul>
-            <li>
-              <a href="https://instagram.com/ludiclass" target="_blank">
-                <img
-                  src="https://www.mchenryvillage.com/images/instagram-icon.png"
-                  alt="Instagram Logo"
-                  className="instagram-icon"
-                />
-              </a>
-            </li>
-            <li>
-              <a href="https://www.facebook.com/ludiclass/" target="_blank">
-                <img
-                  src="http://www.iconarchive.com/download/i54037/danleech/simple/facebook.ico"
-                  alt="Facebook Logo"
-                  className="facebook-icon"
-                />
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="footer-nav" role="navigation">
+      <footer >
+        <div className="social-wrapper">
           <p>LudiClass &copy;{new Date().getFullYear().toString()}.</p>
         </div>
-        
       </footer>
     </div>
   );

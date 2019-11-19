@@ -3,32 +3,46 @@ import styles from './Beneficios.module.css';
 
 const Beneficios = () => {
   return (
-    <div>
+    <div class="container-fluid">
       <div className={styles.main}>
-        <div className={styles.header}>
+        <div class="row" className={styles.header}>
           <h1>¿Por qué elegir LudiClass?</h1>
         </div>
 
-        <div className={styles.maincontent}>
-          <div className={styles.item}>
-            <img src={require("../../static/img/variedad.JPG")} alt="variedad" />
-            <p>Variedad de temas</p>
+        <div class="row justify-content-center">
+          <div class="col-6 col-sm-6 col-md-2 col-lg-2 col-xl-2">
+            <div className={styles.item}>
+              <img src={require("../../static/img/variedad.JPG")} alt="variedad" />
+              <p>Variedad de temas</p>
+            </div>
           </div>
-          <div className={styles.item}>
-            <img src={require("../../static/img/compartir.JPG")} alt="compartir" />
-            <p>Comparte tus lúdicas</p>
+
+          <div class="col-6 col-sm-6 col-md-2 col-lg-2 col-xl-2">
+            <div className={styles.item}>
+              <img src={require("../../static/img/compartir.JPG")} alt="compartir" />
+              <p>Comparte tus lúdicas</p>
+            </div>
           </div>
-          <div className={styles.item}>
-            <img src={require("../../static/img/sugerencias.JPG")} alt="sugerencias" />
-            <p>Obtén sugerencias según tus intereses</p>
+
+          <div class="col-6 col-sm-6 col-md-2 col-lg-2 col-xl-2">
+            <div className={styles.item}>
+              <img src={require("../../static/img/sugerencias.JPG")} alt="sugerencias" />
+              <p>Obtén sugerencias según tus intereses</p>
+            </div>
           </div>
-          <div className={styles.item}>
-            <img src={require("../../static/img/facil.JPG")} alt="facil" />
-            <p>Fácil de usar</p>
+
+          <div class="col-6 col-sm-6 col-md-2 col-lg-2 col-xl-2">
+            <div className={styles.item}>
+              <img src={require("../../static/img/facil.JPG")} alt="facil" />
+              <p>Fácil de usar</p>
+            </div>
           </div>
-          <div className={styles.item}>
-            <img src={require("../../static/img/favorito.JPG")} alt="favorito" />
-            <p>Guarda en tus favoritos las actividades que más te gusten</p>
+
+          <div class="col-8 col-sm-8 col-md-2 col-lg-2 col-xl-2">
+            <div className={styles.item}>
+              <img src={require("../../static/img/favorito.JPG")} alt="favorito" />
+              <p>Guarda en tus favoritos las actividades que más te gusten</p>
+            </div>
           </div>
         </div>
         <div className={styles.header}>

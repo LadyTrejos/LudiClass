@@ -1,0 +1,60 @@
+.main {
+    margin: 0 auto;
+    padding: 0.5rem 2rem 2rem;
+    background: #fafafa;
+    width: 90vw;
+    max-width: 600px;
+    margin-top: 2vh;
+    border-radius: 5px;
+    
+}
+
+.profile {
+    min-width: 80px;
+    min-height: 80px;
+    width: 10vw;
+    height: 10vw;
+    border-radius: 50%;
+    background: white;
+    margin-top: 1rem;
+}
+
+.user {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-left: 1rem;
+    color: #262626;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.bio {
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 300;
+    margin-left: 1rem;
+    color: #262626;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0 0;
+}
+
+.follow {
+    background: #3897f0;
+    border-color: #3897f0;
+    color: white;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 26px;
+    outline: 0;
+    overflow: hidden;
+    padding: 3px 24px;
+    margin-left: 3rem;
+}
+
+a.follow:hover {
+    color: white;
+    text-decoration: none;
+  }
