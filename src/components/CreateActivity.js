@@ -1,10 +1,11 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import {Form, Button, Input, Upload, Icon, Modal, Select, message } from 'antd';
 import axios from 'axios';
-import HOSTNAME from '../helpers/hostname';
+import { Form, Button, Input, Upload, Icon, Modal, Select, message, Row, Col } from 'antd';
 import { withRouter,} from 'react-router-dom';
+
 import history from '.././helpers/history';
+import HOSTNAME from '../helpers/hostname';
 import Styles from './CreateActivity.module.css';
 
 const { TextArea } = Input;
@@ -13,17 +14,15 @@ const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-
-
-
 function getBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
+
 class ActivityClass extends React.Component {
   constructor(props) {
     super(props);
@@ -42,16 +41,16 @@ class ActivityClass extends React.Component {
         fileList: [],
       };
       this.imageRef = React.createRef();
-}
+  }
 
-componentDidMount(){
+  componentDidMount(){
 
-  axios.get(`${HOSTNAME}/api/topic/`)
-  .then( res => {
-      this.setState({ topic: res.data})
-  })
-  .catch( err => console.log(err.message))
-}
+    axios.get(`${HOSTNAME}/api/topic/`)
+    .then( res => {
+        this.setState({ topic: res.data})
+    })
+    .catch( err => console.log(err.message))
+  }
 
   handleTopicsChange = (value) => {
     this.setState({
@@ -76,8 +75,6 @@ componentDidMount(){
     });
   };
 
-  
-
   handleChange = ({ fileList }) => this.setState({ fileList });
 
   // Fin imagenes
@@ -87,9 +84,7 @@ componentDidMount(){
       return;
     }
 
-    this.setState({
-      submitting: true,
-    });
+    this.setState({ submitting: true });
     let postData = new FormData();
     const image = this.state.fileList[0];
     postData.append('picture', image.originFileObj);
@@ -115,8 +110,6 @@ componentDidMount(){
         })
     )
   };
-
-  
 
   handleCreate = (e) => {
     e.preventDefault();
@@ -149,9 +142,7 @@ componentDidMount(){
         }
         )
       }
-      
     });
-    
   }
 
   handleDeletePost = (id) => {
@@ -164,9 +155,6 @@ componentDidMount(){
   }
 
   render() {
-
-   
-    
     const { getFieldDecorator } = this.props.form;
     const { submitting } = this.state;
     const { previewVisible, previewImage, fileList } = this.state;
@@ -183,97 +171,117 @@ componentDidMount(){
         <div className="ant-upload-text">Subir archivo</div>
       </div>
     );
+
     return (
-      <div>
-        <h1 className={Styles.title}>Crear actividad</h1>
-            <Form className={Styles.labels}>
+      <div >
+        <div >
+          <h1 className={Styles.title}>Crear actividad</h1>
+        </div>
+        <Form className={Styles.form}>
+          <Row gutter={50}>
+            <Col md={12}>
+              <Row>
                 <Form.Item label='Nombre'>
-                    {getFieldDecorator('nombre',{
-                        rules: [
-                          { required: true, message: 'Ponle un nombre a tu actividad', type: 'string' },
-                          ],
-                      })(
-                      <Input placeholder='Nombre de la actividad'
-                      className='col-5'
-                        size='large'
-                        onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, name: e.target.value } })}>
-                        
-                      </Input>
-                      )}
-                    
-                </Form.Item >
-                <Form.Item label='Descripción de la actividad'>
-                  {getFieldDecorator('descripcion',{
+                  {getFieldDecorator('nombre', {
+                      rules: [
+                        { required: true, message: 'Ponle un nombre a tu actividad', type: 'string' },
+                        ],
+                    })(
+                    <Input placeholder='Nombre de la actividad'
+                      size='large'
+                      onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, name: e.target.value } })}>
+                      
+                    </Input>
+                    )}
+                </Form.Item>
+              </Row>
+              <Row>
+                  <Form.Item label='Descripción de la actividad'>
+                    {getFieldDecorator('descripcion',{
                         rules: [
                           { required: true, message: 'Ponle una descripción a tu actividad', type: 'string' },
                           ],
                       })(
-                    <TextArea 
-                      placeholder='Descripción de la actividad' 
-                      rows={10} 
-                      onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, description: e.target.value } })} 
-                      class='col-4 col-md-6'
+                      <TextArea 
+                        placeholder='Cuéntanos de qué trata tu actividad, qué materiales necesita...' 
+                        rows={10} 
+                        onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, description: e.target.value } })} 
                       />
+                    )}
+                      
+                  </Form.Item>
+              </Row>
+            </Col>
+            <Col md={8}>
+              <Row>
+                <Form.Item label="Imagen de portada" >
+                  {getFieldDecorator('archivo', {
+                      rules: [
+                      { required: true, message: 'Sube una foto de la actividad que deseas publicar'},
+                      ],
+                  })(
+                      <div className={"clearfix"}>
+                      <Upload
+                      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                      listType="picture-card"
+                      fileList={fileList}
+                      onPreview={this.handlePreview}
+                      onChange={this.handleChange}
+                      >
+                      {fileList.length >= 1 ? null : uploadButton}
+                      </Upload>
+                      <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+                      <img alt="example" style={{ width: '150%' }} src={previewImage} />
+                      </Modal>
+                      </div>
                   )}
-                    
                 </Form.Item>
+              </Row>
+              <Row md={8}>
+                <p className={Styles.highlight}>
+                  Recuerda usar una imagen que se relacione con la actividad que estás publicando.
+                </p>
+                <p>Esta imagen, las palabras claves y el nombre que le pongas a tu actividad, ayudarán a los demás usuarios a 
+                  identificar con facilidad el tema que desarrolla. 
+                </p>
+              </Row>
+            </Col>
+          </Row>
+          
 {/*---------------------------------------------------------------------------------------------------------------*/}
-                <Form.Item label="Palabras clave" extra="Para añadir una nueva palabra clave escribe el nombre en este espacio y finaliza con la tecla Enter">
-                    {getFieldDecorator('topics', {
-                        rules: [
-                        { required: true, message: 'Usa al menos una palabra clave para que los demás usuarios puedan encontrar tu actividad más fácil', type: 'array' },
-                        ],
-                    })(
-                        <Select 
-                        size='large'
-                        className='col-6'
-                        mode="tags"
-                        placeholder="Selecciona palabras clave para tu actividad"
-                        tokenSeparators={[","]}
-                        onChange={(e) => this.handleTopicsChange(e)}
-                        >
-                            {topicItems}
-                        </Select>,
-                    )}
-                </Form.Item>
+          
 {/*---------------------------------------------------------------------------------------------------------------*/}
-                <Form.Item className={Styles.upload}>
-                    {getFieldDecorator('archivo', {
-                        rules: [
-                        { required: true, message: 'Sube una foto de la actividad que deseas publicar'},
-                        ],
-                    })(
-                        <div className={"clearfix"}>
-                        <Upload
-                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                        listType="picture-card"
-                        fileList={fileList}
-                        onPreview={this.handlePreview}
-                        onChange={this.handleChange}
-                        >
-                        {fileList.length >= 1 ? null : uploadButton}
-                        </Upload>
-                        <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-                        <img alt="example" style={{ width: '150%' }} src={previewImage} />
-                        </Modal>
-                        </div>
-                    )}
+          <Form.Item label="Palabras clave" extra="Para añadir una nueva palabra clave escribe el nombre en este espacio y finaliza con la tecla Enter">
+            {getFieldDecorator('topics', {
+                rules: [
+                { required: true, message: 'Usa al menos una palabra clave para que los demás usuarios puedan encontrar tu actividad más fácil', type: 'array' },
+                ],
+            })(
+                <Select 
+                size='large'
+                mode="tags"
+                placeholder="Selecciona palabras clave que identifiquen tu actividad"
+                tokenSeparators={[","]}
+                onChange={(e) => this.handleTopicsChange(e)}
+                >
+                    {topicItems}
+                </Select>,
+            )}
+          </Form.Item>
+{/*---------------------------------------------------------------------------------------------------------------*/}
+          
 
-                    
-                </Form.Item>
-                <Form.Item>
-                <Button 
-                  htmlType="submit" 
-                  loading={submitting} 
-                  onClick={this.handleCreate} 
-                  style={{backgroundColor:'#531dab', borderColor: '#531dab'}}
-                  type="primary"
-                  size='large'
-                  >
-                      Publicar
-                </Button>
-                </Form.Item>
-            </Form>
+          <Button 
+            htmlType="submit" 
+            loading={submitting} 
+            onClick={this.handleCreate} 
+            style={{backgroundColor:'#25b334', borderColor: '#25b334'}}
+            type="primary"
+            size='large'
+            >
+                Publicar
+          </Button>
+        </Form>
       </div>
     );
   }

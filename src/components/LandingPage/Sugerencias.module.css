@@ -46,7 +46,7 @@ h1.header {
 .form {
     color: rgba(70, 42, 213);
 }
-p {
+.text {
     color: rgba(70, 42, 213);
     font-family: "Delius";
     text-align: center;

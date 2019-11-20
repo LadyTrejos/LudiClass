@@ -26,13 +26,13 @@ class RegisterContainer extends React.Component {
         
         <div class="row">
             <div class="col-12 col-sm-12 col-md-7 col-lg-8 col-xl-8" >
-                <div className={styles.registercontainer}>
+              <div className={styles.registercontainer}>
                 <h1>Regístrate</h1>
                 <div class={styles.divider}><div class={styles.dividermask}></div></div>
                 <div className={styles.card}>
                     <RegisterForm />
                 </div>
-                </div>
+              </div>
             </div>
 
           <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4" >

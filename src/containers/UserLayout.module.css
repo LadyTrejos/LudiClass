@@ -1,11 +1,92 @@
 .header {
-    padding-left: 1rem;
+    padding: 0 1rem!important;
     width: 100vw;
-    height: 10vh ;
+    min-height: 10vh ;
     background: linear-gradient(
       to right,
       rgba(36, 17, 144, 1) 0%,
       rgba(70, 42, 213, 1) 48%,
       rgba(52, 174, 222, 1) 100%
     );
+}
+
+aside {
+  min-height: 100vh;
+  min-width: 17vw!important;
+}
+
+.brand {
+  height: 60px;
+  left: 10px;
+  top: 0;
+  align-items: left;
+  margin-bottom: 10vh;
+}
+
+.logout {
+  background: white; 
+  border-color:white; 
+  margin-left:2.5rem;
+  color: #271496;
+  align-self: a;
+  bottom: 10px;
+  position: fixed;
+}
+
+.menutitle {
+  color: white;
+  font-weight: bold;
+  margin: 2vh 0 0 0;
+  text-align: center;
+  
+}
+
+.option {
+  color: white!important;
+}
+
+.option:hover {
+  color: white!important;
+  background: rgba(70, 42, 213, 1);
+  text-decoration: none;
+}
+
+.searchbar {
+  padding-top: 12px;
+  align-self: flex-end;
+}
+
+.searchbar button {
+  background: #ff530e;
+  border-color: #ff530e;
+}
+
+.searchbar button:hover {
+  background: #f04400;
+  border-color: #f04400;
+}
+
+.username {
+  margin-top: 2vh; 
+  font-size: 1.5rem; 
+  color: white;
+}
+
+.username::before {
+  content: '😀  ';
+}
+
+@media screen and (max-width:768px) {
+  .logout{
+    position: relative
+    ;
+  }
+  aside {
+    min-width: 0px!important;
+  }
+
+  .username {
+    visibility: hidden;
+  }
+
 }
