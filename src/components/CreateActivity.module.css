@@ -1,21 +1,28 @@
 
-label{
-    text-align:center;
-    font-size: 1.2rem !important;
+.form {
     color: #000;
     font-family: "Delius";
-    font-weight: bold;
 }
 
-.labels{
-    text-align:center;
-    color: #000;
-    font-family: "Delius";
+.highlight {
+    position: relative;
+	display: inline-block;
+    margin: 0.8rem 0 0;
+    text-align: center;
+    font-weight: bold;
+    background: linear-gradient(
+        to right,
+        rgb(254, 172, 94, 0.3) 0%,
+        rgb(254, 172, 94, 0.4) 60%,
+        rgb(254, 172, 94, 0.4) 60%,
+        rgb(254, 172, 94, 0.6) 85%,
+        rgb(254, 172, 94, 0.8) 100%
+    );
 }
 
 .title{
-    text-align: center ;
-    font-size: 3rem;
+    text-align: center;
+    font-size: 2.5rem;
     color: #fa541c;
     font-family: 'Boogaloo';
 }

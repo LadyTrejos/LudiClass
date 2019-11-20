@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
 import axios from 'axios';
+import styles from './LoginForm.module.css'
 
 import HOSTNAME from '../helpers/hostname';
 
@@ -225,7 +226,7 @@ class RegisterForm extends React.Component {
               htmlType="submit" 
               block
               size='large'
-              style={{backgroundColor: '#531dab'}}
+              className={styles.button}
             >
               Registrarse
             </Button>

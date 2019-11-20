@@ -1,15 +1,15 @@
 import React from 'react';
-import { Layout, Menu, Button, Divider, Row, Col } from 'antd';
+import { Layout, Menu, Button, Row, Col, Input } from 'antd';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
 import axios from 'axios';
 import HOSTNAME from '../helpers/hostname';
 import ActivityListView from './ActivityListView';
-import brand from '../static/img/ludiclass.png';
-import logo from '../static/img/logo.png';
-import Styles from './UserLayout.module.css';
+import styles from './UserLayout.module.css';
+
 const { Header, Content, Footer, Sider } = Layout;
+const { Search } = Input;
 
 class UserLayout extends React.Component {
 
@@ -43,7 +43,7 @@ class UserLayout extends React.Component {
     return(
       <Layout >
         <Sider
-          style={{backgroundColor: '#271496', flex:1, justifyContent:'flex-end', alignContent:'left'}}
+          style={{backgroundColor: '#241190', flex:1, justifyContent:'flex-end', alignContent:'left'}}
           breakpoint="lg"
           collapsedWidth="0"
           onBreakpoint={broken => {
@@ -54,47 +54,54 @@ class UserLayout extends React.Component {
           }}
         >         
           
-          <Menu  mode="inline" defaultSelectedKeys={['7']} style={{backgroundColor:'#271496', justifyContent: 'center'}}>
-          <h1 style={{marginTop:'6vh', textAlign: 'center', fontWeight:'bold', color:'white'}}>Menú</h1>
-            <div><Divider style={{backgroundColor:'black'}}/></div>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['7']} style={{backgroundColor:'#241190', justifyContent: 'center'}}>
+            {/* <h2 className={styles.menutitle}>Menú</h2> */}
+            <a href="/index">
+              <img className={styles.brand} src={require('../static/img/brand_logo.png')} alt="Logo de LudiClass"/>
+            </a>
+            {/* <div><Divider style={{backgroundColor:'white'}}/></div> */}
             <Menu.Item key="1">
-              <span style={{marginTop:'6vh', textAlign: 'center', fontWeight:'1.1rem', color:'white'}} className="nav-text">Crear actividad</span>
-              <Link to='/createActivity'></Link>
+              <span className={styles.option}>Crear actividad</span>
+              <Link to="/createActivity"/>
             </Menu.Item>
 
             <Menu.Item key="2">
-              <span style={{marginTop:'6vh', textAlign: 'center', fontWeight:'1.1rem', color:'white'}} className="nav-text">Ver actividades</span>
-              <Link to="/activityListView"></Link>
+              <span className={styles.option}>Ver actividades</span>
+              <Link to="activityListView"/>
             </Menu.Item>
           </Menu>
         <Button
             type="primary"
             onClick={this.props.logout}
-            style={{backgroundColor:'#fa541c', borderColor:'#fa541c', marginLeft:'2.5rem'}}>
+            className={styles.logout}>
             Cerrar sesión
         </Button>
         </Sider>
-        <Layout style={{backgroundColor:'white'}}>
-          <Header className={Styles.header} >
+        
+        <Layout style={{backgroundColor: 'rgba(36, 17, 144, 0.2)'}}>
+          <Header className={styles.header} >
             <Row type="flex">
-              <Col xs={8} sm={1} md={1} lg={1} xl={1}>
-                <img src={logo} alt="logo" style={{height:'4em', marginLeft:'1rem' }}/>
+              <Col xs={0} sm={0} md={10} lg={10} xl={10}>
+                <h3 className={styles.username}>{this.state.username.toLowerCase()}</h3>
               </Col>
-              <Col xs={8} sm={22} md={21} lg={13} xl={18}>
-                <img src={brand} alt="LudiClass" style={{height:'6vh'}}/>
-              </Col>
-              <Col xs={8} sm={1} md={2} lg={10} xl={1}>
-                <h3 style={{marginTop:'2vh', fontSize:'5vh' , color:'white'}} >{this.state.username.toUpperCase()}</h3>
+              <Col xs={23} sm={24} md={11} lg={9} xl={9}>
+                <Search
+                  placeholder="Ingrese un tema para buscar actividades..."
+                  enterButton="Buscar"
+                  size="large"
+                  className={styles.searchbar}
+                  onSearch={value => console.log(value)}
+                />
               </Col>
             </Row>
           </Header>
-          <Content style={{ margin: '24px 16px 0'}}>
-            <div style={{ padding: 24, minHeight: 360, backgroundColor:'white'}}>
+          <Content style={{ margin: '24px 16px'}}>
+            <div style={{ padding: '3vh 2vw', minHeight: '82vh', backgroundColor:'white', borderRadius: '10px'}}>
                 {this.props.location.pathname === '/' ?<ActivityListView data={this.state.activity} loadData={this.loadData}/>:this.props.children}
             </div>
             
           </Content>
-          <Footer style={{ textAlign: 'center' }}>@LudiClass</Footer>
+          {/* <Footer style={{ textAlign: 'center' }}>@LudiClass</Footer> */}
         </Layout>
       </Layout>
   );
