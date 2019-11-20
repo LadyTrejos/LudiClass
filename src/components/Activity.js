@@ -84,6 +84,7 @@ componentDidMount(){
       })
     }
 
+ 
 
   handleCancel = e => {
     this.setState({
@@ -192,6 +193,19 @@ componentDidMount(){
                             >
                                  {this.state.activities.includes(this.state.activityInfo.id) ? "Eliminar de favoritos 💔" : "Favorito 💖"}
                             </Button>
+                        </Col>
+                        <Col>
+                          {this.state.activityInfo.owner === localStorage.getItem('user')?
+                            <Button size='large' 
+                                  style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', backgroundColor:'#25b379', borderColor:'#25b334'}}
+                                  href= {`/modificateActivity/${this.state.activityInfo.id}`}
+
+                              >
+                                    Editar actividad
+                              </Button>
+                            :
+                            <div></div>
+                          }
                         </Col>
                     </Row>
                     <br/>
