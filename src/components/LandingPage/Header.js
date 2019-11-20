@@ -1,20 +1,20 @@
 import React from "react";
-import { Link as LinkScroll } from "react-scroll";
-import './Header.css'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import styles from './Header.module.css'
+
 import Beneficios from "./Beneficios";
 import Que from "./Que";
 import Frases from "./Frases";
 import Team from "./Team";
 import Sugerencias from "./Sugerencias";
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
 
 export default function Header() {
   return (
     <div>
-      <Navbar collapseOnSelect expand="md" bg="primary" variant="dark" fixed="top">
+      <Navbar collapseOnSelect expand="md" bg="primary" variant="dark" fixed="top" className={styles.navbar}>
         <Navbar.Brand href="#home">
-          <img className="navbrand" src={require('../../static/img/brand_logo.png')} />
+          <img className={styles.navbrand} src={require('../../static/img/brand_logo.png')} alt="Logo LudiClass"/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav " className="justify-content-end">
@@ -23,30 +23,30 @@ export default function Header() {
             <Nav.Link eventKey={2} href="#section-que">¿Qué es LudiClass?</Nav.Link>
             <Nav.Link eventKey={3} href="#section-equipo">Equipo</Nav.Link>
             <Nav.Link eventKey={4} href="#section-sug">Sugerencias</Nav.Link>
-            <a className="btn-outline" href="/iniciar">Ingresar</a>
-            <a className="button" href="/registro">Registrarse</a>
+            <a className={styles.btnoutline} href="/iniciar">Ingresar</a>
+            <a className={styles.btn} href="/registro">Registrarse</a>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <header >
+      <header id="home" className={styles.header}>
         <div class="row">
-          <div className=" col-12 col-sm-12 col-md-8 col-lg-7 col-xl-7">
-            <div className="infoText">
-              <img src={require(`../../static/img/ludiclass.png`)} alt="LudiClass" class="brand"/>
-              <p className="p1">
+          <div class=" col-12 col-sm-12 col-md-8 col-lg-7 col-xl-7">
+            <div className={styles.infoText}>
+              <img src={require(`../../static/img/ludiclass.png`)} alt="LudiClass" className={styles.brand}/>
+              <p className={styles.p1}>
                 La aplicación que te ayuda a hacer tus clases{" "}
                 <span>más divertidas</span>
               </p>
               <br />
-              <p className="p2">
+              <p className={styles.p2}>
                 Encuentra actividades lúdicas para cualquier tema que enseñes y
                 ¡comparte las tuyas!
               </p>
-              <a className="button" href="/iniciar">¡Empieza ahora!</a>
+              <a className={styles.button} href="/iniciar">¡Empieza ahora!</a>
             </div>
           </div>
-          <div className=" col-12 col-sm-12 col-md-4 col-lg-5 col-xl-5">
-            <img src={require(`../../static/img/logo.png`)} alt="Logo de LudiClass" className="bigLogo"/>
+          <div class=" col-12 col-sm-12 col-md-4 col-lg-5 col-xl-5">
+            <img src={require(`../../static/img/logo.png`)} alt="Logo de LudiClass" className={styles.bigLogo}/>
           </div>
         </div>
       </header>
@@ -65,7 +65,7 @@ export default function Header() {
         <Sugerencias />
       </div>
       <footer >
-        <div className="social-wrapper">
+        <div className={styles.socialwrapper}>
           <p>LudiClass &copy;{new Date().getFullYear().toString()}.</p>
         </div>
       </footer>
