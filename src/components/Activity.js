@@ -48,7 +48,6 @@ class ActivityDetail extends React.Component {
   
 componentDidMount(){
     const userID = localStorage.getItem('user');
-    console.log(userID)
 
     axios.get(`${HOSTNAME}/api/users/${userID}/`)
     .then(res => {
@@ -60,7 +59,6 @@ componentDidMount(){
 
    
     const activityID = this.props.match.params.id;
-    console.log(activityID)
     axios.get(`${HOSTNAME}/api/activity/${activityID}/`)
     .then(res => {
         this.setState({ 
@@ -88,7 +86,6 @@ componentDidMount(){
 
 
   handleCancel = e => {
-    console.log(e);
     this.setState({
       visible: false,
     });
@@ -132,7 +129,6 @@ componentDidMount(){
     }
     const userID = localStorage.getItem('user')
     const ActivityData = JSON.stringify({activities:this.state.activities});
-    console.log(ActivityData)
     axios.patch(`${HOSTNAME}/api/users/${userID}/`,
         ActivityData,
         { headers: {"Content-type": "application/json"}}
@@ -199,8 +195,9 @@ componentDidMount(){
                         </Col>
                     </Row>
                     <br/>
-                    <span style={{fontSize:20, color:'#001870'}}>Publicaciones</span>
-                    {/*<PostList {...this.props} admin={false}/>*/}
+                    <span className={Styles.span}>Comentarios</span>
+                    
+                    <PostList {...this.props} user={true}/>
                 </div>
                 :
                 <Skeleton/>

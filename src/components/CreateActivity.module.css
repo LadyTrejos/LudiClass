@@ -1,0 +1,31 @@
+
+label{
+    text-align:center;
+    font-size: 1.2rem !important;
+    color: #000;
+    font-family: "Delius";
+    font-weight: bold;
+}
+
+.labels{
+    text-align:center;
+    color: #000;
+    font-family: "Delius";
+}
+
+.title{
+    text-align: center ;
+    font-size: 3rem;
+    color: #fa541c;
+    font-family: 'Boogaloo';
+}
+.upload{
+    display: flex !important;
+    align-content: center !important;
+    align-items: center !important;
+}
+
+
+
+
+

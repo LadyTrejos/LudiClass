@@ -1,9 +1,8 @@
 import React from 'react';
-import { Layout, Menu, Icon, Button, Divider, Row, Col } from 'antd';
+import { Layout, Menu, Button, Divider, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
-import './UserLayout.css';
 import axios from 'axios';
 import HOSTNAME from '../helpers/hostname';
 import ActivityListView from './ActivityListView';
@@ -41,7 +40,6 @@ class UserLayout extends React.Component {
 }
 
   render(){
-    console.log(this.props)
     return(
       <Layout >
         <Sider
