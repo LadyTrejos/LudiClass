@@ -117,7 +117,7 @@ componentDidMount(){
     if(!this.state.activities.includes(id)){
       this.state.activities.push(id)
       this.setState({favorito: !this.state.favorito})
-      message.success('¡Actividad agregada a tus favoritos! ❤')
+      message.success('¡Actividad agregada a tus favoritos! 💖')
     }else{
       for( var i = 0; i < this.state.activities.length; i++){ 
         if ( this.state.activities[i] === id) {
@@ -190,7 +190,7 @@ componentDidMount(){
                                 style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', backgroundColor:'#25b334', borderColor:'#25b334'}}
                                 onClick={()=>this.Favorite()}
                             >
-                                 {this.state.activities.includes(this.state.activityInfo.id) ? "Eliminar de favoritos 💔" : "Favorito ❤"}
+                                 {this.state.activities.includes(this.state.activityInfo.id) ? "Eliminar de favoritos 💔" : "Favorito 💖"}
                             </Button>
                         </Col>
                     </Row>

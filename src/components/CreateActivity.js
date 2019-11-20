@@ -188,20 +188,34 @@ componentDidMount(){
         <h1 className={Styles.title}>Crear actividad</h1>
             <Form className={Styles.labels}>
                 <Form.Item label='Nombre'>
-                    <Input placeholder='Nombre de la actividad'
+                    {getFieldDecorator('nombre',{
+                        rules: [
+                          { required: true, message: 'Ponle un nombre a tu actividad', type: 'string' },
+                          ],
+                      })(
+                      <Input placeholder='Nombre de la actividad'
                       className='col-5'
                         size='large'
                         onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, name: e.target.value } })}>
                         
-                    </Input>
+                      </Input>
+                      )}
+                    
                 </Form.Item >
                 <Form.Item label='Descripción de la actividad'>
+                  {getFieldDecorator('descripcion',{
+                        rules: [
+                          { required: true, message: 'Ponle una descripción a tu actividad', type: 'string' },
+                          ],
+                      })(
                     <TextArea 
                       placeholder='Descripción de la actividad' 
                       rows={10} 
                       onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, description: e.target.value } })} 
                       class='col-4 col-md-6'
                       />
+                  )}
+                    
                 </Form.Item>
 {/*---------------------------------------------------------------------------------------------------------------*/}
                 <Form.Item label="Palabras clave" extra="Para añadir una nueva palabra clave escribe el nombre en este espacio y finaliza con la tecla Enter">
@@ -224,7 +238,12 @@ componentDidMount(){
                 </Form.Item>
 {/*---------------------------------------------------------------------------------------------------------------*/}
                 <Form.Item className={Styles.upload}>
-                    <div className={"clearfix"}>
+                    {getFieldDecorator('archivo', {
+                        rules: [
+                        { required: true, message: 'Sube una foto de la actividad que deseas publicar'},
+                        ],
+                    })(
+                        <div className={"clearfix"}>
                         <Upload
                         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                         listType="picture-card"
@@ -237,7 +256,10 @@ componentDidMount(){
                         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
                         <img alt="example" style={{ width: '150%' }} src={previewImage} />
                         </Modal>
-                    </div>
+                        </div>
+                    )}
+
+                    
                 </Form.Item>
                 <Form.Item>
                 <Button 
