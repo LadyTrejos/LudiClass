@@ -5,8 +5,8 @@ import Instagram from "./Instagram";
 export default function Sugerencias() {
   return (
     <div class="container-fluid" className={styles.main}>
-        <div class="row">
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex flex-column">
             <h1 className={styles.header}>Comentarios y sugerencias</h1>
             <p>
             ¿Te ha gustado nuestra idea?
@@ -14,7 +14,7 @@ export default function Sugerencias() {
             <br />
             ¿Quieres que incluyamos algo más?
             </p>
-            <p> Déjanos aqui tu opinión!</p>
+            <p>¡Déjanos aqui tu opinión!</p>
             
             <div className={styles.formulario}>
               <form action="https://formspree.io/gertiven@gmail.com" method="POST">

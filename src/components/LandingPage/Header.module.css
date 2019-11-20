@@ -2,49 +2,66 @@
 @import url("https://fonts.googleapis.com/css?family=Delius&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Boogaloo&display=swap");
 
-a.button:hover{
-  color: white;
-  text-decoration: none;
+.button:hover{
   background: #e74b0d;
   border-color: #e74b0d;
+  color: white;
+  text-decoration: none;
 }
-a.btn-outline {
+.btn {
+  background: #ff530e;
+  border: 2px solid #ff530e;
+  border-radius: 15px;
+  color: white;
+  margin: 0 8px;
+  padding: 5px 10px;
+}
+.btn:hover{
+  background: #e74b0d;
+  border-color: #e74b0d;
+  color: white;
+  text-decoration: none;
+}
+.btnoutline {
   background: none;
   border: 2px solid #ff530e;
   border-radius: 15px;
   color: white;
+  padding: 5px 10px;
 }
-a.btn-outline:hover{
+.btnoutline:hover{
+  color: white;
   background: #e74b0d;
   border-color: #e74b0d;
+  text-decoration: none;
 }
 .bigLogo {
-  margin-top: 15vh;
-  width: 80vw;
   height: 80vw;
+  margin-top: 15vh;
   max-width: 400px;
   max-height: 400px;
+  width: 80vw;
 }
-br {
+.br {
   height: 5px;
 }
 .brand {
-  width: 100%;
   max-width: 360px;
+  width: 100%;
 }
 .button {
   background: #25b334;
-  color: #fff;
   border: 3px solid #25b334;
   border-radius: 15px;
-  padding: 0.3rem 1rem;
-  font-size: 1.2rem;
-  outline: none;
+  color: #fff;
   cursor: pointer;
+  font-family: "Delius";
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  outline: none;
+  padding: 0.3rem 1rem;
   position: relative;
   transition: 0.2s ease-in-out;
-  font-family: "Delius";
-  letter-spacing: 1px;
 }
 div[id^="section"]:target::before {
 	content: " ";
@@ -58,7 +75,7 @@ footer {
   margin: 0 0;
   padding: 10px 0;
 }
-header {
+.header {
   color: #fff;
   background: rgb(36, 17, 144); /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -83,14 +100,14 @@ header {
   text-align: center;
 }
 .navbar a {
-  display: inline-block;
-  color: white;
+  color: rgb(255, 255, 255, 1)!important;
   cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-  padding: 7px 10px;
+  display: inline-block;
   font-family: "Delius";
-  font-size: 1.1rem;
+  font-size: 1rem;
+  padding: 7px 10px;
+  text-align: center;
+  text-decoration: none;
 }
 .navbar a:hover {
   background-color: rgb(39, 20, 151);
@@ -149,11 +166,11 @@ header {
   justify-content: space-between;
   color: white;
 }
-.social-wrapper {
+.socialwrapper {
   text-align: center;
   color: #fff;
 }
-.social-wrapper p {
+.socialwrapper p {
   color: white;
 }
 
