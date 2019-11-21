@@ -1,0 +1,11 @@
+python -m venv pathToVEnv
+
+.\Scripts\activate.bat
+
+pip install -r requirements.txt
+
+RUNSERVER
+python manage.py runserver 0.0.0.0:8000
+
+MIGRATIONS
+python manage.py makemigrations users
