@@ -1,6 +1,5 @@
-import React from 'react';
-import axios from 'axios';
-import ModificateActivity from './ModificateActivity';
+import React from "react";
+import axios from "axios";
 
 import {
   Form,
@@ -9,8 +8,8 @@ import {
   Modal,
   message,
   Upload
-} from 'antd';
-import HOSTNAME from '../helpers/hostname';
+} from "antd";
+import HOSTNAME from "../helpers/hostname";
 
 
 /* imagenes*/
@@ -27,7 +26,7 @@ function getBase64(file) {
   class PicturesWall extends React.Component {
     state = {
       previewVisible: false,
-      previewImage: '',
+      previewImage: "",
       fileList: [  ],
     };
  
@@ -48,9 +47,9 @@ function getBase64(file) {
  
  
      beforeUpload = (file) => {
-       const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
+       const isJPG = file.type === "image/jpeg" || file.type === "image/png";
        if (!isJPG) {
-         message.error('Solo se pueden subir imágenes');
+         message.error("Solo se pueden subir imágenes");
        }
  
        return isJPG;
@@ -79,7 +78,7 @@ function getBase64(file) {
             {fileList.length >= 1   ? null : uploadButton}
           </Upload>
           <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-            <img alt="Portada de la actividad" style={{ width: '100%' }} src={previewImage} />
+            <img alt="Portada de la actividad" style={{ width: "100%" }} src={previewImage} />
           </Modal>
         </div>
       );
@@ -104,12 +103,12 @@ class ChangeImageModal extends React.Component {
         const image = this.imageRef.current.state.fileList[0].originFileObj
         const id = this.props.activityID;
         let activityData = new FormData();
-        activityData.append('picture', image);
+        activityData.append("picture", image);
         axios.patch(`${HOSTNAME}/api/activity/${id}/`,
                     activityData,
-                    { headers: {"Content-type": 'multipart/form-data'}})
+                    { headers: {"Content-type": "multipart/form-data"}})
         .then((res) => {
-            message.success('La imagen se ha cambiado exitosamente.', 10)
+            message.success("La imagen se ha cambiado exitosamente.", 10)
             this.setState({
                 visiblePassword: false,
               });
@@ -140,9 +139,9 @@ class ChangeImageModal extends React.Component {
       const {getFieldDecorator} = this.props.form;
        return(
             <Form.Item>
-              <Button onClick={this.showModalPassword} size='large' type="primary"  
-                style={{backgroundColor:'#8F9AE0', 
-                borderColor:'#8F9AE0'}}
+              <Button onClick={this.showModalPassword} size="large" type="primary"  
+                style={{backgroundColor:"#8F9AE0", 
+                borderColor:"#8F9AE0"}}
               >
                   Cambiar la imagen de portada
               </Button>
@@ -163,7 +162,7 @@ class ChangeImageModal extends React.Component {
                   ]}
                 >
                     <Form.Item label="Nueva imagen">
-                        {getFieldDecorator('url',
+                        {getFieldDecorator("url",
                         )(<PicturesWall ref={this.imageRef}/>)}
                     </Form.Item>
 
@@ -175,7 +174,7 @@ class ChangeImageModal extends React.Component {
 
   }
   
-  const ChangeActivityImage = Form.create({ name: 'change_image' })(ChangeImageModal);
+  const ChangeActivityImage = Form.create({ name: "change_image" })(ChangeImageModal);
 
 
   export default ChangeActivityImage;

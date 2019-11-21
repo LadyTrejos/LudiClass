@@ -8,7 +8,7 @@ import HOSTNAME from "../helpers/hostname";
 import ActivityListView from "./ActivityListView";
 import styles from "./UserLayout.module.css";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Header, Sider } = Layout;
 const { Search } = Input;
 
 class UserLayout extends React.Component {
@@ -82,12 +82,12 @@ class UserLayout extends React.Component {
             {/* <div><Divider style={{backgroundColor:'white'}}/></div> */}
             <Menu.Item key="1">
               <span className={styles.option}>Crear actividad</span>
-              <Link to="/createActivity" />
+              <Link to="/create" />
             </Menu.Item>
 
             <Menu.Item key="2">
               <span className={styles.option}>Ver actividades</span>
-              <Link to="/activityListView" />
+              <Link to="/list" />
             </Menu.Item>
           </Menu>
           <Button
@@ -109,7 +109,7 @@ class UserLayout extends React.Component {
               </Col>
               <Col xs={23} sm={24} md={11} lg={9} xl={9}>
                 <Search
-                  placeholder="Ingrese un tema para buscar actividades..."
+                  placeholder="Ingresa un tema para buscar actividades..."
                   enterButton="Buscar"
                   size="large"
                   className={styles.searchbar}

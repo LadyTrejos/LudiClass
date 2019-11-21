@@ -64,7 +64,6 @@ class ActivityListView extends React.Component {
         });
     }
   }
-  /*
   
   componentWillMount() {
     const userID = localStorage.getItem("user");
@@ -74,7 +73,7 @@ class ActivityListView extends React.Component {
         favorites: res.data.activities
       });
     });
-  }*/
+  }
 
   handleSearch = value => {
     const { activity } = this.state;
@@ -113,7 +112,7 @@ class ActivityListView extends React.Component {
     axios.all(promises).then(results => {
       results.forEach(item => activities.push(item.data));
       this.setState({
-        activity: activities
+        filtered: activities
       });
     });
   };

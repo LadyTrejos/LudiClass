@@ -106,7 +106,7 @@ componentDidMount(){
       onOk: () => {
         axios.delete(`${HOSTNAME}/api/activity/${id}/`)
         .then(() => 
-          history.push('/activityListView')
+          history.push('/list')
         )
       },
       onCancel() {},
@@ -114,7 +114,7 @@ componentDidMount(){
   }
 
   Favorite = () => {
-      const id = this.state.activityInfo.id;
+    const id = this.state.activityInfo.id;
     if(!this.state.activities.includes(id)){
       this.state.activities.push(id)
       this.setState({favorito: !this.state.favorito})
@@ -129,7 +129,7 @@ componentDidMount(){
      message.info('Eliminaste esta actividad de tu lista de favoritos 💔')
     }
     const userID = localStorage.getItem('user')
-    const ActivityData = JSON.stringify({activities:this.state.activities});
+    const ActivityData = JSON.stringify({activities: this.state.activities});
     axios.patch(`${HOSTNAME}/api/users/${userID}/`,
         ActivityData,
         { headers: {"Content-type": "application/json"}}
@@ -137,9 +137,7 @@ componentDidMount(){
     .catch(err => 
       console.log(err)
     )
-    
-  
-    }
+  }
 
   searchTag = (a) => {
     console.log('Estoy en searchTag ',a)
@@ -198,7 +196,7 @@ componentDidMount(){
                           {this.state.activityInfo.owner === localStorage.getItem('user')?
                             <Button size='large' 
                                   style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', backgroundColor:'#25b379', borderColor:'#25b334'}}
-                                  href= {`/modificateActivity/${this.state.activityInfo.id}`}
+                                  href= {`/edit/${this.state.activityInfo.id}`}
 
                               >
                                     Editar actividad

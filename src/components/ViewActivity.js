@@ -48,7 +48,13 @@ class ViewActivity extends React.Component {
         {data.length > 0 ? (
           <List
             itemLayout="horizontal"
-            grid={{ gutter: 16, column: 4 }}
+            grid={{ 
+              xs: 1,
+              sm: 1,
+              md: 2,
+              lg: 2,
+              xl: 2,
+              xxl: 3, }}
             pagination={{
               onChange: page => {
                 console.log(page);
@@ -61,13 +67,19 @@ class ViewActivity extends React.Component {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  alignItems: "center"
+                  alignItems: "center",
+                  margin: "10px 10px"
                 }}
               >
                 <Card
                   style={{
                     borderColor: "gray",
-                    borderRadius: 20
+                    borderRadius: 20,
+                    width: "80vw",
+                    height: "max-content",
+                    maxWidth: "450px",
+                    maxHeight: "fit-content",
+                    minHeight: "fit-content",
                   }}
                   cover={
                     <div
@@ -80,9 +92,11 @@ class ViewActivity extends React.Component {
                     >
                       <img
                         style={{
-                          width: "90%",
-                          height: "90%",
-                          borderRadius: "5px"
+                          width: "10vw",
+                          height: "10vw",
+                          borderRadius: "5px",
+                          minHeight: "120px",
+                          minWidth: "120px"
                         }}
                         alt="Foto de la actividad"
                         src={item.picture}
@@ -91,15 +105,18 @@ class ViewActivity extends React.Component {
                   }
                 >
                   <Meta
-                    style={{ textAlign: "center" }}
+                    style={{ textAlign: "center"}}
                     title={
                       <a
-                        style={{ fontSize: "1.2rem" }}
+                        style={{ fontSize: "1.2rem", wordWrap: 'ellipsis' }}
                         href={`/activity/${item.id}/`}
                       >
-                        {item.name[0]
-                          .toUpperCase()
-                          .concat(item.name.substring(1))}
+                        { 
+                          item.name.length > 45 ? 
+                            item.name[0].toUpperCase().concat(item.name.substring(1).concat('...'))
+                            :
+                            item.name[0].toUpperCase().concat(item.name.substring(1))
+                        }
                       </a>
                     }
                   />
@@ -108,7 +125,7 @@ class ViewActivity extends React.Component {
                     style={{ color: "#2F3E9E", overflowWrap: "break-word" }}
                     description={
                       <p style={{ color: "#149", fontWeight: "bold" }}>
-                        {item.description.substring(0, 100).concat(" . . .")}
+                        {item.description.substring(0, 100).concat(" ...")}
                       </p>
                     }
                   />

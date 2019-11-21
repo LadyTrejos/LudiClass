@@ -84,8 +84,8 @@ WSGI_APPLICATION = 'ludiclass.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'semda',
-        'HOST': 'mongodb://admin:admin1234@ds253567.mlab.com:53567/semda',
+        'NAME': 'ludiclass',
+        'HOST': 'localhost',
     }
 }
 

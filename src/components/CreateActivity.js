@@ -6,13 +6,13 @@ import { withRouter,} from 'react-router-dom';
 
 import history from '.././helpers/history';
 import HOSTNAME from '../helpers/hostname';
-import Styles from './CreateActivity.module.css';
+import styles from './CreateActivity.module.css';
 
 const { TextArea } = Input;
 const { Option } = Select;
-const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
+// const sleep = (milliseconds) => {
+//   return new Promise(resolve => setTimeout(resolve, milliseconds))
+// }
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -137,7 +137,7 @@ class ActivityClass extends React.Component {
         .then(results => {
           results.forEach(item => topics.push(item.data.id))
           this.handleSubmit(topics)
-          history.push("/activityListView")
+          history.push("/list")
           window.location.reload(true);
         }
         )
@@ -175,13 +175,13 @@ class ActivityClass extends React.Component {
     return (
       <div >
         <div >
-          <h1 className={Styles.title}>Crear actividad</h1>
+          <h1 className={styles.title}>Crear actividad</h1>
         </div>
-        <Form className={Styles.form}>
+        <Form className={styles.form}>
           <Row gutter={50}>
             <Col md={12}>
               <Row>
-                <Form.Item label='Nombre'>
+                <Form.Item label='Nombre de la actividad'>
                   {getFieldDecorator('nombre', {
                       rules: [
                         { required: true, message: 'Ponle un nombre a tu actividad', type: 'string' },
@@ -190,7 +190,6 @@ class ActivityClass extends React.Component {
                     <Input placeholder='Nombre de la actividad'
                       size='large'
                       onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, name: e.target.value } })}>
-                      
                     </Input>
                     )}
                 </Form.Item>
@@ -204,7 +203,7 @@ class ActivityClass extends React.Component {
                       })(
                       <TextArea 
                         placeholder='Cuéntanos de qué trata tu actividad, qué materiales necesita...' 
-                        rows={10} 
+                        rows={8} 
                         onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, description: e.target.value } })} 
                       />
                     )}
@@ -237,8 +236,8 @@ class ActivityClass extends React.Component {
                   )}
                 </Form.Item>
               </Row>
-              <Row md={8}>
-                <p className={Styles.highlight}>
+              <Row md={6}>
+                <p className={styles.highlight}>
                   Recuerda usar una imagen que se relacione con la actividad que estás publicando.
                 </p>
                 <p>Esta imagen, las palabras claves y el nombre que le pongas a tu actividad, ayudarán a los demás usuarios a 
@@ -251,7 +250,9 @@ class ActivityClass extends React.Component {
 {/*---------------------------------------------------------------------------------------------------------------*/}
           
 {/*---------------------------------------------------------------------------------------------------------------*/}
-          <Form.Item label="Palabras clave" extra="Para añadir una nueva palabra clave escribe el nombre en este espacio y finaliza con la tecla Enter">
+          <Form.Item 
+            label="Palabras clave" 
+            extra="Para añadir una nueva palabra clave escribe el nombre en este espacio y finaliza con la tecla Enter">
             {getFieldDecorator('topics', {
                 rules: [
                 { required: true, message: 'Usa al menos una palabra clave para que los demás usuarios puedan encontrar tu actividad más fácil', type: 'array' },

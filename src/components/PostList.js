@@ -1,6 +1,8 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Comment, Form, Button, List, Input, Upload, Icon, Modal, Avatar, Tooltip, Divider, message } from 'antd';
+import { Comment, Form, Button, 
+  List, Input, Upload, Icon, Modal, Avatar, 
+  Tooltip, Divider, message } from 'antd';
 import moment from 'moment';
 import axios from 'axios';
 import HOSTNAME from '../helpers/hostname';

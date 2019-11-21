@@ -139,12 +139,12 @@ class RegisterForm extends React.Component {
     
     const { getFieldDecorator } = this.props.form;
     
-    let errorMessage = null;
-    if (this.props.error) {
-      errorMessage = (
-        <p> { this.props.error.message } </p>
-      )
-    }
+    // let errorMessage = null;
+    // if (this.props.error) {
+    //   errorMessage = (
+    //     <p> { this.props.error.message } </p>
+    //   )
+    // }
     return (
     
         <Form onSubmit={this.handleSubmit}>                    

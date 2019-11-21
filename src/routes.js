@@ -2,9 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { PrivateRoute } from './components/PrivateRoute';
 
-import Home from './components/Home';
 import Header from './components/LandingPage/Header';
-import Activity from './components/CreateActivity';
+import Home from './components/Home';
 import LoginContainer from './containers/LoginContainer';
 import RegisterContainer from './containers/RegisterContainer';
 
