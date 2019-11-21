@@ -42,9 +42,10 @@ class ViewActivity extends React.Component {
   };
 
   render() {
+    const { data } = this.props;
     return (
       <div>
-        {this.props.data.length > 0 ? (
+        {data.length > 0 ? (
           <List
             itemLayout="horizontal"
             grid={{ gutter: 16, column: 4 }}
@@ -52,7 +53,7 @@ class ViewActivity extends React.Component {
               onChange: page => {
                 console.log(page);
               },
-              pageSize: 2
+              pageSize: 20
             }}
             dataSource={this.props.data}
             renderItem={item => (
