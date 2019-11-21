@@ -87,7 +87,7 @@ class UserLayout extends React.Component {
 
             <Menu.Item key="2">
               <span className={styles.option}>Ver actividades</span>
-              <Link to="activityListView" />
+              <Link to="/activityListView" />
             </Menu.Item>
           </Menu>
           <Button

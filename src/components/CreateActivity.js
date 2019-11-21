@@ -137,8 +137,8 @@ class ActivityClass extends React.Component {
         .then(results => {
           results.forEach(item => topics.push(item.data.id))
           this.handleSubmit(topics)
-          sleep(3000)
           history.push("/activityListView")
+          window.location.reload(true);
         }
         )
       }
