@@ -128,11 +128,12 @@ class ActivityListView extends React.Component {
         <Row>
           <Col sm={12} md={16} lg={18} xl={18} xxl={18}>
             <Search
-              placeholder="Buscar actividad"
+              placeholder="Ingresa un tema para buscar actividades..."
               onSearch={value => this.handleSearch(value)}
-              enterButton
+              enterButton="Buscar"
               size="large"
               style={{ maxWidth: 300 }}
+              className={Styles.searchbar}
             />
           </Col>
           <Col sm={12} md={8} lg={6} xl={6} xxl={6}>

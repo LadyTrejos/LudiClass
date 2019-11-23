@@ -92,11 +92,9 @@ class ViewActivity extends React.Component {
                     >
                       <img
                         style={{
-                          width: "10vw",
-                          height: "10vw",
-                          borderRadius: "5px",
-                          minHeight: "120px",
-                          minWidth: "120px"
+                          width: '100%',
+                          height: '15vw',
+                          objectFit: 'cover'
                         }}
                         alt="Foto de la actividad"
                         src={item.picture}
@@ -134,11 +132,7 @@ class ViewActivity extends React.Component {
 
                   {item.topics.map(item => (
                     <Tag
-                      style={{
-                        background: "#DAC6FF",
-                        fontWeight: "bold",
-                        fontSize: "medium"
-                      }}
+                      color="geekblue"
                       key={item}
                     >
                       {this.state.topics[item]}

@@ -7,6 +7,7 @@ import axios from "axios";
 import HOSTNAME from "../helpers/hostname";
 import ActivityListView from "./ActivityListView";
 import styles from "./UserLayout.module.css";
+import figures from "../static/css/utils.module.css";
 
 const { Content, Header, Sider } = Layout;
 const { Search } = Input;
@@ -48,13 +49,24 @@ class UserLayout extends React.Component {
   render() {
     const { actFiltered } = this.state;
     return (
+      <div> 
+        <div>
+          <div className={figures.first}></div>
+          <div className={figures.second}></div>
+          <div className={figures.third}></div>
+          <div className={figures.four}></div>
+          <div className={figures.five}></div>
+          <div className={figures.six}></div>
+        </div>
+      
       <Layout>
         <Sider
           style={{
             backgroundColor: "#241190",
-            flex: 1,
-            justifyContent: "flex-end",
-            alignContent: "left"
+            overflow: 'auto',
+            height: '100vh',
+            position: 'fixed',
+            left: 0,
           }}
           breakpoint="lg"
           collapsedWidth="0"
@@ -99,7 +111,7 @@ class UserLayout extends React.Component {
           </Button>
         </Sider>
 
-        <Layout style={{ backgroundColor: "rgba(36, 17, 144, 0.2)" }}>
+        <Layout className={styles.layout}>
           <Header className={styles.header}>
             <Row type="flex">
               <Col xs={0} sm={0} md={10} lg={10} xl={10}>
@@ -118,7 +130,7 @@ class UserLayout extends React.Component {
               </Col>
             </Row>
           </Header>
-          <Content style={{ margin: "24px 16px" }}>
+          <Content style={{ margin: '100px 16px 24px', overflow: 'initial' }}>
             <div
               style={{
                 padding: "3vh 2vw",
@@ -137,6 +149,7 @@ class UserLayout extends React.Component {
           {/* <Footer style={{ textAlign: 'center' }}>@LudiClass</Footer> */}
         </Layout>
       </Layout>
+      </div>
     );
   }
 }

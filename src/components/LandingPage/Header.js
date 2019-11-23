@@ -8,10 +8,12 @@ import Que from "./Que";
 import Frases from "./Frases";
 import Team from "./Team";
 import Sugerencias from "./Sugerencias";
+import { BackTop } from "antd";
 
 export default function Header() {
   return (
     <div>
+      <BackTop />
       <Navbar collapseOnSelect expand="md" bg="primary" variant="dark" fixed="top" className={styles.navbar}>
         <Navbar.Brand href="#home">
           <img className={styles.navbrand} src={require('../../static/img/brand_logo.png')} alt="Logo LudiClass"/>

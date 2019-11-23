@@ -44,17 +44,16 @@ class LoginForm extends React.Component {
                         )}
                         {/*<a href="">Olvidé mi contraseña </a>*/}
                         <br/>
-                        <Button 
-                            type="primary" 
-                            htmlType="submit" 
-                            block
-                            size='large'
-                            className={styles.button}
-                        >
-                            Entrar
-                        </Button>
                     </Form.Item>
-                    
+                    <Button 
+                        type="primary" 
+                        htmlType="submit" 
+                        block
+                        size='large'
+                        className={styles.button}
+                    >
+                        Entrar
+                    </Button>
                 </Form>
             );
         }
