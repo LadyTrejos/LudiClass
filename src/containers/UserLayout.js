@@ -49,10 +49,13 @@ class UserLayout extends React.Component {
         <Sider
           style={{
             backgroundColor: "#241190",
-            overflow: 'auto',
-            height: '100vh',
+            flex: 1, 
+            justifyContent: "flex-end", 
+            alignContent: "left", 
+            zIndex: 9999,
             position: 'fixed',
-            left: 0,
+            left:0,
+            height: '100vh',
           }}
           breakpoint="lg"
           collapsedWidth="0"
