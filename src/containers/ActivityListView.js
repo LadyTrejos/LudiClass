@@ -46,23 +46,19 @@ class ActivityListView extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { filter } = nextProps;
     console.log(filter);
+    let url = `${HOSTNAME}/api/activity/?search=${filter}&&ordering=-created_at`;
     if (filter === "all") {
-      axios
-        .get(`${HOSTNAME}/api/activity/?ordering=-created_at`)
+      url = `${HOSTNAME}/api/activity/?ordering=-created_at`;
+    } else if (filter === "favorites") {
+    }
+
+    axios
+        .get(url)
         .then(({ data }) => {
           this.setState({
             filtered: data
           });
         });
-    } else {
-      axios
-        .get(`${HOSTNAME}/api/activity/?search=${filter}&&ordering=-created_at`)
-        .then(res => {
-          this.setState({
-            filtered: res.data
-          });
-        });
-    }
   }
   
   componentWillMount() {
@@ -132,8 +128,7 @@ class ActivityListView extends React.Component {
               onSearch={value => this.handleSearch(value)}
               enterButton="Buscar"
               size="large"
-              style={{ maxWidth: 300 }}
-              className={Styles.searchbar}
+              style={{ maxWidth: '420px' }}
             />
           </Col>
           <Col sm={12} md={8} lg={6} xl={6} xxl={6}>

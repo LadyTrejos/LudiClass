@@ -1,0 +1,123 @@
+.ribbon {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+  }
+  .ribbon::before,
+  .ribbon::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    display: block;
+    border: 5px solid #ff530e;
+  }
+  .ribbon span {
+    position: absolute;
+    display: block;
+    width: 225px;
+    padding: 15px 0;
+    background-color: #ff530e;
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    color: #fff;
+    font: 700 16px/1 'Delius';
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  /* top left*/
+  .ribbontopleft {
+    top: -10px;
+    left: -10px;
+  }
+  .ribbontopleft::before,
+  .ribbontopleft::after {
+    border-top-color: transparent;
+    border-left-color: transparent;
+  }
+  .ribbontopleft::before {
+    top: 0;
+    right: 0;
+  }
+  .ribbontopleft::after {
+    bottom: 0;
+    left: 0;
+  }
+  .ribbontopleft span {
+    right: -25px;
+    top: 30px;
+    transform: rotate(-45deg);
+  }
+  
+  /* top right*/
+  .ribbontopright {
+    top: -10px;
+    right: -10px;
+  }
+  .ribbontopright::before,
+  .ribbontopright::after {
+    border-top-color: transparent;
+    border-right-color: transparent;
+  }
+  .ribbontopright::before {
+    top: 0;
+    left: 0;
+  }
+  .ribbontopright::after {
+    bottom: 0;
+    right: 0;
+  }
+  .ribbontopright span {
+    left: -25px;
+    top: 30px;
+    transform: rotate(45deg);
+  }
+  
+  /* bottom left*/
+  .ribbonbottomleft {
+    bottom: -10px;
+    left: -10px;
+  }
+  .ribbonbottomleft::before,
+  .ribbonbottomleft::after {
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  .ribbonbottomleft::before {
+    bottom: 0;
+    right: 0;
+  }
+  .ribbonbottomleft::after {
+    top: 0;
+    left: 0;
+  }
+  .ribbonbottomleft span {
+    right: -25px;
+    bottom: 30px;
+    transform: rotate(225deg);
+  }
+  
+  /* bottom right*/
+  .ribbonbottomright {
+    bottom: -10px;
+    right: -10px;
+  }
+  .ribbonbottomright::before,
+  .ribbonbottomright::after {
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+  }
+  .ribbonbottomright::before {
+    bottom: 0;
+    left: 0;
+  }
+  .ribbonbottomright::after {
+    top: 0;
+    right: 0;
+  }
+  .ribbonbottomright span {
+    left: -25px;
+    bottom: 30px;
+    transform: rotate(-225deg);
+  }
