@@ -41,15 +41,6 @@ class UserLayout extends React.Component {
     const { actFiltered } = this.state;
     return (
       <div> 
-        <div>
-          <div className={figures.first}></div>
-          <div className={figures.second}></div>
-          <div className={figures.third}></div>
-          <div className={figures.four}></div>
-          <div className={figures.five}></div>
-          <div className={figures.six}></div>
-        </div>
-      
       <Layout>
         <Sider
           style={{

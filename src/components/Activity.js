@@ -118,7 +118,7 @@ componentDidMount(){
     if(!this.state.activityInfo.users.includes(userID)){
       this.state.activityInfo.users.push(userID)
       this.setState({favorito: !this.state.favorito})
-      message.success('¡Actividad agregada a tus favoritos! 💖')
+      message.success('¡Actividad agregada a tu lista de favoritos! 💖')
     }else{
       for( var i = 0; i < this.state.activityInfo.users.length; i++){ 
         if ( this.state.activityInfo.users[i] === userID) {
@@ -198,12 +198,19 @@ componentDidMount(){
                         </Descriptions.Item>
                         <br/> 
                         <Descriptions.Item className={Styles.descriptionItem} label="Creador">
-                            
-                            <p style={{fontSize:'1.1rem', fontWeight:'bold'}} > {this.state.activityInfo.owner.toUpperCase()}</p>
+                            <a href={`/list?autor=${this.state.activityInfo.owner}`}>
+                              <p style={{fontSize:'1.1rem', fontWeight:'bold'}} >
+                                {this.state.activityInfo.owner.toUpperCase()}
+                              </p>
+                            </a>
                         </Descriptions.Item>
                         
                         <Descriptions.Item className={Styles.descriptionItem} label='Temas'>{ this.state.activityInfo.topics.map( item => (
-                                <a href={`/list?topic=${this.state.all_topics[item]}`}><Tag>{this.state.all_topics[item]}</Tag></a>
+                                <a href={`/list?topic=${this.state.all_topics[item]}`}>
+                                  <Tag className={Styles.tag}>
+                                    {this.state.all_topics[item]}
+                                  </Tag>
+                                </a>
                                 ))
                                 }</Descriptions.Item>
                         
@@ -232,7 +239,7 @@ componentDidMount(){
                         </Col>
                         <Col>
                         {this.state.activityInfo.owner === localStorage.getItem('user')?
-                            <Button  type="danger" onClick={() => {this.showConfirm(this.state.activityInfo.id)}} size='large' style={{borderRadius:'10px', color:'#fff', fontWeight: 'bold', marginTop:'1rem'}}>
+                            <Button  type='default' onClick={() => {this.showConfirm(this.state.activityInfo.id)}} size='large' style={{borderRadius:'10px', color:'#271496', fontWeight: 'bold', marginTop:'1rem'}}>
                               Eliminar actividad
                             </Button>
                         :

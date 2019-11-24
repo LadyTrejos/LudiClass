@@ -15,6 +15,7 @@ class ActivityListView extends React.Component {
     filtered: [],
     _query_topic:'',
     _query_search:'',
+    _query_autor:'',
     title:''
 
   };
@@ -25,13 +26,15 @@ class ActivityListView extends React.Component {
     
     const query_topic = this.props.location ? new URLSearchParams(this.props.location.search).get('topic') : null;
     const query_search = this.props.location ? new URLSearchParams(this.props.location.search).get('search') : null;
+    const query_autor = this.props.location ? new URLSearchParams(this.props.location.search).get('autor') : null;
     console.log('---> ',this.props)
     console.log('el filtro es: ', filter)
     console.log('query_topic ',query_topic)
     console.log('query_search ',query_search)
-    this.setState({_query_topic:query_topic,_query_search:query_search})
+    console.log('query_autor ',query_autor)
+    this.setState({_query_topic:query_topic,_query_search:query_search, _query_autor: query_autor})
     
-    if (filter === "all" && query_topic == null && query_search == null) {
+    if (filter === "all" && query_topic == null && query_search == null && query_autor == null) {
       axios
         .get(`${HOSTNAME}/api/activity/?ordering=-created_at`)
         .then(({ data }) => {
@@ -65,7 +68,19 @@ class ActivityListView extends React.Component {
             title:'Actividades con el nombre o etiqueta "'.concat(query_search).concat('"')
           });
         });
-      }else if (filter === 'favorites') {
+      }else if(query_autor != null) {
+        let url = `${HOSTNAME}/api/activity/?name=&topics__name=&owner=${query_autor}`;
+        console.log('la url es: ', url)
+        axios
+          .get(url)
+          .then(res => {
+            this.setState({
+              activity: res.data,
+              filtered: res.data,
+              title:'Actividades hechas por "'.concat(query_autor).concat('"')
+            });
+          });
+        }else if (filter === 'favorites') {
       axios
         .get(`${HOSTNAME}/api/activity/?name=&topics__name=&users=${localStorage.getItem('user')}`)
         .then(res => {
@@ -85,7 +100,6 @@ class ActivityListView extends React.Component {
             title:'Mis actividades'
           });
         });
-
     }
 
   }
@@ -120,7 +134,7 @@ class ActivityListView extends React.Component {
           
           <Col sm={12} md={8} lg={6} xl={6} xxl={6}>
             {
-              this.state._query_topic !== null || this.props.filter === 'favorites' || this.props.filter === 'my-content' || this.state._query_search !== null ? 
+              this.state._query_topic !== null || this.props.filter === 'favorites' || this.props.filter === 'my-content' || this.state._query_search !== null || this.state._query_autor !== null ? 
               <Button
               href='/list'
               className={Styles.button}
