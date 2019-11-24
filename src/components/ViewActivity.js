@@ -3,6 +3,7 @@ import "antd/dist/antd.css";
 import axios from "axios";
 import { Card, Tag, Row, List, Empty } from "antd";
 import HOSTNAME from "../helpers/hostname";
+import { BackTop } from "antd";
 
 const { Meta } = Card;
 
@@ -45,6 +46,7 @@ class ViewActivity extends React.Component {
     const { data } = this.props;
     return (
       <div>
+        <BackTop />
         {data.length > 0 ? (
           <List
             itemLayout="horizontal"

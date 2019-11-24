@@ -10,6 +10,10 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter,)
+    filter_fields = ('username','email')
+    ordering_fields = ('username', 'email')
+    search_fields = ('email','username') 
 
 class ActivityViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all()
@@ -17,7 +21,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter,)
     filter_fields = ('name', 'topics__name')
     ordering_fields = ('created_at',)
-    search_fields = ('name','topics__name', 'id')
+    search_fields = ('name','topics__name', 'id ')
 
 class TopicViewSet(viewsets.ModelViewSet):
     serializer_class = TopicSerializer
