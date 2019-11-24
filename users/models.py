@@ -89,6 +89,7 @@ class Activity(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='activity_user')
     users = models.ManyToManyField('User', related_name="fans", blank=True)
+    views = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
