@@ -63,8 +63,6 @@ class ViewActivity extends React.Component {
 
   render() {
     const { data } = this.props;
-    console.log('data en el render', this.props.data)
-    console.log(this.state.topTen)
     return (
       <div>
         <BackTop />

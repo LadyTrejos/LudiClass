@@ -22,6 +22,8 @@ import HOSTNAME from '../helpers/hostname';
 import PostList from './PostList';
 import Styles from './Activity.module.css';
 
+import ActivityListView from "../containers/ActivityListView";
+
 const confirm = Modal.confirm;
 const { CheckableTag } = Tag;
 
@@ -43,6 +45,7 @@ class ActivityDetail extends React.Component {
         previewVisible: false,
         previewImage: '',
         fileList: [],
+        actFiltered:'all',
       };
       this.imageRef = React.createRef();
 }
@@ -71,6 +74,7 @@ componentDidMount(){
             owner: res.data.owner,
             users: res.data.users
         },
+        
 
       })
     })
@@ -115,30 +119,6 @@ componentDidMount(){
   }
 
   Favorite = () => {
-    // const id = this.state.activityInfo.id;
-    // if(!this.state.activities.includes(id)){
-    //   this.state.activities.push(id)
-    //   this.setState({favorito: !this.state.favorito})
-    //   message.success('¡Actividad agregada a tus favoritos! 💖')
-    // }else{
-    //   for( var i = 0; i < this.state.activities.length; i++){ 
-    //     if ( this.state.activities[i] === id) {
-    //       this.state.activities.splice(i, 1); 
-    //     }
-    //  }
-    //  this.setState({favorito: !this.state.favorito})
-    //  message.info('Eliminaste esta actividad de tu lista de favoritos 💔')
-    // }
-    // const userID = localStorage.getItem('user')
-    // const ActivityData = JSON.stringify({activities: this.state.activities});
-    // axios.patch(`${HOSTNAME}/api/users/${userID}/`,
-    //     ActivityData,
-    //     { headers: {"Content-type": "application/json"}}
-    // )
-    // .catch(err => 
-    //   console.log(err)
-    // )
-
     const id = this.state.activityInfo.id;
     const userID = localStorage.getItem('user')
     
@@ -165,14 +145,21 @@ componentDidMount(){
     )
   }
 
-  searchTag = (a) => {
-    console.log('Estoy en searchTag ',a)
+  searchTag = (value) => {
+    console.log('Estoy en searchTag ',value)
+    if (value !== "") {
+     history.push('/')
+      this.setState({
+        actFiltered: value
+      });
+    } 
   }
 
   
 
   render() {
     const userID = localStorage.getItem('user');
+    const { actFiltered } = this.state;
     return (
         
         <div className={Styles.gr} style={{padding:15 }}>
@@ -208,7 +195,8 @@ componentDidMount(){
                         </Descriptions.Item>
                         
                         <Descriptions.Item className={Styles.descriptionItem} label='Temas'>{ this.state.activityInfo.topics.map( item => (
-                                <CheckableTag className={Styles.tag} key={item} onChange={()=> this.searchTag(this.state.all_topics[item])}>{this.state.all_topics[item]}</CheckableTag>
+                                // <CheckableTag className={Styles.tag} key={item} onChange={()=> this.searchTag(this.state.all_topics[item]) }>{this.state.all_topics[item]}</CheckableTag>
+                                <a href={`/list?topic=${this.state.all_topics[item]}`}><Tag>{this.state.all_topics[item]}</Tag></a>
                                 ))
                                 }</Descriptions.Item>
                         
@@ -238,6 +226,7 @@ componentDidMount(){
                     </Row>
                     <br/>
                     <span className={Styles.span}>Comentarios</span>
+                    
                     
                     <PostList {...this.props} user={true}/>
                 </div>

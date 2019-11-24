@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import * as actions from "../store/actions/auth";
 import axios from "axios";
-import HOSTNAME from "../helpers/hostname";
+import history from "../helpers/history";
 import ActivityListView from "./ActivityListView";
 import styles from "./UserLayout.module.css";
 import figures from "../static/css/utils.module.css";
@@ -22,7 +22,9 @@ class UserLayout extends React.Component {
   }
 
   searchSubject = value => {
+    
     if (value !== "") {
+      history.push('/')
       this.setState({
         actFiltered: value
       });
@@ -32,6 +34,7 @@ class UserLayout extends React.Component {
       });
     }
   };
+
   render() {
     const { actFiltered } = this.state;
     return (
@@ -132,7 +135,7 @@ class UserLayout extends React.Component {
                 backgroundColor: "white",
                 borderRadius: "10px"
               }}
-            >
+            > 
               {this.props.location.pathname === "/" ? (
                 <ActivityListView filter={actFiltered} />
               ) : (
