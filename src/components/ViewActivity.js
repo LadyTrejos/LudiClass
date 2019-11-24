@@ -4,6 +4,7 @@ import axios from "axios";
 import { Card, Tag, Row, List, Empty, Statistic, Icon, Tooltip } from "antd";
 import styles from './ViewActivity.module.css'
 import HOSTNAME from "../helpers/hostname";
+import { BackTop } from "antd";
 
 const { Meta } = Card;
 
@@ -66,6 +67,7 @@ class ViewActivity extends React.Component {
     console.log(this.state.topTen)
     return (
       <div>
+        <BackTop />
         {data.length > 0 ? (
           <List
             itemLayout="horizontal"

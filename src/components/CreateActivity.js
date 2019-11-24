@@ -154,6 +154,13 @@ class ActivityClass extends React.Component {
     })
   }
 
+  validateName = (rule, value, callback) => {
+    if(value.length > 40){
+      callback("El nombre de la actividad no debe contener más de 40 caracteres.")
+    } 
+    callback();
+  };
+
   render() {
     const { getFieldDecorator } = this.props.form;
     const { submitting } = this.state;
@@ -181,11 +188,13 @@ class ActivityClass extends React.Component {
           <Row gutter={50}>
             <Col md={12}>
               <Row>
+
+  
                 <Form.Item label='Nombre de la actividad'>
                   {getFieldDecorator('nombre', {
                       rules: [
                         { required: true, message: 'Ponle un nombre a tu actividad', type: 'string' },
-                        ],
+                        { validator: this.validateName }],
                     })(
                     <Input placeholder='Nombre de la actividad'
                       size='large'

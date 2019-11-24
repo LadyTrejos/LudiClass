@@ -8,7 +8,8 @@ import {
     Button,
     Col,
     Modal,
-    message
+    message,
+    BackTop
   } from 'antd';
 
 import { connect } from 'react-redux';
@@ -168,10 +169,14 @@ componentDidMount(){
     console.log('Estoy en searchTag ',a)
   }
 
+  
+
   render() {
     const userID = localStorage.getItem('user');
     return (
+        
         <div className={Styles.gr} style={{padding:15 }}>
+          <BackTop/>
             {
                 this.state.activityInfo && this.state.all_topics ? 
                 <div>
@@ -192,8 +197,9 @@ componentDidMount(){
                         
                     >
                         <Descriptions.Item className={Styles.descriptionItem} label='Descripción'>
-                            <br/>
-                            <p style={{fontSize:'1.2rem'}} > {this.state.activityInfo.description} </p>
+                          <br/>
+                          <p style={{fontSize:'1.2rem', whiteSpace:'pre-wrap'}} > {this.state.activityInfo.description} </p>
+                            
                         </Descriptions.Item>
                         <br/> 
                         <Descriptions.Item className={Styles.descriptionItem} label="Creador">
