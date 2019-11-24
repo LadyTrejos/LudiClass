@@ -13,54 +13,81 @@ class ActivityListView extends React.Component {
     events: [],
     favorites: [],
     filtered: [],
-    _query:''
+    _query_topic:'',
+    _query_search:'',
+    title:''
 
   };
-
+ 
   componentDidMount() {
+    {/*  Arreglar eso de nuevo, la query_topic dice que es null cuando hago una búsqueda*/}
     const { filter } = this.props;
-    const query = this.props.location ? new URLSearchParams(this.props.location.search).get('topic') : null;
+    
+    const query_topic = this.props.location ? new URLSearchParams(this.props.location.search).get('topic') : null;
+    const query_search = this.props.location ? new URLSearchParams(this.props.location.search).get('search') : null;
     console.log('---> ',this.props)
     console.log('el filtro es: ', filter)
-    console.log('--> ',query)
-    this.setState({_query:query})
+    console.log('query_topic ',query_topic)
+    console.log('query_search ',query_search)
+    this.setState({_query_topic:query_topic,_query_search:query_search})
     
-    if (filter === "all" && query == null) {
+    if (filter === "all" && query_topic == null && query_search == null) {
       axios
         .get(`${HOSTNAME}/api/activity/?ordering=-created_at`)
         .then(({ data }) => {
           this.setState({
             activity: data,
-            filtered: data
+            filtered: data,
+            title:'Actividades'
           });
         });
-    }else if(query != null) {
-      let url = `${HOSTNAME}/api/activity/?name=&topics__name=${query}`;
+    }else if(query_topic != null) {
+      let url = `${HOSTNAME}/api/activity/?name=&topics__name=${query_topic}&owner`;
       console.log('la url es: ', url)
       axios
         .get(url)
         .then(res => {
           this.setState({
             activity: res.data,
-            filtered: res.data
+            filtered: res.data,
+            title:'Actividades con la etiqueta "'.concat(query_topic).concat('"')
           });
         });
-    }else {
+    }else if(query_search != null) {
+      let url = `${HOSTNAME}/api/activity/?search=${query_search}`;
+      console.log('la url es: ', url)
       axios
-        .get(`${HOSTNAME}/api/activity/?search=${filter}&&ordering=-created_at`)
+        .get(url)
         .then(res => {
           this.setState({
             activity: res.data,
-            filtered: res.data
+            filtered: res.data,
+            title:'Actividades con el nombre o etiqueta "'.concat(query_search).concat('"')
           });
         });
+      }else if (filter === 'favorites') {
+      axios
+        .get(`${HOSTNAME}/api/activity/?name=&topics__name=&users=${localStorage.getItem('user')}`)
+        .then(res => {
+          this.setState({
+            activity: res.data,
+            filtered: res.data,
+            title:'Mis actividades favoritas'
+          });
+        });
+    }else if(filter === 'my-content'){
+      axios
+        .get(`${HOSTNAME}/api/activity/?name=&topics__name=&owner=${localStorage.getItem('user')}`)
+        .then(res => {
+          this.setState({
+            activity: res.data,
+            filtered: res.data,
+            title:'Mis actividades'
+          });
+        });
+
     }
 
-    /*try {
-      
-    } catch (e) {
-      console.log("no data");
-    }*/
   }
 
   componentDidUpdate(prevProps) {
@@ -81,36 +108,19 @@ class ActivityListView extends React.Component {
   }
 
 
-  handleSearchFavorites = value => {
-    let activities = [],
-      promises = [];
-
-    for (const prop in value) {
-      console.log(`value.${prop} = ${value[prop]}`);
-      promises.push(axios.get(`${HOSTNAME}/api/activity/${value[prop]}/`));
-    }
-
-    axios.all(promises).then(results => {
-      results.forEach(item => activities.push(item.data));
-      this.setState({
-        filtered: activities
-      });
-    });
-  };
-
   render() {
     
     const { filtered } = this.state;
     return (
       <div>
         <Row type="flex" justify="center" align="middle">
-          <h2 className={Styles.h2}>Actividades</h2>
+    <h2 className={Styles.h2}>{this.state.title}</h2>
         </Row>
         <Row>
           
           <Col sm={12} md={8} lg={6} xl={6} xxl={6}>
             {
-              this.state._query !== null ? 
+              this.state._query_topic !== null || this.props.filter === 'favorites' || this.props.filter === 'my-content' || this.state._query_search !== null ? 
               <Button
               href='/list'
               className={Styles.button}
@@ -121,6 +131,7 @@ class ActivityListView extends React.Component {
               :
               <div></div>
             }
+            
             
           </Col>
         </Row>

@@ -257,8 +257,6 @@ class ActivityClass extends React.Component {
           </Row>
           
 {/*---------------------------------------------------------------------------------------------------------------*/}
-          
-{/*---------------------------------------------------------------------------------------------------------------*/}
           <Form.Item 
             label="Palabras clave" 
             extra="Para añadir una nueva palabra clave escribe el nombre en este espacio y finaliza con la tecla Enter">

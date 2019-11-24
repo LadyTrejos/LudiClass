@@ -22,9 +22,11 @@ class UserLayout extends React.Component {
   }
 
   searchSubject = value => {
+
+    
     
     if (value !== "") {
-      history.push('/')
+      history.push(`/list?search=${value}`)
       this.setState({
         actFiltered: value
       });
@@ -75,7 +77,6 @@ class UserLayout extends React.Component {
             defaultSelectedKeys={["7"]}
             style={{ backgroundColor: "#241190", justifyContent: "center" }}
           >
-            {/* <h2 className={styles.menutitle}>Menú</h2> */}
             <a href="/index">
               <img
                 className={styles.brand}
@@ -90,14 +91,21 @@ class UserLayout extends React.Component {
             </Menu.Item>
 
             <Menu.Item key="2">
-              <span className={styles.option}>Ver actividades</span>
-              <Link to="/list" />
+              <span className={styles.option}>Mis actividades</span>
+              <Link to="/my-content" />
             </Menu.Item>
-            
+
             <Menu.Item key="3">
               <span className={styles.option}>Mis favoritos</span>
               <Link to="/favorites" />
             </Menu.Item>
+
+            <Menu.Item key="4">
+              <span className={styles.option}>Todas las actividades</span>
+              <Link to="/list" />
+            </Menu.Item>
+            
+            
           </Menu>
           <Button
             type="primary"
@@ -143,7 +151,6 @@ class UserLayout extends React.Component {
               )}
             </div>
           </Content>
-          {/* <Footer style={{ textAlign: 'center' }}>@LudiClass</Footer> */}
         </Layout>
       </Layout>
       </div>

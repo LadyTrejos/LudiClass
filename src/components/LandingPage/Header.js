@@ -25,7 +25,12 @@ export default function Header() {
             <Nav.Link eventKey={2} href="#section-que">¿Qué es LudiClass?</Nav.Link>
             <Nav.Link eventKey={3} href="#section-equipo">Equipo</Nav.Link>
             <Nav.Link eventKey={4} href="#section-sug">Sugerencias</Nav.Link>
-            <a className={styles.btnoutline} href="/iniciar">Ingresar</a>
+            {
+              localStorage.getItem("user") === null  ?
+              <a className={styles.btnoutline} href="/iniciar">Ingresar</a>:
+              <a className={styles.btnoutline} href="/">Ingresar</a>
+            }
+            
             <a className={styles.btn} href="/registro">Registrarse</a>
           </Nav>
         </Navbar.Collapse>

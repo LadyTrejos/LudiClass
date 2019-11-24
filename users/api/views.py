@@ -20,7 +20,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all()
     serializer_class = ActivitySerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter,)
-    filter_fields = ('name', 'topics__name', 'users')
+    filter_fields = ('name', 'topics__name', 'users', 'owner')
     ordering_fields = ('created_at',)
     search_fields = ('name','topics__name', 'id')
 

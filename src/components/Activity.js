@@ -54,13 +54,6 @@ class ActivityDetail extends React.Component {
 componentDidMount(){
     const userID = localStorage.getItem('user');
 
-    // axios.get(`${HOSTNAME}/api/users/${userID}/`)
-    // .then(res => {
-    //     this.setState({
-    //     activities:res.data.activities
-    //     })
-    // })
-
     const activityID = this.props.match.params.id;
     axios.get(`${HOSTNAME}/api/activity/${activityID}/`)
     .then(res => {
@@ -155,6 +148,21 @@ componentDidMount(){
     } 
   }
 
+  showConfirm(id) {
+
+    confirm({
+      title: '¿Estás seguro(a) que deseas eliminar esta actividad?',
+      content: 'Si eliminas la actividad nadie podrá volver a verla.',
+      onOk: () => {
+        console.log(this.state)
+        axios.delete(`${HOSTNAME}/api/activity/${id}/`)
+        .then(() => 
+          history.push('/')
+        )
+      },
+      onCancel() {},
+    });
+  }
   
 
   render() {
@@ -195,7 +203,6 @@ componentDidMount(){
                         </Descriptions.Item>
                         
                         <Descriptions.Item className={Styles.descriptionItem} label='Temas'>{ this.state.activityInfo.topics.map( item => (
-                                // <CheckableTag className={Styles.tag} key={item} onChange={()=> this.searchTag(this.state.all_topics[item]) }>{this.state.all_topics[item]}</CheckableTag>
                                 <a href={`/list?topic=${this.state.all_topics[item]}`}><Tag>{this.state.all_topics[item]}</Tag></a>
                                 ))
                                 }</Descriptions.Item>
@@ -204,7 +211,7 @@ componentDidMount(){
                     <Row type="flex" justify="center" align="middle" gutter={20}>
                         <Col>
                             <Button size='large' 
-                                style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', backgroundColor:'#25b334', borderColor:'#25b334'}}
+                                style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', marginTop:'1rem', backgroundColor:'#25b334', borderColor:'#25b334'}}
                                 onClick={()=>this.Favorite()}
                             >
                                  {this.state.activityInfo.users.includes(userID) ? "Eliminar de favoritos 💔" : "Favorito 💖"}
@@ -213,7 +220,7 @@ componentDidMount(){
                         <Col>
                           {this.state.activityInfo.owner === localStorage.getItem('user')?
                             <Button size='large' 
-                                  style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', backgroundColor:'#25b379', borderColor:'#25b334'}}
+                                  style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', marginTop:'1rem', backgroundColor:'#25b379', borderColor:'#25b334'}}
                                   href= {`/edit/${this.state.activityInfo.id}`}
 
                               >
@@ -222,6 +229,15 @@ componentDidMount(){
                             :
                             <div></div>
                           }
+                        </Col>
+                        <Col>
+                        {this.state.activityInfo.owner === localStorage.getItem('user')?
+                            <Button  type="danger" onClick={() => {this.showConfirm(this.state.activityInfo.id)}} size='large' style={{borderRadius:'10px', color:'#fff', fontWeight: 'bold', marginTop:'1rem'}}>
+                              Eliminar actividad
+                            </Button>
+                        :
+                        <div></div>
+                        }
                         </Col>
                     </Row>
                     <br/>
