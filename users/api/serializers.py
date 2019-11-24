@@ -10,7 +10,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             "username",
             "email",
-            "activities",
             "password",
             "is_user",
             "is_admin",
@@ -38,3 +37,10 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
+
+class FavoritesSerializer(serializers.ModelSerializer):
+    activities = ActivitySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['email', 'activities']

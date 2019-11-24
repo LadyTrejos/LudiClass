@@ -37,6 +37,7 @@ class Home extends React.Component {
                 <Route exact path='/create' component={CreateActivity}/>
                 <Route exact path="/activity/:id" component={Activity}/> 
                 <Route exact path="/edit/:id" component={EditActivity} />
+                <Route exact path="/favorites" render={(props) => <ActivityListView {...props} filter="favorites"/>}/>
               </UserLayout>)
               }
               }

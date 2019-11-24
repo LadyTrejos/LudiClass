@@ -16,25 +16,11 @@ class UserLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      username: localStorage.getItem('user'),
       actFiltered: "all"
     };
   }
 
-  async componentDidMount() {
-    try {
-      const userID = localStorage.getItem("user");
-      let { username } = await axios
-        .get(`${HOSTNAME}/api/users/${userID}/`)
-        .then(res => res.data);
-
-      this.setState({
-        username
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  }
   searchSubject = value => {
     if (value !== "") {
       this.setState({
@@ -100,6 +86,11 @@ class UserLayout extends React.Component {
             <Menu.Item key="2">
               <span className={styles.option}>Ver actividades</span>
               <Link to="/list" />
+            </Menu.Item>
+            
+            <Menu.Item key="3">
+              <span className={styles.option}>Mis favoritos</span>
+              <Link to="/favorites" />
             </Menu.Item>
           </Menu>
           <Button

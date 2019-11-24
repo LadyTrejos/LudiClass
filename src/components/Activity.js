@@ -36,6 +36,7 @@ class ActivityDetail extends React.Component {
             topics:[],
             image:'',
             id:'',
+            users: []
         },
         activities:[],
         submitting: false,
@@ -50,15 +51,13 @@ class ActivityDetail extends React.Component {
 componentDidMount(){
     const userID = localStorage.getItem('user');
 
-    axios.get(`${HOSTNAME}/api/users/${userID}/`)
-    .then(res => {
-        this.setState({
-        activities:res.data.activities
-        })
-    })
+    // axios.get(`${HOSTNAME}/api/users/${userID}/`)
+    // .then(res => {
+    //     this.setState({
+    //     activities:res.data.activities
+    //     })
+    // })
 
-
-   
     const activityID = this.props.match.params.id;
     axios.get(`${HOSTNAME}/api/activity/${activityID}/`)
     .then(res => {
@@ -70,6 +69,7 @@ componentDidMount(){
             image: res.data.picture,
             id: res.data.id,
             owner: res.data.owner,
+            users: res.data.users
         },
 
       })
@@ -115,24 +115,49 @@ componentDidMount(){
   }
 
   Favorite = () => {
+    // const id = this.state.activityInfo.id;
+    // if(!this.state.activities.includes(id)){
+    //   this.state.activities.push(id)
+    //   this.setState({favorito: !this.state.favorito})
+    //   message.success('¡Actividad agregada a tus favoritos! 💖')
+    // }else{
+    //   for( var i = 0; i < this.state.activities.length; i++){ 
+    //     if ( this.state.activities[i] === id) {
+    //       this.state.activities.splice(i, 1); 
+    //     }
+    //  }
+    //  this.setState({favorito: !this.state.favorito})
+    //  message.info('Eliminaste esta actividad de tu lista de favoritos 💔')
+    // }
+    // const userID = localStorage.getItem('user')
+    // const ActivityData = JSON.stringify({activities: this.state.activities});
+    // axios.patch(`${HOSTNAME}/api/users/${userID}/`,
+    //     ActivityData,
+    //     { headers: {"Content-type": "application/json"}}
+    // )
+    // .catch(err => 
+    //   console.log(err)
+    // )
+
     const id = this.state.activityInfo.id;
-    if(!this.state.activities.includes(id)){
-      this.state.activities.push(id)
+    const userID = localStorage.getItem('user')
+    
+    if(!this.state.activityInfo.users.includes(userID)){
+      this.state.activityInfo.users.push(userID)
       this.setState({favorito: !this.state.favorito})
       message.success('¡Actividad agregada a tus favoritos! 💖')
     }else{
-      for( var i = 0; i < this.state.activities.length; i++){ 
-        if ( this.state.activities[i] === id) {
-          this.state.activities.splice(i, 1); 
+      for( var i = 0; i < this.state.activityInfo.users.length; i++){ 
+        if ( this.state.activityInfo.users[i] === userID) {
+          this.state.activityInfo.users.splice(i, 1); 
         }
      }
      this.setState({favorito: !this.state.favorito})
      message.info('Eliminaste esta actividad de tu lista de favoritos 💔')
     }
-    const userID = localStorage.getItem('user')
-    const ActivityData = JSON.stringify({activities: this.state.activities});
-    axios.patch(`${HOSTNAME}/api/users/${userID}/`,
-        ActivityData,
+    const usersData = JSON.stringify({users: this.state.activityInfo.users});
+    axios.patch(`${HOSTNAME}/api/activity/${id}/`,
+        usersData,
         { headers: {"Content-type": "application/json"}}
     )
     .catch(err => 
@@ -147,6 +172,7 @@ componentDidMount(){
   
 
   render() {
+    const userID = localStorage.getItem('user');
     return (
         
         <div className={Styles.gr} style={{padding:15 }}>
@@ -170,8 +196,6 @@ componentDidMount(){
                         column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
                         
                     >
-                        
-                        
                         <Descriptions.Item className={Styles.descriptionItem} label='Descripción'>
                           <br/>
                           <p style={{fontSize:'1.2rem', whiteSpace:'pre-wrap'}} > {this.state.activityInfo.description} </p>
@@ -195,7 +219,7 @@ componentDidMount(){
                                 style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', backgroundColor:'#25b334', borderColor:'#25b334'}}
                                 onClick={()=>this.Favorite()}
                             >
-                                 {this.state.activities.includes(this.state.activityInfo.id) ? "Eliminar de favoritos 💔" : "Favorito 💖"}
+                                 {this.state.activityInfo.users.includes(userID) ? "Eliminar de favoritos 💔" : "Favorito 💖"}
                             </Button>
                         </Col>
                         <Col>
