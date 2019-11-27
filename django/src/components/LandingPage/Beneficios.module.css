@@ -1,0 +1,51 @@
+.main {
+    min-height: 90vh;
+    background: #fff;
+}
+.header h1{
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Boogaloo";
+  color: #ff530e;
+  padding: 5px 0px;
+}
+.header p {
+  margin-top: 10px;
+  font-family: "Delius";
+  font-size: 1.5rem;
+  color: black;
+  font-weight: bold;
+  text-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+  justify-content: space-between;
+  text-align: center;
+}
+
+.item {
+  align-items: center;
+  background: #452ed5;
+  border-radius: 25px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  flex-wrap: wrap;
+  height: 50vh;
+  justify-content: center;
+  text-align: center;
+  margin: 10px 0;
+  min-height: fit-content;
+}
+.item p {
+  color: #fff;
+  font-family: "Delius";
+  font-size: 1rem;
+}
+.item img {
+  border-radius: 50%;
+  margin: 20px auto;
+  width: 10vw;
+  height: 10vw;
+  min-width: 90px;
+  min-height: 90px;
+}

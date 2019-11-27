@@ -1,0 +1,123 @@
+/* ELEMENTOS HTML  */
+body {
+    font-family: 'Delius'!important;
+}
+
+label {
+    font-style: bold;
+    font-size: 1rem;
+    font-family: 'Delius';
+}
+/* fin */
+
+.brand {
+    height: 60px;
+    left: 10px;
+    top: 0;
+    align-items: left;
+    position: fixed;
+}
+
+.card {
+    width: 80vw;
+    max-width: 400px;
+    
+}
+
+.divider {
+    margin: 0px auto;
+    width:400px; 
+    max-width: 100%;
+    position:relative;
+  }
+  
+.dividermask { 
+    overflow:hidden; 
+    height:20px; 
+}
+  
+.dividermask:after { 
+    content:''; 
+    display:block; 
+    margin:-25px auto 0;
+    width:100%; 
+    height:25px;  
+    border-radius:125px / 12px;
+    box-shadow:0 0 8px #ff530e;
+}
+
+.container {
+    background: #261293;
+    min-width: 100vw;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.message {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    min-width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+}
+
+.message h1 {
+    font-family: 'Boogaloo';
+    color: #ff530e;
+    text-align: center;
+}
+
+.message p {
+    padding: 0 5vw;
+    color: white;
+    font-weight: 400;
+}
+
+.message .button {
+    background: white;
+    color: #261293;
+    padding: 0.7rem 2rem;
+    border-radius: 15px;
+    font-family: 'Delius';
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.message .button:hover {
+    background: rgb(224, 218, 255);
+    color: rgb(38, 18, 147);
+    text-decoration: none;
+}
+
+.registercontainer {
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #fff;
+    overflow: hidden;
+    padding: 3rem 0;
+}
+
+.registercontainer h1 {
+    box-shadow: 0 1em 1em -1em rgba(255, 0, 0, 0.3);
+    color: #ff530e;
+    font-family: 'Boogaloo';
+    font-size: 4rem;
+    text-align: center;
+}
+
+

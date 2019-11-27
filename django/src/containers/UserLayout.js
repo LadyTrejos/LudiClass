@@ -1,50 +1,58 @@
-import React from 'react';
-import { Layout, Menu, Icon, Button, Divider, Row, Col } from 'antd';
-import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
-import * as actions from '../store/actions/auth';
-import './UserLayout.css';
-import axios from 'axios';
-import HOSTNAME from '../helpers/hostname';
-import ActivityListView from './ActivityListView';
-import brand from '../static/img/ludiclass.png';
-import logo from '../static/img/logo.png';
-const { Header, Content, Footer, Sider } = Layout;
+import React from "react";
+import { Layout, Menu, Button, Row, Col, Input } from "antd";
+import { connect } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
+import * as actions from "../store/actions/auth";
+import axios from "axios";
+import history from "../helpers/history";
+import ActivityListView from "./ActivityListView";
+import styles from "./UserLayout.module.css";
+import figures from "../static/css/utils.module.css";
+
+const { Content, Header, Sider } = Layout;
+const { Search } = Input;
 
 class UserLayout extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-        username: "",
-        activity:'',
+      username: localStorage.getItem('user'),
+      actFiltered: "all"
     };
   }
 
-  componentDidMount() {
-    const userID = localStorage.getItem('user');
-    axios.get(`${HOSTNAME}/api/users/${userID}/`)
-    .then(res => {
-        this.setState({
-            username: res.data.username
-        })
-    })
+  searchSubject = value => {
 
-    axios.get(`${HOSTNAME}/api/activity/?ordering=-created_at`)
-      .then(res =>{
-          this.setState({
-              activity: res.data
-          })
-      })
-  
-}
+    
+    
+    if (value !== "") {
+      history.push(`/list?search=${value}`)
+      this.setState({
+        actFiltered: value
+      });
+    } else {
+      this.setState({
+        actFiltered: "all"
+      });
+    }
+  };
 
-  render(){
-    console.log(this.props)
-    return(
-      <Layout >
+  render() {
+    const { actFiltered } = this.state;
+    return (
+      <div> 
+      <Layout>
         <Sider
-          style={{backgroundColor: '#ffe58f', flex:1, justifyContent:'flex-end', alignContent:'left'}}
+          style={{
+            backgroundColor: "#241190",
+            flex: 1, 
+            justifyContent: "flex-end", 
+            alignContent: "left", 
+            zIndex: 9999,
+            position: 'fixed',
+            left:0,
+            height: '100vh',
+          }}
           breakpoint="lg"
           collapsedWidth="0"
           onBreakpoint={broken => {
@@ -53,64 +61,91 @@ class UserLayout extends React.Component {
           onCollapse={(collapsed, type) => {
             console.log(collapsed, type);
           }}
-        >         
-          
-          <Menu  mode="inline" defaultSelectedKeys={['7']} style={{backgroundColor:'#ffe58f', justifyContent: 'center'}}>
-          <h1 style={{marginTop:'6vh', textAlign: 'center', fontWeight:'bold'}}>Menú</h1>
-            <div><Divider style={{backgroundColor:'black'}}/></div>
+        >
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={["7"]}
+            style={{ backgroundColor: "#241190", justifyContent: "center" }}
+          >
+            <a href="/index">
+              <img
+                className={styles.brand}
+                src={require("../static/img/brand_logo.png")}
+                alt="Logo de LudiClass"
+              />
+            </a>
+            {/* <div><Divider style={{backgroundColor:'white'}}/></div> */}
             <Menu.Item key="1">
-              <span className="nav-text">Crear actividad</span>
-              <Link to='/activity'></Link>
+              <span className={styles.option}>Crear actividad</span>
+              <Link to="/create" />
             </Menu.Item>
 
             <Menu.Item key="2">
-              <span className="nav-text">Ver actividades</span>
-              <Link to="/activityListView"></Link>
+              <span className={styles.option}>Mis actividades</span>
+              <Link to="/my-content" />
             </Menu.Item>
 
-            {/*<Menu.Item key="3">
-              <Icon type="upload" />
-              <span className="nav-text">nav 3</span>
+            <Menu.Item key="3">
+              <span className={styles.option}>Mis favoritos</span>
+              <Link to="/favorites" />
             </Menu.Item>
+
             <Menu.Item key="4">
-              <Icon type="user" />
-              <span className="nav-text">nav 4</span>
-        </Menu.Item>*/}
+              <span className={styles.option}>Todas las actividades</span>
+              <Link to="/list" />
+            </Menu.Item>
+            
+            
           </Menu>
-        <Button
+          <Button
             type="primary"
             onClick={this.props.logout}
-            style={{backgroundColor:'#fa541c', borderColor:'#fa541c', marginLeft:'2.5rem'}}>
+            className={styles.logout}
+          >
             Cerrar sesión
-        </Button>
+          </Button>
         </Sider>
-        <Layout style={{backgroundColor:'white'}}>
-          <Header style={{ background: '#ffd666', paddingRight: 40}} >
+
+        <Layout className={styles.layout}>
+          <Header className={styles.header}>
             <Row type="flex">
-              <Col xs={8} sm={2} md={2} lg={2} xl={2}>
-                <img src={logo} alt="logo" style={{height:'4em'}}/>
+              <Col xs={0} sm={0} md={10} lg={10} xl={10}>
+                <h3 className={styles.username}>
+                  {this.state.username.toLowerCase()}
+                </h3>
               </Col>
-              <Col xs={8} sm={2} md={2} lg={21} xl={21}>
-                <img src={brand} alt="LudiClass" style={{height:'2em'}}/>
-              </Col>
-              <Col xs={8} sm={1} md={1} lg={1} xl={1}>
-                <h3>{this.state.username.toUpperCase()}</h3>
+              <Col xs={23} sm={24} md={11} lg={9} xl={9}>
+                <Search
+                  placeholder="Ingresa un tema para buscar actividades..."
+                  enterButton="Buscar"
+                  size="large"
+                  className={styles.searchbar}
+                  onSearch={value => this.searchSubject(value)}
+                />
               </Col>
             </Row>
           </Header>
-          <Content style={{ margin: '24px 16px 0' }}>
-            <div style={{ padding: 24, minHeight: 360, backgroundColor:'white'}}>
-                
-                {this.props.location.pathname === '/' ?<ActivityListView data={this.state.activity} loadData={this.loadData} />:this.props.children}
-                
-
+          <Content style={{ margin: '100px 16px 24px', overflow: 'initial' }}>
+            <div
+              style={{
+                padding: "3vh 2vw",
+                minHeight: "82vh",
+                backgroundColor: "white",
+                borderRadius: "10px"
+              }}
+            > 
+              {this.props.location.pathname === "/" ? (
+                <ActivityListView filter={actFiltered} />
+              ) : (
+                this.props.children
+              )}
             </div>
-            
           </Content>
-          <Footer style={{ textAlign: 'center' }}>@LudiClass</Footer>
         </Layout>
       </Layout>
-  );
+      </div>
+    );
   }
 }
 
@@ -118,13 +153,15 @@ const mapStateToProps = state => {
   return {
     loading: state.loading,
     error: state.error
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     logout: () => dispatch(actions.logout())
-  }
-}
+  };
+};
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserLayout));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(UserLayout)
+);

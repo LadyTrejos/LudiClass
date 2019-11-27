@@ -1,0 +1,44 @@
+.header h1{
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Boogaloo";
+  color: #ff530e;
+  padding: 2% 0%;
+}
+.item {
+  text-align: center;
+}
+
+.item h2 {
+  font-family: "Boogaloo";
+  font-size: 1.5rem;
+  margin: 1.1em 0.2em;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.item h3 {
+  font-family: "Delius";
+  font-size: 1rem;
+  margin: 1.1em 0.2em;
+  color: white;
+}
+
+.item img {
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  height: 60%;
+  padding: 0 20px;
+}
+
+.main {
+  min-height: 90vh;
+  background: #000D80;
+}

@@ -1,0 +1,31 @@
+.main {
+    min-height: 70vh;
+    background: rgba(70, 42, 213, 0.7);
+  }
+  .header h1{
+    text-align: center;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Boogaloo";
+    color: #ff530e;
+    font-weight: 100;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0px 0px 21px 3px rgba(255,255,255,1);
+    height: 6rem;
+  }
+  
+  .maincontent p {
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "Delius";
+    color: #000;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .green {
+    color: #fff;
+    font-size: 1.2rem;
+    font-family: "Delius";
+  }

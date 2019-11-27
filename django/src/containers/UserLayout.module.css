@@ -1,0 +1,104 @@
+aside {
+  min-height: 100vh;
+  min-width: 17vw!important;
+}
+
+.brand {
+  height: 60px;
+  left: 10px;
+  top: 0;
+  align-items: left;
+  margin-bottom: 10vh;
+}
+
+.header {
+  padding: 0 1rem!important;
+  position: fixed;
+  z-index: 1;
+  width: 100vw;
+  min-height: 10vh ;
+  background: linear-gradient(
+    to right,
+    rgba(36, 17, 144, 1) 0%,
+    rgba(70, 42, 213, 1) 48%,
+    rgba(52, 174, 222, 1) 100%
+  );
+}
+
+.layout {
+  background-color: rgba(36, 17, 144, 0.2);
+  margin-left: 17vw;
+}
+
+.logout {
+  background: white; 
+  border-color:white; 
+  margin-left:2.5rem;
+  color: #271496;
+  align-self: a;
+  bottom: 10px;
+  position: fixed;
+  margin-top: 11rem;
+}
+
+.menutitle {
+  color: white;
+  font-weight: bold;
+  margin: 2vh 0 0 0;
+  text-align: center;
+  
+}
+
+.option {
+  color: white!important;
+}
+
+.option:hover {
+  color: white!important;
+  background: rgba(70, 42, 213, 1);
+  text-decoration: none;
+}
+
+.searchbar {
+  padding-top: 12px;
+  align-self: flex-end;
+}
+
+.searchbar button {
+  background: #ff530e;
+  border-color: #ff530e;
+}
+
+.searchbar button:hover {
+  background: #f04400;
+  border-color: #f04400;
+}
+
+.username {
+  margin-top: 2vh; 
+  font-size: 1.5rem; 
+  color: white;
+}
+
+.username::before {
+  content: '😀  ';
+}
+
+@media screen and (max-width:768px) {
+  aside {
+    min-width: 0px!important;
+  }
+  
+  .layout {
+    margin-left: 0;
+  }
+
+  .logout{
+    position: relative
+    ;
+  }
+  .username {
+    visibility: hidden;
+  }
+
+}

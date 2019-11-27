@@ -1,0 +1,26 @@
+.h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #fa541c;
+    font-family: 'Boogaloo';
+}
+
+.button{
+    background-color: #44a7f8 ;
+    
+}
+
+.searchbar {
+    padding-top: 12px;
+    align-self: flex-end;
+}
+
+.searchbar button {
+    background: #ff530e;
+    border-color: #ff530e;
+}
+
+.searchbar button:hover {
+    background: #f04400;
+    border-color: #f04400;
+}

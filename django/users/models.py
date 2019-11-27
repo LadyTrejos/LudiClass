@@ -58,6 +58,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, primary_key=True, unique=True)
     email = models.EmailField(unique=True)
+    #activities = models.ManyToManyField('Activity', related_name="activities", blank=True)
 
     is_user = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -87,7 +88,8 @@ class Activity(models.Model):
     topics = models.ManyToManyField(Topic, related_name='activity_topic', blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='activity_user')
-
+    users = models.ManyToManyField('User', related_name="fans", blank=True)
+    views = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
@@ -95,6 +97,15 @@ class Activity(models.Model):
 class Material(models.Model):
     file_url = models.FileField(upload_to="local_comments", blank=True)
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE, related_name='material_activity')
+
+class Post(models.Model):
+    description = models.TextField(blank=True)
+    file_url = models.FileField(upload_to="local_comments", blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE, related_name='activity_post')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_user')
+    file_type = models.CharField(max_length=50, default="image/jpeg", blank=True)
+
 
 # FORMS
 
@@ -109,3 +120,4 @@ class UserForm(ModelForm):
             'email',
             'is_admin'
         )
+    

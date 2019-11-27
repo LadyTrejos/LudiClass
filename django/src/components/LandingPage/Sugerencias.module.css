@@ -1,0 +1,65 @@
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
+
+
+.btn {
+    background: #25b334;
+    border: none;
+    border-radius: 15px;
+    transition: 0.2s ease-in-out;
+    color: white;
+    outline: none;
+    width: 100%;
+    padding: 0.2rem;
+}
+.main {
+    min-height: 100vh;
+    background: rgba(70, 42, 213, 0.3);
+    width: 100%;
+}
+h1.header {
+    text-align: center;
+    font-family: "Boogaloo";
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 3px 3px 0 rgba(255, 83, 14, 0.7);
+	margin: 0.8rem 0 0;
+    border-radius: 15px;
+    background: rgba(70, 42, 213, 0.3); /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      rgba(70, 42, 213, 0.8) 0%,
+      rgba(70, 42, 213, 0.6) 30%,
+      rgba(70, 42, 213, 0.4) 65%,
+      rgba(70, 42, 213, 0.2) 100%
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      rgba(70, 42, 213, 0.8) 0%,
+      rgba(70, 42, 213, 0.6) 30%,
+      rgba(70, 42, 213, 0.4) 65%,
+      rgba(70, 42, 213, 0.2) 100%
+    );
+}
+.form {
+    color: rgba(70, 42, 213);
+}
+.text {
+    color: rgba(70, 42, 213);
+    font-family: "Delius";
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 15px 20px;
+    font-weight: bold;
+}
+
+.formulario {
+    margin: 0 1.5rem;
+    color: rgba(70, 42, 213);
+    font-family: 'Delius';
+    width: 85vw;
+    max-width: 400px;
+    align-self: center;
+}

@@ -1,0 +1,33 @@
+.item {
+  align-items: center;
+  background: rgba(70, 42, 213) 48%;
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  margin: 5vh 10px;
+  min-height: max-content;
+  padding: 0 0 5vh 0;
+  text-align: center;
+}
+.item h2 {
+  color: #ff530e;
+  font-family: "Boogaloo";
+  font-size: 2rem;
+  font-style: italic;
+  justify-content: center;
+  letter-spacing: 1px;
+  margin: 2.5rem 10px;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+.item h3 {
+  color: #fff;
+  font-family: "Delius";
+  font-size: 1.2rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.main {
+  min-height: 60vh;
+  background: #fff;
+}

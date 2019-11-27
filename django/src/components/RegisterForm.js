@@ -1,9 +1,10 @@
 import React from 'react';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, Tooltip} from 'antd';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
 import axios from 'axios';
+import styles from './LoginForm.module.css'
 
 import HOSTNAME from '../helpers/hostname';
 
@@ -29,7 +30,6 @@ class RegisterForm extends React.Component {
       }
 
     handleSubmit = e => {
-        const selector = this.countryRef.current;
     
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -78,22 +78,23 @@ class RegisterForm extends React.Component {
 
   getPattern = (rule, value, callback) => {
     let reg = null;
-    reg = /^[A-Z]{2}[0-9]{6}$/;
+    reg = /^(?=.{6,25}$)(?![_.0-9])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
+    
     
     // Check regular expresion
     if(value && !reg.test(value)){
       callback('El nombre de usuario no es válido.')
     }else {
-      axios.get(`${HOSTNAME}/api/users/?search=${value}&&ordering=-id/`)
+      axios.get(`${HOSTNAME}/api/users/?username=${value}&email=`)
       .then(res =>{
           if(res.data.length > 0){
             if(res.data[0].username === value && value !== ''){
                 callback('Este nombre de usuario ya está en uso.')
               } else {
-                callback()
+                callback();
               }
             } else {
-              callback()
+              callback();
             }
       })
     }
@@ -109,20 +110,19 @@ class RegisterForm extends React.Component {
   }
 
   validatePasswordFormat = (rule, value, callback) => {
-    const regex = /^(?=.*[0-9])(?=.*[!-@_#$%^&*?"])[a-zA-Z0-9!-@_#$%^&*?"]{8,15}$/gi
-    if(value.length > 15){
-      callback("La contraseña es demasiado larga, use menos de 15 caracteres.")
-    } else if (value.length > 0 && value.length < 8) {
-      callback("La contraseña es muy corta, use al menos 8 caracteres.")
-    } else if (value && !regex.test(value)) {
-      callback("Elija una contraseña más segura. Pruebe con una combinación de letras números y símbolos")
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    if (value.length > 0 && value.length < 8) {
+      callback("La contraseña es muy corta, usa al menos 8 caracteres.")
+    } else if (value && !strongRegex.test(value)) {
+      callback("Elige una contraseña más segura. Prueba con una combinación de letras números y símbolos")
     }
     callback();
   };
 
   validateEmail = (rule, value, callback) => {
-    axios.get(`${HOSTNAME}/api/users/?search=${value}&&ordering=-email/`)
+    axios.get(`${HOSTNAME}/api/users/?username=&email=${value}`)
     .then(res =>{
+
       if(res.data.length>0){
           if(res.data[0].email === value && value !== "")
             { callback("Este correo electrónico ya está registrado") }
@@ -139,18 +139,20 @@ class RegisterForm extends React.Component {
     
     const { getFieldDecorator } = this.props.form;
     
-    let errorMessage = null;
-    if (this.props.error) {
-      errorMessage = (
-        <p> { this.props.error.message } </p>
-      )
-    }
+    // let errorMessage = null;
+    // if (this.props.error) {
+    //   errorMessage = (
+    //     <p> { this.props.error.message } </p>
+    //   )
+    // }
     return (
     
         <Form onSubmit={this.handleSubmit}>                    
-            <Form.Item label='Nombre de usuario' hasFeedback>
+            <Form.Item label='Nombre de usuario'
+                        extra = 'El nombre de usuario debe ser mínimo de 6 caracteres y máximo de 25, ¡No debe contener caracteres especiales ni empezar con un número!'
+                        hasFeedback>
                 {getFieldDecorator('username', {
-                    rules: [{ required: true, message: 'Ingrese un nombre de usuario'}, {/*validator: this.getPattern()*/}
+                    rules: [{ required: true, message: 'Ingrese un nombre de usuario'}, {validator: this.getPattern}
                             ],
                 })(<Input 
                         placeholder='Nombre de usuario'
@@ -172,7 +174,7 @@ class RegisterForm extends React.Component {
                         required: true,
                         message: 'Ingrese un correo electrónico',
                     },
-                    {/*validator:this.validateEmail, validationTrigger:'onBlur'*/}
+                    {validator: this.validateEmail, validationTrigger:'onBlur'}
                     ],
                 })(<Input 
                         prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -184,7 +186,10 @@ class RegisterForm extends React.Component {
                     )}
             </Form.Item>
 
-            <Form.Item label="Contraseña" hasFeedback>
+            <Form.Item  
+              label="Contraseña"
+              hasFeedback
+              extra='La contraseña debe contener más de 8 caracteres y al menos una letra en minúscula, una letra en mayúscula, un número y un caracter especial'>
                 {getFieldDecorator('password', {
                     rules: [{ required: true, message: 'Ingrese una contraseña' },
                     { validator: this.validateToNextPassword },
@@ -226,7 +231,7 @@ class RegisterForm extends React.Component {
               htmlType="submit" 
               block
               size='large'
-              style={{backgroundColor: '#531dab'}}
+              className={styles.button}
             >
               Registrarse
             </Button>

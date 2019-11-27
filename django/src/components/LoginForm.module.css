@@ -1,0 +1,13 @@
+
+.button {
+    background: #25b334;
+    margin-top: 4vh;
+    border-color: #25b334;
+    border-radius: 15px;
+}
+
+.button:hover {
+    background: #209e2d;
+    border-color: #209e2d;
+}
+

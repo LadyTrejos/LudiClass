@@ -3,7 +3,7 @@ import { Form, Input, Icon, Button } from 'antd';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
-
+import styles from './LoginForm.module.css';
 
 class LoginForm extends React.Component {
 
@@ -25,9 +25,9 @@ class LoginForm extends React.Component {
                         rules: [{ required: true, message: 'Ingresa tu correo electrónico' }],
                     })(
                         <Input
-                        prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        size='large'
-                        placeholder="Correo electrónico"
+                            prefix={<Icon type="mail" style={{ color: '#391085' }} />}
+                            size='large'
+                            placeholder="Correo electrónico"
                         />,
                     )}
                     </Form.Item>
@@ -44,17 +44,16 @@ class LoginForm extends React.Component {
                         )}
                         {/*<a href="">Olvidé mi contraseña </a>*/}
                         <br/>
-                        <Button 
-                            type="primary" 
-                            htmlType="submit" 
-                            block
-                            size='large'
-                            style={{backgroundColor: '#531dab', marginTop: '2em'}}
-                        >
-                            Entrar
-                        </Button>
                     </Form.Item>
-                    
+                    <Button 
+                        type="primary" 
+                        htmlType="submit" 
+                        block
+                        size='large'
+                        className={styles.button}
+                    >
+                        Entrar
+                    </Button>
                 </Form>
             );
         }
