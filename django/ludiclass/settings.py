@@ -62,7 +62,7 @@ ROOT_URLCONF = 'ludiclass.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'build'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,20 +75,30 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'ludiclass.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'ludiclass',
         'HOST': 'localhost',
     }
 }
-
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'LudiClass',
+        'USER': 'ludiclass_admin',
+        'PASSWORD': 'emprendimiento',
+        'HOST': 'mongodb://ludiclass_admin:emprendimiento@ludiclass-shard-00-00-u85rm.mongodb.net:27017,ludiclass-shard-00-01-u85rm.mongodb.net:27017,ludiclass-shard-00-02-u85rm.mongodb.net:27017/test?ssl=true&replicaSet=LudiClass-shard-0&authSource=admin&retryWrites=true&w=majority'
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -158,7 +168,10 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'build/static')
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
