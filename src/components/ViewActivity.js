@@ -74,7 +74,7 @@ class ViewActivity extends React.Component {
   }
 
   getDescription = (item) => {
-    if (item.description.length < 40) {
+    if (item.description.length < 42) {
       return `${item.description.substring(0, 140).concat("...")}\n\n\n`
     } else if (item.description.length < 82){
       return `${item.description.substring(0, 140).concat("...")}\n\n`
