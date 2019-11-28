@@ -214,7 +214,7 @@ class ViewActivity extends React.Component {
                     }
                   />
 
-                  {item.topics.map(item => (
+                  {item.topics.slice(0, 5).map(item => (
                     <a href={`/list?topic=${this.state.topics[item]}`}>
                       <Tag
                         className={styles.tag}
