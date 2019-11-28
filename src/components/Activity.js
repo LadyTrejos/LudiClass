@@ -197,8 +197,8 @@ componentDidMount(){
                     </Col>
                   </Row>
                     
-                    <Row justify="center">
-                      <Col offset={4} md={16} lg={16}>
+                    <Row type="flex" justify="center">
+                      <Col xs={24} sm={24} md={16} lg={16}>
                         <p className={Styles.label}>Descripción:</p>
                         <p style={{wordWrap:'break-word', whiteSpace:'pre-line'}}>
                           {this.state.activityInfo.description}
@@ -207,7 +207,7 @@ componentDidMount(){
                     </Row>
                     
                     <Row>
-                      <Col offset={4}>
+                      <Col>
                           <div>
                             <p className={Styles.label}>Creada por: &nbsp;
                               <a href={`/list?autor=${this.state.activityInfo.owner}`}>
@@ -220,7 +220,7 @@ componentDidMount(){
                         </Col>
                       </Row>
                       <Row>
-                        <Col offset={4}>
+                        <Col>
                           <div>
                             { this.state.activityInfo.topics.map( item => (
                               <a href={`/list?topic=${this.state.all_topics[item]}`}>

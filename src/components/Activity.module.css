@@ -37,9 +37,9 @@
 
 .image{
     width:auto;
-    max-width:640px;
+    max-width: 100%;
     height: auto;
-    max-height: 640px;
+    max-height: 100%;
     object-fit: contain;
     margin-bottom: 5vh;
 }

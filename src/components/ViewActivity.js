@@ -61,7 +61,26 @@ class ViewActivity extends React.Component {
     });
   };
 
-  
+  getTitle = () => {
+    if (window.location.pathname === '/list') {
+      return "Aún no se han creado actividades."
+    } else if (window.location.pathname === '/favorites') {
+      return "Aún no has guardado actividades en tus favoritos."
+    } else if (window.location.pathname === '/my-content') {
+      return "Aún no has creado actividades."
+    }
+  }
+
+  getDescription = (item) => {
+    if (item.description.length < 40) {
+      return `${item.description.substring(0, 140).concat("...")}\n\n\n`
+    } else if (item.description.length < 82){
+      return `${item.description.substring(0, 140).concat("...")}\n\n`
+    }else{
+      return item.description.substring(0, 140).concat("...")
+    }
+    
+  }
 
   render() {
     const { data } = this.props;
@@ -91,7 +110,7 @@ class ViewActivity extends React.Component {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  margin: "10px 10px"
+                  margin: "3vh 10px"
                 }}
               >
                 <Card
@@ -99,8 +118,8 @@ class ViewActivity extends React.Component {
                     borderColor: "gray",
                     borderRadius: 20,
                     width: "80vw",
-                    height: "max-content",
-                    maxWidth: "450px",
+                    height: "fit-content",
+                    maxWidth: "420px",
                     maxHeight: "fit-content",
                     minHeight: "fit-content",
                   }}
@@ -154,15 +173,15 @@ class ViewActivity extends React.Component {
                   />
                   <br />
                   <Meta
-                    style={{ color: "#2F3E9E", overflowWrap: "break-word" }}
+                    style={{ color: "#2F3E9E", overflowWrap: "break-word",whiteSpace:'pre-line' }}
                     description={
                       <p style={{ color: "#149", fontWeight: "bold" }}>
-                        {item.description.substring(0, 60).concat(" ...")}
+                        {
+                          this.getDescription(item)
+                        }
                       </p>
                     }
                   />
-                  <br />
-                  <br />
 
                   {item.topics.map(item => (
                     <a href={`/list?topic=${this.state.topics[item]}`}>
@@ -189,7 +208,7 @@ class ViewActivity extends React.Component {
             <Empty
               description={
                 <span style={{ fontSize: 20, color: "#001870" }}>
-                  { this.props.filter === 'all' ? "No se han creado actividades." : "No has guardado ninguna actividad como favorita."}
+                  { this.getTitle() }
                 </span>
               }
             />

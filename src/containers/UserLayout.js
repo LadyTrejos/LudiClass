@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Menu, Button, Row, Col, Input } from "antd";
+import { Layout, Menu, Button, Row, Col, Input, notification, Icon } from "antd";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import * as actions from "../store/actions/auth";
@@ -7,10 +7,11 @@ import axios from "axios";
 import history from "../helpers/history";
 import ActivityListView from "./ActivityListView";
 import styles from "./UserLayout.module.css";
-import figures from "../static/css/utils.module.css";
 
 const { Content, Header, Sider } = Layout;
 const { Search } = Input;
+
+
 
 class UserLayout extends React.Component {
   constructor(props) {
@@ -22,8 +23,6 @@ class UserLayout extends React.Component {
   }
 
   searchSubject = value => {
-
-    
     
     if (value !== "") {
       history.push(`/list?search=${value}`)
@@ -35,6 +34,27 @@ class UserLayout extends React.Component {
         actFiltered: "all"
       });
     }
+  };
+
+  openNotification = () => {
+    notification.open({
+      description:
+      <p style={{fontSize:'1.1rem'}}>
+        <Icon type="arrow-left" style={{color:"#ff530e"}}/>
+        &nbsp;&nbsp;Este es el menú&nbsp;
+          <Icon type="unordered-list" style={{backgroundColor:"#001529", color:"#fff", padding:'5px', borderRadius:'2px'}}/>, 
+          aquí encontrarás todo lo que puedes hacer en LudiClass.
+      </p>,
+      duration: 20,
+      placement: 'topLeft',
+      key: 1,
+      style: {
+          width: '80vw',
+          marginLeft: '12px',
+          marginTop: '13px',
+          maxWidth: '350px',
+      }
+    });
   };
 
   render() {
@@ -59,7 +79,11 @@ class UserLayout extends React.Component {
             console.log(broken);
           }}
           onCollapse={(collapsed, type) => {
-            console.log(collapsed, type);
+            if (collapsed & this.props.location.pathname === "/"){
+              this.openNotification()
+            } else {
+              notification.close(1)
+            }
           }}
         >
           <Menu
