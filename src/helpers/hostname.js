@@ -1,3 +1,3 @@
-const HOSTNAME = "http://localhost:8000";
+const HOSTNAME = "http://104.248.9.57";
 
 export default HOSTNAME;
