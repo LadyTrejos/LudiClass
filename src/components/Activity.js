@@ -29,15 +29,6 @@ class ActivityDetail extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-        activityInfo:{
-            name:'',
-            description:'',
-            owner:'',
-            topics:[],
-            image:'',
-            id:'',
-            users: []
-        },
         activities:[],
         submitting: false,
         previewVisible: false,
@@ -147,6 +138,7 @@ componentDidMount(){
   
 
   render() {
+    console.log(this.state)
     const userID = localStorage.getItem('user');
     const { actFiltered } = this.state;
     return (
@@ -156,46 +148,91 @@ componentDidMount(){
             {
                 this.state.activityInfo && this.state.all_topics ? 
                 <div>
-                    <div
-                        style={{display:"flex", justifyContent:"center", alignItems:"center", marginTop:"5%"}}>
-                        
-                        <br/>
-                        <img
-                            className={Styles.image}
-                            alt="Foto de la actividad"
-                            src={this.state.activityInfo.image}
+                  <Row type="flex" justify="center">
+                    <Col xs={16} sm={16} md={16} lg={16} xl={16}>
+                      <h2 className={Styles.title}>
+                        {this.state.activityInfo.name[0].toUpperCase().concat(this.state.activityInfo.name.substring(1))}
+                      </h2>
+                    </Col>
+                  </Row>
+                  <Row type="flex" justify="center">
+                    <Col>
+                      <img
+                        className={Styles.image}
+                        alt="Foto de la actividad"
+                        src={this.state.activityInfo.image}
                         />
-                    </div>        
-                    <Descriptions
-                        
-                        title={<span style={{display:"flex", justifyContent:"center", alignItems:"center",fontSize:'2rem', color:'#FA541C'}}>{this.state.activityInfo.name.toUpperCase()}</span>}
-                        column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
-                        
-                    >
-                        <Descriptions.Item className={Styles.descriptionItem} label='Descripción'>
-                          <br/>
-                          <p style={{fontSize:'1.2rem', whiteSpace:'pre-wrap'}} > {this.state.activityInfo.description} </p>
-                            
-                        </Descriptions.Item>
-                        <br/> 
-                        <Descriptions.Item className={Styles.descriptionItem} label="Creador">
-                            <a href={`/list?autor=${this.state.activityInfo.owner}`}>
-                              <p style={{fontSize:'1.1rem', fontWeight:'bold'}} >
-                                {this.state.activityInfo.owner.toUpperCase()}
-                              </p>
-                            </a>
-                        </Descriptions.Item>
-                        
-                        <Descriptions.Item className={Styles.descriptionItem} label='Temas'>{ this.state.activityInfo.topics.map( item => (
-                                <a href={`/list?topic=${this.state.all_topics[item]}`}>
-                                  <Tag className={Styles.tag}>
-                                    {this.state.all_topics[item]}
-                                  </Tag>
-                                </a>
-                                ))
-                                }</Descriptions.Item>
-                        
-                    </Descriptions>
+                    </Col>
+                  </Row>
+                  <Row type="flex" justify="center">
+                    <Col md={24} lg={24}>
+                      <Row type="flex" justify="center">
+                        <Col md={5} lg={5}>
+                          {this.state.activityInfo.owner === localStorage.getItem('user')?
+                            <Button 
+                              className={Styles.editbtn}
+                              href= {`/edit/${this.state.activityInfo.id}`}
+                            >
+                              Editar actividad
+                            </Button>
+                            :
+                            <div></div>
+                          }
+                        </Col>
+                        <Col md={5} lg={5}>
+                          {this.state.activityInfo.owner === localStorage.getItem('user')?
+                            <Button 
+                              type='default' 
+                              onClick={() => {this.showConfirm(this.state.activityInfo.id)}} 
+                              style={{borderRadius:'10px', color:'#271496', fontWeight: 'bold', marginTop:'1rem'}}
+                            >
+                              Eliminar actividad
+                            </Button>
+                          :
+                          <div></div>
+                          }
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+                    
+                    <Row justify="center">
+                      <Col offset={4} md={16} lg={16}>
+                        <p className={Styles.label}>Descripción:</p>
+                        <p style={{wordWrap:'break-word', whiteSpace:'pre-line'}}>
+                          {this.state.activityInfo.description}
+                        </p>
+                      </Col>
+                    </Row>
+                    
+                    <Row>
+                      <Col offset={4}>
+                          <div>
+                            <p className={Styles.label}>Creada por: &nbsp;
+                              <a href={`/list?autor=${this.state.activityInfo.owner}`}>
+                                <span style={{fontSize:'1rem', fontWeight:'bold'}} >
+                                  {this.state.activityInfo.owner}
+                                </span>
+                              </a>
+                            </p>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col offset={4}>
+                          <div>
+                            { this.state.activityInfo.topics.map( item => (
+                              <a href={`/list?topic=${this.state.all_topics[item]}`}>
+                                <Tag color="geekblue">
+                                  {this.state.all_topics[item]}
+                                </Tag>
+                              </a>
+                              ))
+                            }
+                          </div>
+                        </Col>
+                      </Row>
+
                     <Row type="flex" justify="center" align="middle" gutter={20}>
                         <Col>
                             <Button size='large' 
@@ -205,28 +242,7 @@ componentDidMount(){
                                  {this.state.activityInfo.users.includes(userID) ? "Eliminar de favoritos 💔" : "Favorito 💖"}
                             </Button>
                         </Col>
-                        <Col>
-                          {this.state.activityInfo.owner === localStorage.getItem('user')?
-                            <Button size='large' 
-                                  style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', marginTop:'1rem', backgroundColor:'#25b379', borderColor:'#25b334'}}
-                                  href= {`/edit/${this.state.activityInfo.id}`}
-
-                              >
-                                    Editar actividad
-                              </Button>
-                            :
-                            <div></div>
-                          }
-                        </Col>
-                        <Col>
-                        {this.state.activityInfo.owner === localStorage.getItem('user')?
-                            <Button  type='default' onClick={() => {this.showConfirm(this.state.activityInfo.id)}} size='large' style={{borderRadius:'10px', color:'#271496', fontWeight: 'bold', marginTop:'1rem'}}>
-                              Eliminar actividad
-                            </Button>
-                        :
-                        <div></div>
-                        }
-                        </Col>
+                        
                     </Row>
                     <br/>
                     <span className={Styles.span}>Comentarios</span>

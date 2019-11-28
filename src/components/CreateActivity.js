@@ -108,7 +108,7 @@ class ActivityClass extends React.Component {
         submitting: false,
         fileList:[]
         }, ()=>{
-          history.push("/list")
+          history.push(`/activity/${res.data.id}`)
         } )
     )
   };
@@ -213,6 +213,7 @@ class ActivityClass extends React.Component {
                       <TextArea 
                         placeholder='Cuéntanos de qué trata tu actividad, qué materiales necesita...' 
                         rows={8} 
+                        style={{whiteSpace:'pre-line'}}
                         onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, description: e.target.value } })} 
                       />
                     )}

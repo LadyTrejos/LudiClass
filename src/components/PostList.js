@@ -126,7 +126,12 @@ class PostList extends React.Component {
                 { this.props.user ? 
                 <React.Fragment>
                     <Form.Item>
-                        <TextArea rows={3} onChange={this.handleCommentChange} value={value} />
+                        <TextArea 
+                          rows={3} 
+                          onChange={this.handleCommentChange} 
+                          value={value}
+                          placeholder="Cuéntanos, ¿qué tal te pareció esta actividad?"
+                        />
                     </Form.Item>
                     <Form.Item>
                         <div className="clearfix">

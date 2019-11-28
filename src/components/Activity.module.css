@@ -7,11 +7,27 @@
     font-weight: initial;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    font-size: 1rem;
     font-family: "Delius";
     font-weight: bolder;
     padding: 0 3vw;
 
+}
+
+.editbtn{
+    border-radius: 10px; 
+    color:#fff;
+    font-weight: bold; 
+    padding: 0 20px;
+    background-color: #25b334; 
+    border-color: #25b334;
+    margin: 1rem 20px;
+}
+
+.editbtn:hover {
+    background-color: #03a814; 
+    border-color: #03a814;
+    color: #fff;
 }
 
 .gr {
@@ -20,23 +36,23 @@
 
 
 .image{
-    max-width: 70vw;
-    max-height: 70vh;
-    border-radius: 10px;
+    width:auto;
+    max-width:640px;
+    height: auto;
+    max-height: 640px;
+    object-fit: contain;
+    margin-bottom: 5vh;
 }
 
 
 .label {
-    text-align: justify;
     font-weight: bolder;
-    font-size: 4rem;
-    
+    font-size: 1rem;
 }
 
 .span{
-    
     font-family: "Delius";
-    font-size:1.5rem;
+    font-size: 1.2rem;
     color:#001870;
     font-weight: bold;
 }
@@ -46,4 +62,11 @@
     background:#DAC6FF;
     font-size: medium;
     cursor: pointer;
+}
+
+.title {
+    text-align: center;
+    font-family: 'Boogaloo';
+    color: #ff530e;
+    word-wrap: break-word;
 }

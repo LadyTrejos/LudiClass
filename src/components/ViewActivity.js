@@ -95,7 +95,6 @@ class ViewActivity extends React.Component {
     const { data } = this.props;
     return (
       <div>
-        <BackTop/>
         {data.length > 0 ? (
           <List
             itemLayout="horizontal"
@@ -110,7 +109,8 @@ class ViewActivity extends React.Component {
               onChange: page => {
                 console.log(page);
               },
-              pageSize: 6
+              pageSize: 6,
+              position: 'both'
             }}
             dataSource={this.props.data}
             renderItem={item => (
@@ -140,7 +140,7 @@ class ViewActivity extends React.Component {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        marginTop: "5%"
+                        marginTop: "5%",
                       }}
                     >
                       <a
@@ -170,7 +170,7 @@ class ViewActivity extends React.Component {
                     style={{ textAlign: "center"}}
                     title={
                       <a
-                        style={{ fontSize: "1.2rem", wordWrap: 'ellipsis' }}
+                        style={{ fontSize: "1.2rem", wordWrap: 'break-word' }}
                         href={`/activity/${item.id}/`}
                       >
                         { 
