@@ -11,7 +11,8 @@ import {
   Select,
   message,
   Row,
-  Col
+  Col,
+  Alert
 } from "antd";
 import { withRouter } from "react-router-dom";
 
@@ -49,7 +50,8 @@ class ActivityClass extends React.Component {
       submitting: false,
       previewVisible: false,
       previewImage: "",
-      fileList: []
+      fileList: [],
+      fileOk: true
     };
     this.imageRef = React.createRef();
   }
@@ -98,6 +100,7 @@ class ActivityClass extends React.Component {
     const image = this.state.fileList[0];
 
     if (image.type.includes("image/")) {
+      this.setState({ fileOk: true });
       postData.append("picture", image.originFileObj);
       postData.append("name", this.state.activityInfo.name);
       postData.append("description", this.state.activityInfo.description);
@@ -118,7 +121,8 @@ class ActivityClass extends React.Component {
                 image: ""
               },
               submitting: false,
-              fileList: []
+              fileList: [],
+              fileOk: false
             },
             () => {
               history.push(`/activity/${res.data.id}`);
@@ -126,7 +130,7 @@ class ActivityClass extends React.Component {
           )
         );
     } else {
-      this.setState({ submitting: false });
+      this.setState({ submitting: false, fileOk: false });
       return;
     }
   };
@@ -179,12 +183,14 @@ class ActivityClass extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { submitting } = this.state;
+    const { submitting, fileOk } = this.state;
     const { previewVisible, previewImage, fileList } = this.state;
 
     const topicItems = [];
 
     let status = true;
+    console.log("FIle OK", fileOk);
+
     if (fileList[0] !== undefined) {
       status = fileList[0].status !== "done" ? true : false;
     }
@@ -304,6 +310,17 @@ class ActivityClass extends React.Component {
                   )}
                 </Form.Item>
               </Row>
+              {!fileOk ? (
+                <Alert
+                  message="El formato que subiste no es el correcto!"
+                  description="Recuerda que solo debes subir imágenes."
+                  type="warning"
+                  closable
+                  showIcon
+                />
+              ) : (
+                <div></div>
+              )}
               <Row md={6}>
                 <p className={styles.highlight}>
                   Recuerda usar una imagen que se relacione con la actividad que

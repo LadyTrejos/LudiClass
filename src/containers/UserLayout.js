@@ -1,5 +1,15 @@
 import React from "react";
-import { Layout, Menu, Button, Row, Col, Input, Typography, Alert } from "antd";
+import {
+  Layout,
+  Menu,
+  Button,
+  Row,
+  Col,
+  Input,
+  notification,
+  Icon,
+  Typography
+} from "antd";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import * as actions from "../store/actions/auth";
@@ -7,7 +17,6 @@ import * as actions from "../store/actions/auth";
 import history from "../helpers/history";
 import ActivityListView from "./ActivityListView";
 import styles from "./UserLayout.module.css";
-//import figures from "../static/css/utils.module.css";
 
 const { Content, Header, Sider } = Layout;
 const { Search } = Input;
@@ -17,8 +26,7 @@ class UserLayout extends React.Component {
     super(props);
     this.state = {
       username: localStorage.getItem("user"),
-      actFiltered: "all",
-      breaked: false
+      actFiltered: "all"
     };
   }
 
@@ -34,11 +42,39 @@ class UserLayout extends React.Component {
       });
     }
   };
-  onBreak = breaked => {
-    this.setState({ breaked });
+
+  openNotification = () => {
+    notification.open({
+      description: (
+        <p style={{ fontSize: "1.1rem" }}>
+          <Icon type="arrow-left" style={{ color: "#ff530e" }} />
+          &nbsp;&nbsp;Este es el menú&nbsp;
+          <Icon
+            type="unordered-list"
+            style={{
+              backgroundColor: "#001529",
+              color: "#fff",
+              padding: "5px",
+              borderRadius: "2px"
+            }}
+          />
+          , aquí encontrarás todo lo que puedes hacer en LudiClass.
+        </p>
+      ),
+      duration: 20,
+      placement: "topLeft",
+      key: 1,
+      style: {
+        width: "80vw",
+        marginLeft: "12px",
+        marginTop: "13px",
+        maxWidth: "350px"
+      }
+    });
   };
+
   render() {
-    const { actFiltered, breaked } = this.state;
+    const { actFiltered } = this.state;
     return (
       <div>
         <Layout>
@@ -55,57 +91,69 @@ class UserLayout extends React.Component {
             }}
             breakpoint="lg"
             collapsedWidth="0"
-            onBreakpoint={this.onBreak}
-            //onCollapse={this.onCollapse}
-            /*collapsible
-            collapsed={this.state.collapsed}*/
+            onBreakpoint={broken => {
+              console.log(broken);
+            }}
+            onCollapse={(collapsed, type) => {
+              if (collapsed & (this.props.location.pathname === "/")) {
+                this.openNotification();
+              } else {
+                notification.close(1);
+              }
+            }}
           >
-            <a href="/index">
-              <img
-                className={styles.brand}
-                src={require("../static/img/brand_logo.png")}
-                alt="Logo de LudiClass"
-              />
-            </a>
-            <Typography.Title className={styles.title} level={3}>
-              Mira lo que puedes hacer
-            </Typography.Title>
             <Menu
               theme="dark"
               mode="inline"
               defaultSelectedKeys={["7"]}
               style={{ backgroundColor: "#241190", justifyContent: "center" }}
             >
-              {/* <div><Divider style={{backgroundColor:'white'}}/></div> */}
+              <a href="/index">
+                <img
+                  className={styles.brand}
+                  src={require("../static/img/brand_logo.png")}
+                  alt="Logo de LudiClass"
+                />
+              </a>
+              <Typography.Title className={styles.title} level={3}>
+                Mira lo que puedes hacer
+              </Typography.Title>
+              <Menu
+                theme="dark"
+                mode="inline"
+                defaultSelectedKeys={["7"]}
+                style={{ backgroundColor: "#241190", justifyContent: "center" }}
+              >
+                <Menu.Item key="1">
+                  <span className={styles.option}>Crear actividad</span>
 
-              <Menu.Item key="1">
-                <span className={styles.option}>Crear actividad</span>
+                  <Link to="/create" />
+                </Menu.Item>
 
-                <Link to="/create" />
-              </Menu.Item>
+                <Menu.Item key="2">
+                  <span className={styles.option}>Mis actividades</span>
+                  <Link to="/my-content" />
+                </Menu.Item>
 
-              <Menu.Item key="2">
-                <span className={styles.option}>Mis actividades</span>
-                <Link to="/my-content" />
-              </Menu.Item>
+                <Menu.Item key="3">
+                  <span className={styles.option}>Mis favoritos</span>
+                  <Link to="/favorites" />
+                </Menu.Item>
 
-              <Menu.Item key="3">
-                <span className={styles.option}>Mis favoritos</span>
-                <Link to="/favorites" />
-              </Menu.Item>
+                <Menu.Item key="4">
+                  <span className={styles.option}>Todas las actividades</span>
+                  <Link to="/list" />
+                </Menu.Item>
+              </Menu>
 
-              <Menu.Item key="4">
-                <span className={styles.option}>Todas las actividades</span>
-                <Link to="/list" />
-              </Menu.Item>
+              <Button
+                type="primary"
+                onClick={this.props.logout}
+                className={styles.logout}
+              >
+                Cerrar sesión
+              </Button>
             </Menu>
-            <Button
-              type="primary"
-              onClick={this.props.logout}
-              className={styles.logout}
-            >
-              Cerrar sesión
-            </Button>
           </Sider>
 
           <Layout className={styles.layout}>
@@ -137,18 +185,6 @@ class UserLayout extends React.Component {
                   borderRadius: "10px"
                 }}
               >
-                {breaked ? (
-                  <Alert
-                    message="El menú ha cambiado"
-                    type="warning"
-                    description="Al cambiar el tamaño de pantalla nuestro menú se transforma en el ícono pequeño que ves."
-                    closable
-                    showIcon
-                  />
-                ) : (
-                  <div></div>
-                )}
-
                 {this.props.location.pathname === "/" ? (
                   <ActivityListView filter={actFiltered} />
                 ) : (

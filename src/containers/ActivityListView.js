@@ -24,9 +24,6 @@ class ActivityListView extends React.Component {
   }
 
   loadData = () => {
-    {
-      /*  Arreglar eso de nuevo, la query_topic dice que es null cuando hago una búsqueda*/
-    }
     const { filter } = this.props;
 
     const query_topic = this.props.location
@@ -38,11 +35,6 @@ class ActivityListView extends React.Component {
     const query_autor = this.props.location
       ? new URLSearchParams(this.props.location.search).get("autor")
       : null;
-    console.log("---> ", this.props);
-    console.log("el filtro es: ", filter);
-    console.log("query_topic ", query_topic);
-    console.log("query_search ", query_search);
-    console.log("query_autor ", query_autor);
     this.setState({
       _query_topic: query_topic,
       _query_search: query_search,
@@ -66,7 +58,6 @@ class ActivityListView extends React.Component {
         });
     } else if (query_topic != null) {
       let url = `${HOSTNAME}/api/activity/?name=&topics__name=${query_topic}&owner`;
-      console.log("la url es: ", url);
       axios.get(url).then(res => {
         this.setState({
           activity: res.data,
@@ -76,7 +67,6 @@ class ActivityListView extends React.Component {
       });
     } else if (query_search != null) {
       let url = `${HOSTNAME}/api/activity/?search=${query_search}`;
-      console.log("la url es: ", url);
       axios.get(url).then(res => {
         this.setState({
           activity: res.data,
@@ -88,7 +78,6 @@ class ActivityListView extends React.Component {
       });
     } else if (query_autor != null) {
       let url = `${HOSTNAME}/api/activity/?name=&topics__name=&owner=${query_autor}`;
-      console.log("la url es: ", url);
       axios.get(url).then(res => {
         this.setState({
           activity: res.data,
