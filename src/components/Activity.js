@@ -113,7 +113,6 @@ componentDidMount(){
   }
 
   searchTag = (value) => {
-    console.log('Estoy en searchTag ',value)
     if (value !== "") {
      history.push('/')
       this.setState({
