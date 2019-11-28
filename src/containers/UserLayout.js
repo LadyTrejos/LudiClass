@@ -115,9 +115,7 @@ class UserLayout extends React.Component {
                   alt="Logo de LudiClass"
                 />
               </a>
-              <Typography.Title className={styles.title} level={3}>
-                Mira lo que puedes hacer
-              </Typography.Title>
+              
               <Menu
                 theme="dark"
                 mode="inline"

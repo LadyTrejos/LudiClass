@@ -214,14 +214,15 @@ class ViewActivity extends React.Component {
                       </p>
                     }
                   />
-
-                  {item.topics.slice(0, 5).map(item => (
-                    <a href={`/list?topic=${this.state.topics[item]}`}>
-                      <Tag className={styles.tag} color="geekblue" key={item}>
-                        {this.state.topics[item]}
-                      </Tag>
-                    </a>
-                  ))}
+                  <div style={{overflow:'hidden',height:'27px', padding:'5px 0'}}>
+                    {item.topics.map(item => (
+                      <a href={`/list?topic=${this.state.topics[item]}`}>
+                        <Tag className={styles.tag} color="geekblue" key={item}>
+                          {this.state.topics[item]}
+                        </Tag>
+                      </a>
+                    ))}
+                  </div>
                   <Tooltip
                     title={`${item.users.length} personas han guardado esta actividad en sus favoritos.`}
                   >

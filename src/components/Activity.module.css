@@ -36,10 +36,10 @@
 
 
 .image{
-    width:90vh;
-    max-width: 600px;
-    height: 90vh;
-    max-height: 600px;
+    width:auto;
+    max-width: 500px;
+    height: auto;
+    max-height: 400px;
     object-fit: contain;
     margin-bottom: 5vh;
 }
@@ -69,4 +69,11 @@
     font-family: 'Boogaloo';
     color: #ff530e;
     word-wrap: break-word;
+}
+
+@media screen and (max-width:768px) {
+    .image {
+        max-width: 80vw;
+        max-height: 80vh;
+    }
 }

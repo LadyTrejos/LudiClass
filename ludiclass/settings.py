@@ -81,23 +81,23 @@ WSGI_APPLICATION = 'ludiclass.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-"""DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'ludiclass',
         'HOST': 'localhost',
     }
-}"""
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'LudiClass',
-        'USER': 'ludiclass_admin',
-        'PASSWORD': 'emprendimiento',
-        'HOST': 'mongodb://ludiclass_admin:emprendimiento@ludiclass-shard-00-00-u85rm.mongodb.net:27017,ludiclass-shard-00-01-u85rm.mongodb.net:27017,ludiclass-shard-00-02-u85rm.mongodb.net:27017/test?ssl=true&replicaSet=LudiClass-shard-0&authSource=admin&retryWrites=true&w=majority'
-    }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'LudiClass',
+#         'USER': 'ludiclass_admin',
+#         'PASSWORD': 'emprendimiento',
+#         'HOST': 'mongodb://ludiclass_admin:emprendimiento@ludiclass-shard-00-00-u85rm.mongodb.net:27017,ludiclass-shard-00-01-u85rm.mongodb.net:27017,ludiclass-shard-00-02-u85rm.mongodb.net:27017/test?ssl=true&replicaSet=LudiClass-shard-0&authSource=admin&retryWrites=true&w=majority'
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
