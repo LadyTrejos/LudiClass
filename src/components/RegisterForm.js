@@ -110,11 +110,15 @@ class RegisterForm extends React.Component {
   }
 
   validatePasswordFormat = (rule, value, callback) => {
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    // var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    // if (value.length > 0 && value.length < 8) {
+    //   callback("La contraseña es muy corta, usa al menos 8 caracteres.")
+    // } else if (value && !strongRegex.test(value)) {
+    //   callback("Elige una contraseña más segura. Prueba con una combinación de letras números y símbolos")
+    // }
+    // callback();
     if (value.length > 0 && value.length < 8) {
       callback("La contraseña es muy corta, usa al menos 8 caracteres.")
-    } else if (value && !strongRegex.test(value)) {
-      callback("Elige una contraseña más segura. Prueba con una combinación de letras números y símbolos")
     }
     callback();
   };
@@ -189,7 +193,7 @@ class RegisterForm extends React.Component {
             <Form.Item  
               label="Contraseña"
               hasFeedback
-              extra='La contraseña debe contener más de 8 caracteres y al menos una letra en minúscula, una letra en mayúscula, un número y un caracter especial'>
+              extra='La contraseña debe contener más de 8 caracteres'>
                 {getFieldDecorator('password', {
                     rules: [{ required: true, message: 'Ingrese una contraseña' },
                     { validator: this.validateToNextPassword },

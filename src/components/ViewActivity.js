@@ -1,10 +1,10 @@
 import React from "react";
 import "antd/dist/antd.css";
 import axios from "axios";
-import { Card, Tag, Row, List, Empty, Statistic, Icon, Tooltip } from "antd";
+import { Card, Tag, Row, List, Empty, Statistic, Icon, Button, Tooltip } from "antd";
 import styles from './ViewActivity.module.css'
 import HOSTNAME from "../helpers/hostname";
-import { BackTop } from "antd";
+import { BackTop, message, } from "antd";
 
 const { Meta } = Card;
 
@@ -12,6 +12,8 @@ class ViewActivity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      cant: 0,
+    
       topics: {},
       activity: []
     };
@@ -61,6 +63,32 @@ class ViewActivity extends React.Component {
     });
   };
 
+  Favorite = (item) => {
+    console.log(this.props)
+    const userID = localStorage.getItem('user')
+    
+    if(!item.users.includes(userID)){
+      item.users.push(userID)
+      message.success('¡Actividad agregada a tu lista de favoritos! 💖')
+    }else{
+      for( var i = 0; i < item.users.length; i++){ 
+        if ( item.users[i] === userID) {
+          item.users.splice(i, 1); 
+        }
+     }
+     this.setState({favorito: !this.state.favorito})
+     message.info('Eliminaste esta actividad de tu lista de favoritos 💔')
+    }
+    const usersData = JSON.stringify({users: item.users});
+    axios.patch(`${HOSTNAME}/api/activity/${item.id}/`,
+        usersData,
+        { headers: {"Content-type": "application/json"}}
+    )
+    .then(() => this.props.loadData())
+    .catch(err => 
+      console.log(err)
+    )
+  }
   
 
   render() {
@@ -86,6 +114,7 @@ class ViewActivity extends React.Component {
             }}
             dataSource={this.props.data}
             renderItem={item => (
+              
               <List.Item
                 style={{
                   display: "flex",
@@ -94,6 +123,7 @@ class ViewActivity extends React.Component {
                   margin: "10px 10px"
                 }}
               >
+                {console.log('item: ',item)}
                 <Card
                   style={{
                     borderColor: "gray",
@@ -176,9 +206,8 @@ class ViewActivity extends React.Component {
                     </a>
                   ))}
                   <Tooltip title={`${item.users.length} personas han guardado esta actividad en sus favoritos.`}>
-                    <span>
-                      <Statistic valueStyle={{fontFamily:'Delius', fontSize:'1rem', paddingTop: '6px'}} value={item.users.length} prefix={'💖'} />
-                    </span>
+                    <br/>                    
+                    <Button onClick={()=>this.Favorite(item)} style={{fontFamily:'Delius', fontSize:'1rem', paddingTop: '6px'}} type="link">{'💖 '}{item.users.length}</Button>
                   </Tooltip>
                 </Card>
               </List.Item>

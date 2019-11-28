@@ -21,6 +21,10 @@ class ActivityListView extends React.Component {
   };
  
   componentDidMount() {
+    this.loadData();
+  }
+
+  loadData = () => {
     {/*  Arreglar eso de nuevo, la query_topic dice que es null cuando hago una búsqueda*/}
     const { filter } = this.props;
     
@@ -151,7 +155,7 @@ class ActivityListView extends React.Component {
         </Row>
 
         <br />
-        <ViewActivity data={filtered} loadData={this.props.data} />
+        <ViewActivity data={filtered} loadData={this.loadData} />
       </div>
     );
   }
