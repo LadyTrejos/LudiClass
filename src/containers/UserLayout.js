@@ -1,13 +1,13 @@
 import React from "react";
-import { Layout, Menu, Button, Row, Col, Input } from "antd";
+import { Layout, Menu, Button, Row, Col, Input, Typography, Alert } from "antd";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import * as actions from "../store/actions/auth";
-import axios from "axios";
+
 import history from "../helpers/history";
 import ActivityListView from "./ActivityListView";
 import styles from "./UserLayout.module.css";
-import figures from "../static/css/utils.module.css";
+//import figures from "../static/css/utils.module.css";
 
 const { Content, Header, Sider } = Layout;
 const { Search } = Input;
@@ -16,17 +16,15 @@ class UserLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: localStorage.getItem('user'),
-      actFiltered: "all"
+      username: localStorage.getItem("user"),
+      actFiltered: "all",
+      breaked: false
     };
   }
 
   searchSubject = value => {
-
-    
-    
     if (value !== "") {
-      history.push(`/list?search=${value}`)
+      history.push(`/list?search=${value}`);
       this.setState({
         actFiltered: value
       });
@@ -36,37 +34,31 @@ class UserLayout extends React.Component {
       });
     }
   };
-
+  onBreak = breaked => {
+    this.setState({ breaked });
+  };
   render() {
-    const { actFiltered } = this.state;
+    const { actFiltered, breaked } = this.state;
     return (
-      <div> 
-      <Layout>
-        <Sider
-          style={{
-            backgroundColor: "#241190",
-            flex: 1, 
-            justifyContent: "flex-end", 
-            alignContent: "left", 
-            zIndex: 9999,
-            position: 'fixed',
-            left:0,
-            height: '100vh',
-          }}
-          breakpoint="lg"
-          collapsedWidth="0"
-          onBreakpoint={broken => {
-            console.log(broken);
-          }}
-          onCollapse={(collapsed, type) => {
-            console.log(collapsed, type);
-          }}
-        >
-          <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={["7"]}
-            style={{ backgroundColor: "#241190", justifyContent: "center" }}
+      <div>
+        <Layout>
+          <Sider
+            style={{
+              backgroundColor: "#241190",
+              flex: 1,
+              justifyContent: "flex-end",
+              alignContent: "left",
+              zIndex: 9999,
+              position: "fixed",
+              left: 0,
+              height: "100vh"
+            }}
+            breakpoint="lg"
+            collapsedWidth="0"
+            onBreakpoint={this.onBreak}
+            //onCollapse={this.onCollapse}
+            /*collapsible
+            collapsed={this.state.collapsed}*/
           >
             <a href="/index">
               <img
@@ -75,75 +67,97 @@ class UserLayout extends React.Component {
                 alt="Logo de LudiClass"
               />
             </a>
-            {/* <div><Divider style={{backgroundColor:'white'}}/></div> */}
-            <Menu.Item key="1">
-              <span className={styles.option}>Crear actividad</span>
-              <Link to="/create" />
-            </Menu.Item>
+            <Typography.Title className={styles.title} level={3}>
+              Mira lo que puedes hacer
+            </Typography.Title>
+            <Menu
+              theme="dark"
+              mode="inline"
+              defaultSelectedKeys={["7"]}
+              style={{ backgroundColor: "#241190", justifyContent: "center" }}
+            >
+              {/* <div><Divider style={{backgroundColor:'white'}}/></div> */}
 
-            <Menu.Item key="2">
-              <span className={styles.option}>Mis actividades</span>
-              <Link to="/my-content" />
-            </Menu.Item>
+              <Menu.Item key="1">
+                <span className={styles.option}>Crear actividad</span>
 
-            <Menu.Item key="3">
-              <span className={styles.option}>Mis favoritos</span>
-              <Link to="/favorites" />
-            </Menu.Item>
+                <Link to="/create" />
+              </Menu.Item>
 
-            <Menu.Item key="4">
-              <span className={styles.option}>Todas las actividades</span>
-              <Link to="/list" />
-            </Menu.Item>
-            
-            
-          </Menu>
-          <Button
-            type="primary"
-            onClick={this.props.logout}
-            className={styles.logout}
-          >
-            Cerrar sesión
-          </Button>
-        </Sider>
+              <Menu.Item key="2">
+                <span className={styles.option}>Mis actividades</span>
+                <Link to="/my-content" />
+              </Menu.Item>
 
-        <Layout className={styles.layout}>
-          <Header className={styles.header}>
-            <Row type="flex">
-              <Col xs={0} sm={0} md={10} lg={10} xl={10}>
-                <h3 className={styles.username}>
-                  {this.state.username.toLowerCase()}
-                </h3>
-              </Col>
-              <Col xs={23} sm={24} md={11} lg={9} xl={9}>
-                <Search
-                  placeholder="Ingresa un tema para buscar actividades..."
-                  enterButton="Buscar"
-                  size="large"
-                  className={styles.searchbar}
-                  onSearch={value => this.searchSubject(value)}
-                />
-              </Col>
-            </Row>
-          </Header>
-          <Content style={{ margin: '100px 16px 24px', overflow: 'initial' }}>
-            <div
-              style={{
-                padding: "3vh 2vw",
-                minHeight: "82vh",
-                backgroundColor: "white",
-                borderRadius: "10px"
-              }}
-            > 
-              {this.props.location.pathname === "/" ? (
-                <ActivityListView filter={actFiltered} />
-              ) : (
-                this.props.children
-              )}
-            </div>
-          </Content>
+              <Menu.Item key="3">
+                <span className={styles.option}>Mis favoritos</span>
+                <Link to="/favorites" />
+              </Menu.Item>
+
+              <Menu.Item key="4">
+                <span className={styles.option}>Todas las actividades</span>
+                <Link to="/list" />
+              </Menu.Item>
+            </Menu>
+            <Button
+              type="primary"
+              onClick={this.props.logout}
+              className={styles.logout}
+            >
+              Cerrar sesión
+            </Button>
+          </Sider>
+
+          <Layout className={styles.layout}>
+            <Header className={styles.header}>
+              <Row type="flex">
+                <Col xs={0} sm={0} md={10} lg={10} xl={10}>
+                  <h3 className={styles.username}>
+                    {this.state.username.toLowerCase()}
+                  </h3>
+                </Col>
+                <Col xs={23} sm={24} md={11} lg={9} xl={9}>
+                  <Search
+                    placeholder="Ingresa un tema para buscar actividades..."
+                    enterButton="Buscar"
+                    size="large"
+                    className={styles.searchbar}
+                    onSearch={value => this.searchSubject(value)}
+                  />
+                </Col>
+              </Row>
+            </Header>
+
+            <Content style={{ margin: "100px 16px 24px", overflow: "initial" }}>
+              <div
+                style={{
+                  padding: "3vh 2vw",
+                  minHeight: "82vh",
+                  backgroundColor: "white",
+                  borderRadius: "10px"
+                }}
+              >
+                {breaked ? (
+                  <Alert
+                    message="El menú ha cambiado"
+                    type="warning"
+                    description="Al cambiar el tamaño de pantalla nuestro menú se transforma en el ícono pequeño que ves."
+                    closable
+                    showIcon
+                  />
+                ) : (
+                  <div></div>
+                )}
+
+                {this.props.location.pathname === "/" ? (
+                  <ActivityListView filter={actFiltered} />
+                ) : (
+                  this.props.children
+                )}
+              </div>
+            </Content>
+          </Layout>
         </Layout>
-      </Layout>
       </div>
     );
   }
