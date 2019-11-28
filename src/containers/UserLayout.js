@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import * as actions from "../store/actions/auth";
 import axios from "axios";
-import HOSTNAME from "../helpers/hostname";
+import history from "../helpers/history";
 import ActivityListView from "./ActivityListView";
 import styles from "./UserLayout.module.css";
 import figures from "../static/css/utils.module.css";
@@ -22,7 +22,11 @@ class UserLayout extends React.Component {
   }
 
   searchSubject = value => {
+
+    
+    
     if (value !== "") {
+      history.push(`/list?search=${value}`)
       this.setState({
         actFiltered: value
       });
@@ -32,19 +36,11 @@ class UserLayout extends React.Component {
       });
     }
   };
+
   render() {
     const { actFiltered } = this.state;
     return (
       <div> 
-        <div>
-          <div className={figures.first}></div>
-          <div className={figures.second}></div>
-          <div className={figures.third}></div>
-          <div className={figures.four}></div>
-          <div className={figures.five}></div>
-          <div className={figures.six}></div>
-        </div>
-      
       <Layout>
         <Sider
           style={{
@@ -72,7 +68,6 @@ class UserLayout extends React.Component {
             defaultSelectedKeys={["7"]}
             style={{ backgroundColor: "#241190", justifyContent: "center" }}
           >
-            {/* <h2 className={styles.menutitle}>Menú</h2> */}
             <a href="/index">
               <img
                 className={styles.brand}
@@ -87,14 +82,21 @@ class UserLayout extends React.Component {
             </Menu.Item>
 
             <Menu.Item key="2">
-              <span className={styles.option}>Ver actividades</span>
-              <Link to="/list" />
+              <span className={styles.option}>Mis actividades</span>
+              <Link to="/my-content" />
             </Menu.Item>
-            
+
             <Menu.Item key="3">
               <span className={styles.option}>Mis favoritos</span>
               <Link to="/favorites" />
             </Menu.Item>
+
+            <Menu.Item key="4">
+              <span className={styles.option}>Todas las actividades</span>
+              <Link to="/list" />
+            </Menu.Item>
+            
+            
           </Menu>
           <Button
             type="primary"
@@ -132,7 +134,7 @@ class UserLayout extends React.Component {
                 backgroundColor: "white",
                 borderRadius: "10px"
               }}
-            >
+            > 
               {this.props.location.pathname === "/" ? (
                 <ActivityListView filter={actFiltered} />
               ) : (
@@ -140,7 +142,6 @@ class UserLayout extends React.Component {
               )}
             </div>
           </Content>
-          {/* <Footer style={{ textAlign: 'center' }}>@LudiClass</Footer> */}
         </Layout>
       </Layout>
       </div>

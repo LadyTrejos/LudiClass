@@ -107,7 +107,9 @@ class ActivityClass extends React.Component {
         },
         submitting: false,
         fileList:[]
-        })
+        }, ()=>{
+          history.push(`/activity/${res.data.id}`)
+        } )
     )
   };
 
@@ -137,8 +139,6 @@ class ActivityClass extends React.Component {
         .then(results => {
           results.forEach(item => topics.push(item.data.id))
           this.handleSubmit(topics)
-          history.push("/list")
-          window.location.reload(true);
         }
         )
       }
@@ -213,6 +213,7 @@ class ActivityClass extends React.Component {
                       <TextArea 
                         placeholder='Cuéntanos de qué trata tu actividad, qué materiales necesita...' 
                         rows={8} 
+                        style={{whiteSpace:'pre-line'}}
                         onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, description: e.target.value } })} 
                       />
                     )}
@@ -255,8 +256,6 @@ class ActivityClass extends React.Component {
               </Row>
             </Col>
           </Row>
-          
-{/*---------------------------------------------------------------------------------------------------------------*/}
           
 {/*---------------------------------------------------------------------------------------------------------------*/}
           <Form.Item 

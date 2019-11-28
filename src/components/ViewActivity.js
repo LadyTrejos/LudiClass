@@ -61,13 +61,12 @@ class ViewActivity extends React.Component {
     });
   };
 
+  
+
   render() {
     const { data } = this.props;
-    console.log('data en el render', this.props.data)
-    console.log(this.state.topTen)
     return (
       <div>
-        <BackTop />
         {data.length > 0 ? (
           <List
             itemLayout="horizontal"
@@ -82,7 +81,8 @@ class ViewActivity extends React.Component {
               onChange: page => {
                 console.log(page);
               },
-              pageSize: 20
+              pageSize: 6,
+              position: 'both'
             }}
             dataSource={this.props.data}
             renderItem={item => (
@@ -110,19 +110,24 @@ class ViewActivity extends React.Component {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        marginTop: "5%"
+                        marginTop: "5%",
                       }}
                     >
-                      <img
-                        style={{
-                          width: '100%',
-                          height: '15vw',
-                          minHeight: '200px',
-                          objectFit: 'cover'
-                        }}
-                        alt="Foto de la actividad"
-                        src={item.picture}
-                      />
+                      <a
+                        href={`/activity/${item.id}/`}
+                      >
+                        <img
+                          style={{
+                            width: '100%',
+                            height: '15vw',
+                            minHeight: '200px',
+                            objectFit: 'cover'
+                          }}
+                          
+                          alt="Foto de la actividad"
+                          src={item.picture}
+                        />
+                      </a>
                     </div>
                   }
                 >
@@ -135,7 +140,7 @@ class ViewActivity extends React.Component {
                     style={{ textAlign: "center"}}
                     title={
                       <a
-                        style={{ fontSize: "1.2rem", wordWrap: 'ellipsis' }}
+                        style={{ fontSize: "1.2rem", wordWrap: 'break-word' }}
                         href={`/activity/${item.id}/`}
                       >
                         { 
@@ -152,7 +157,7 @@ class ViewActivity extends React.Component {
                     style={{ color: "#2F3E9E", overflowWrap: "break-word" }}
                     description={
                       <p style={{ color: "#149", fontWeight: "bold" }}>
-                        {item.description.substring(0, 100).concat(" ...")}
+                        {item.description.substring(0, 60).concat(" ...")}
                       </p>
                     }
                   />
@@ -160,12 +165,15 @@ class ViewActivity extends React.Component {
                   <br />
 
                   {item.topics.map(item => (
-                    <Tag
-                      color="geekblue"
-                      key={item}
-                    >
-                      {this.state.topics[item]}
-                    </Tag>
+                    <a href={`/list?topic=${this.state.topics[item]}`}>
+                      <Tag
+                        className={styles.tag}
+                        color="geekblue"
+                        key={item}
+                      >
+                        {this.state.topics[item]}
+                      </Tag>
+                    </a>
                   ))}
                   <Tooltip title={`${item.users.length} personas han guardado esta actividad en sus favoritos.`}>
                     <span>

@@ -12,54 +12,104 @@ class ActivityListView extends React.Component {
     activity: "",
     events: [],
     favorites: [],
-    filtered: []
-  };
+    filtered: [],
+    _query_topic:'',
+    _query_search:'',
+    _query_autor:'',
+    title:''
 
+  };
+ 
   componentDidMount() {
+    {/*  Arreglar eso de nuevo, la query_topic dice que es null cuando hago una búsqueda*/}
     const { filter } = this.props;
-    if (filter === "all") {
+    
+    const query_topic = this.props.location ? new URLSearchParams(this.props.location.search).get('topic') : null;
+    const query_search = this.props.location ? new URLSearchParams(this.props.location.search).get('search') : null;
+    const query_autor = this.props.location ? new URLSearchParams(this.props.location.search).get('autor') : null;
+    console.log('---> ',this.props)
+    console.log('el filtro es: ', filter)
+    console.log('query_topic ',query_topic)
+    console.log('query_search ',query_search)
+    console.log('query_autor ',query_autor)
+    this.setState({_query_topic:query_topic,_query_search:query_search, _query_autor: query_autor})
+    
+    if (filter === "all" && query_topic == null && query_search == null && query_autor == null) {
       axios
         .get(`${HOSTNAME}/api/activity/?ordering=-created_at`)
         .then(({ data }) => {
           this.setState({
             activity: data,
-            filtered: data
+            filtered: data,
+            title:'Actividades'
           });
         });
-    } else {
+    }else if(query_topic != null) {
+      let url = `${HOSTNAME}/api/activity/?name=&topics__name=${query_topic}&owner`;
+      console.log('la url es: ', url)
       axios
-        .get(`${HOSTNAME}/api/activity/?search=${filter}&&ordering=-created_at`)
+        .get(url)
         .then(res => {
           this.setState({
             activity: res.data,
-            filtered: res.data
+            filtered: res.data,
+            title:'Actividades con la etiqueta "'.concat(query_topic).concat('"')
           });
         });
-    }
-
-    /*try {
-      
-    } catch (e) {
-      console.log("no data");
-    }*/
-  }
-  componentWillReceiveProps(nextProps) {
-    const { filter } = nextProps;
-    console.log(filter);
-    let url = `${HOSTNAME}/api/activity/?search=${filter}&&ordering=-created_at`;
-    if (filter === "all") {
-      url = `${HOSTNAME}/api/activity/?ordering=-created_at`;
-    } else if (filter === "favorites") {
-    }
-
-    axios
+    }else if(query_search != null) {
+      let url = `${HOSTNAME}/api/activity/?search=${query_search}`;
+      console.log('la url es: ', url)
+      axios
         .get(url)
-        .then(({ data }) => {
+        .then(res => {
           this.setState({
-            filtered: data
+            activity: res.data,
+            filtered: res.data,
+            title:'Actividades con el nombre o etiqueta "'.concat(query_search).concat('"')
           });
         });
+      }else if(query_autor != null) {
+        let url = `${HOSTNAME}/api/activity/?name=&topics__name=&owner=${query_autor}`;
+        console.log('la url es: ', url)
+        axios
+          .get(url)
+          .then(res => {
+            this.setState({
+              activity: res.data,
+              filtered: res.data,
+              title:'Actividades hechas por "'.concat(query_autor).concat('"')
+            });
+          });
+        }else if (filter === 'favorites') {
+      axios
+        .get(`${HOSTNAME}/api/activity/?name=&topics__name=&users=${localStorage.getItem('user')}`)
+        .then(res => {
+          this.setState({
+            activity: res.data,
+            filtered: res.data,
+            title:'Mis actividades favoritas'
+          });
+        });
+    }else if(filter === 'my-content'){
+      axios
+        .get(`${HOSTNAME}/api/activity/?name=&topics__name=&owner=${localStorage.getItem('user')}`)
+        .then(res => {
+          this.setState({
+            activity: res.data,
+            filtered: res.data,
+            title:'Mis actividades'
+          });
+        });
+    }
+
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.componentDidMount();
+    }
+  }
+
   
   componentWillMount() {
     const userID = localStorage.getItem("user");
@@ -71,73 +121,32 @@ class ActivityListView extends React.Component {
     });
   }
 
-  handleSearch = value => {
-    const { activity } = this.state;
-    let newActi = [];
-    if (value !== "") {
-      newActi = activity.filter(item =>
-        item.name.toLowerCase().includes(value.toLowerCase())
-      );
-      this.setState({
-        filtered: newActi
-      });
-    } else {
-      this.setState({
-        filtered: activity
-      });
-    }
-    /*axios
-      .get(`${HOSTNAME}/api/activity/?search=${value}&&ordering=-created_at`)
-      .then(res => {
-        console.log("res: ", res);
-        this.setState({
-          activity: res.data
-        });
-      });*/
-  };
-
-  handleSearchFavorites = value => {
-    let activities = [],
-      promises = [];
-
-    for (const prop in value) {
-      console.log(`value.${prop} = ${value[prop]}`);
-      promises.push(axios.get(`${HOSTNAME}/api/activity/${value[prop]}/`));
-    }
-
-    axios.all(promises).then(results => {
-      results.forEach(item => activities.push(item.data));
-      this.setState({
-        filtered: activities
-      });
-    });
-  };
 
   render() {
+    
     const { filtered } = this.state;
-
     return (
       <div>
         <Row type="flex" justify="center" align="middle">
-          <h2 className={Styles.h2}>Actividades</h2>
+    <h2 className={Styles.h2}>{this.state.title}</h2>
         </Row>
         <Row>
-          <Col sm={12} md={16} lg={18} xl={18} xxl={18}>
-            <Search
-              placeholder="Ingresa un tema para buscar actividades..."
-              onSearch={value => this.handleSearch(value)}
-              enterButton="Buscar"
-              size="large"
-              style={{ maxWidth: '420px' }}
-            />
-          </Col>
+          
           <Col sm={12} md={8} lg={6} xl={6} xxl={6}>
-            <Button
-              onClick={() => this.handleSearchFavorites(this.state.favorites)}
+            {
+              this.state._query_topic !== null || this.props.filter === 'favorites' || this.props.filter === 'my-content' || this.state._query_search !== null || this.state._query_autor !== null ? 
+              <Button
+              href='/list'
               className={Styles.button}
+              type="primary"
             >
-              Mis actividades favoritas
+              Todas las actividades
             </Button>
+              :
+              <div></div>
+            }
+            
+            
           </Col>
         </Row>
 

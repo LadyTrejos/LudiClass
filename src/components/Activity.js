@@ -22,41 +22,25 @@ import HOSTNAME from '../helpers/hostname';
 import PostList from './PostList';
 import Styles from './Activity.module.css';
 
+
 const confirm = Modal.confirm;
-const { CheckableTag } = Tag;
 
 class ActivityDetail extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-        activityInfo:{
-            name:'',
-            description:'',
-            owner:'',
-            topics:[],
-            image:'',
-            id:'',
-            users: []
-        },
         activities:[],
         submitting: false,
         previewVisible: false,
         previewImage: '',
         fileList: [],
+        actFiltered:'all',
       };
       this.imageRef = React.createRef();
 }
   
   
 componentDidMount(){
-    const userID = localStorage.getItem('user');
-
-    // axios.get(`${HOSTNAME}/api/users/${userID}/`)
-    // .then(res => {
-    //     this.setState({
-    //     activities:res.data.activities
-    //     })
-    // })
 
     const activityID = this.props.match.params.id;
     axios.get(`${HOSTNAME}/api/activity/${activityID}/`)
@@ -71,6 +55,7 @@ componentDidMount(){
             owner: res.data.owner,
             users: res.data.users
         },
+        
 
       })
     })
@@ -99,53 +84,15 @@ componentDidMount(){
     });
   };
 
-  showConfirm(id) {
-
-    confirm({
-      title: '¿Estás seguro(a) que deseas eliminar esta actividad?',
-      content: 'Si eliminas la actividad nadie podrá verla de nuevo.',
-      onOk: () => {
-        axios.delete(`${HOSTNAME}/api/activity/${id}/`)
-        .then(() => 
-          history.push('/list')
-        )
-      },
-      onCancel() {},
-    });
-  }
 
   Favorite = () => {
-    // const id = this.state.activityInfo.id;
-    // if(!this.state.activities.includes(id)){
-    //   this.state.activities.push(id)
-    //   this.setState({favorito: !this.state.favorito})
-    //   message.success('¡Actividad agregada a tus favoritos! 💖')
-    // }else{
-    //   for( var i = 0; i < this.state.activities.length; i++){ 
-    //     if ( this.state.activities[i] === id) {
-    //       this.state.activities.splice(i, 1); 
-    //     }
-    //  }
-    //  this.setState({favorito: !this.state.favorito})
-    //  message.info('Eliminaste esta actividad de tu lista de favoritos 💔')
-    // }
-    // const userID = localStorage.getItem('user')
-    // const ActivityData = JSON.stringify({activities: this.state.activities});
-    // axios.patch(`${HOSTNAME}/api/users/${userID}/`,
-    //     ActivityData,
-    //     { headers: {"Content-type": "application/json"}}
-    // )
-    // .catch(err => 
-    //   console.log(err)
-    // )
-
     const id = this.state.activityInfo.id;
     const userID = localStorage.getItem('user')
     
     if(!this.state.activityInfo.users.includes(userID)){
       this.state.activityInfo.users.push(userID)
       this.setState({favorito: !this.state.favorito})
-      message.success('¡Actividad agregada a tus favoritos! 💖')
+      message.success('¡Actividad agregada a tu lista de favoritos! 💖')
     }else{
       for( var i = 0; i < this.state.activityInfo.users.length; i++){ 
         if ( this.state.activityInfo.users[i] === userID) {
@@ -165,14 +112,36 @@ componentDidMount(){
     )
   }
 
-  searchTag = (a) => {
-    console.log('Estoy en searchTag ',a)
+  searchTag = (value) => {
+    console.log('Estoy en searchTag ',value)
+    if (value !== "") {
+     history.push('/')
+      this.setState({
+        actFiltered: value
+      });
+    } 
   }
+  
+  showConfirm(id) {
 
+    confirm({
+      title: '¿Estás seguro(a) que deseas eliminar esta actividad?',
+      content: 'Si eliminas la actividad nadie podrá verla de nuevo.',
+      onOk: () => {
+        axios.delete(`${HOSTNAME}/api/activity/${id}/`)
+        .then(() => 
+          history.push('/list')
+        )
+      },
+      onCancel() {},
+    });
+  }
   
 
   render() {
+    console.log(this.state)
     const userID = localStorage.getItem('user');
+    const { actFiltered } = this.state;
     return (
         
         <div className={Styles.gr} style={{padding:15 }}>
@@ -180,64 +149,105 @@ componentDidMount(){
             {
                 this.state.activityInfo && this.state.all_topics ? 
                 <div>
-                    <div
-                        style={{display:"flex", justifyContent:"center", alignItems:"center", marginTop:"5%"}}>
-                        
-                        <br/>
-                        <img
-                            className={Styles.image}
-                            alt="Foto de la actividad"
-                            src={this.state.activityInfo.image}
+                  <Row type="flex" justify="center">
+                    <Col xs={16} sm={16} md={16} lg={16} xl={16}>
+                      <h2 className={Styles.title}>
+                        {this.state.activityInfo.name[0].toUpperCase().concat(this.state.activityInfo.name.substring(1))}
+                      </h2>
+                    </Col>
+                  </Row>
+                  <Row type="flex" justify="center">
+                    <Col>
+                      <img
+                        className={Styles.image}
+                        alt="Foto de la actividad"
+                        src={this.state.activityInfo.image}
                         />
-                    </div>        
-                    <Descriptions
-                        
-                        title={<span style={{display:"flex", justifyContent:"center", alignItems:"center",fontSize:'2rem', color:'#FA541C'}}>{this.state.activityInfo.name.toUpperCase()}</span>}
-                        column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
-                        
-                    >
-                        <Descriptions.Item className={Styles.descriptionItem} label='Descripción'>
-                          <br/>
-                          <p style={{fontSize:'1.2rem', whiteSpace:'pre-wrap'}} > {this.state.activityInfo.description} </p>
-                            
-                        </Descriptions.Item>
-                        <br/> 
-                        <Descriptions.Item className={Styles.descriptionItem} label="Creador">
-                            
-                            <p style={{fontSize:'1.1rem', fontWeight:'bold'}} > {this.state.activityInfo.owner.toUpperCase()}</p>
-                        </Descriptions.Item>
-                        
-                        <Descriptions.Item className={Styles.descriptionItem} label='Temas'>{ this.state.activityInfo.topics.map( item => (
-                                <CheckableTag className={Styles.tag} key={item} onChange={()=> this.searchTag(this.state.all_topics[item])}>{this.state.all_topics[item]}</CheckableTag>
-                                ))
-                                }</Descriptions.Item>
-                        
-                    </Descriptions>
+                    </Col>
+                  </Row>
+                  <Row type="flex" justify="center">
+                    <Col md={24} lg={24}>
+                      <Row type="flex" justify="center">
+                        <Col md={5} lg={5}>
+                          {this.state.activityInfo.owner === localStorage.getItem('user')?
+                            <Button 
+                              className={Styles.editbtn}
+                              href= {`/edit/${this.state.activityInfo.id}`}
+                            >
+                              Editar actividad
+                            </Button>
+                            :
+                            <div></div>
+                          }
+                        </Col>
+                        <Col md={5} lg={5}>
+                          {this.state.activityInfo.owner === localStorage.getItem('user')?
+                            <Button 
+                              type='default' 
+                              onClick={() => {this.showConfirm(this.state.activityInfo.id)}} 
+                              style={{borderRadius:'10px', color:'#271496', fontWeight: 'bold', marginTop:'1rem'}}
+                            >
+                              Eliminar actividad
+                            </Button>
+                          :
+                          <div></div>
+                          }
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+                    
+                    <Row justify="center">
+                      <Col offset={4} md={16} lg={16}>
+                        <p className={Styles.label}>Descripción:</p>
+                        <p style={{wordWrap:'break-word', whiteSpace:'pre-line'}}>
+                          {this.state.activityInfo.description}
+                        </p>
+                      </Col>
+                    </Row>
+                    
+                    <Row>
+                      <Col offset={4}>
+                          <div>
+                            <p className={Styles.label}>Creada por: &nbsp;
+                              <a href={`/list?autor=${this.state.activityInfo.owner}`}>
+                                <span style={{fontSize:'1rem', fontWeight:'bold'}} >
+                                  {this.state.activityInfo.owner}
+                                </span>
+                              </a>
+                            </p>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col offset={4}>
+                          <div>
+                            { this.state.activityInfo.topics.map( item => (
+                              <a href={`/list?topic=${this.state.all_topics[item]}`}>
+                                <Tag color="geekblue">
+                                  {this.state.all_topics[item]}
+                                </Tag>
+                              </a>
+                              ))
+                            }
+                          </div>
+                        </Col>
+                      </Row>
+
                     <Row type="flex" justify="center" align="middle" gutter={20}>
                         <Col>
                             <Button size='large' 
-                                style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', backgroundColor:'#25b334', borderColor:'#25b334'}}
+                                style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', marginTop:'1rem', backgroundColor:'#25b334', borderColor:'#25b334'}}
                                 onClick={()=>this.Favorite()}
                             >
                                  {this.state.activityInfo.users.includes(userID) ? "Eliminar de favoritos 💔" : "Favorito 💖"}
                             </Button>
                         </Col>
-                        <Col>
-                          {this.state.activityInfo.owner === localStorage.getItem('user')?
-                            <Button size='large' 
-                                  style={{width:'100%', borderRadius:'10px', color:'#fff', fontWeight: 'bold', backgroundColor:'#25b379', borderColor:'#25b334'}}
-                                  href= {`/edit/${this.state.activityInfo.id}`}
-
-                              >
-                                    Editar actividad
-                              </Button>
-                            :
-                            <div></div>
-                          }
-                        </Col>
+                        
                     </Row>
                     <br/>
                     <span className={Styles.span}>Comentarios</span>
+                    
                     
                     <PostList {...this.props} user={true}/>
                 </div>
