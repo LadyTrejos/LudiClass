@@ -195,7 +195,7 @@ class RegisterForm extends React.Component {
               hasFeedback
               extra='La contraseña debe contener más de 8 caracteres'>
                 {getFieldDecorator('password', {
-                    rules: [{ required: true, message: 'Ingrese una contraseña' },
+                    rules: [{ required: true, message: 'Ingrese una contraseña',whitespace: true },
                     { validator: this.validateToNextPassword },
                     {validator: this.validatePasswordFormat} ],
                 })(
