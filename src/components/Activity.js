@@ -22,10 +22,8 @@ import HOSTNAME from '../helpers/hostname';
 import PostList from './PostList';
 import Styles from './Activity.module.css';
 
-import ActivityListView from "../containers/ActivityListView";
 
 const confirm = Modal.confirm;
-const { CheckableTag } = Tag;
 
 class ActivityDetail extends React.Component {
   constructor(props) {
@@ -52,7 +50,6 @@ class ActivityDetail extends React.Component {
   
   
 componentDidMount(){
-    const userID = localStorage.getItem('user');
 
     const activityID = this.props.match.params.id;
     axios.get(`${HOSTNAME}/api/activity/${activityID}/`)
@@ -96,20 +93,6 @@ componentDidMount(){
     });
   };
 
-  showConfirm(id) {
-
-    confirm({
-      title: '¿Estás seguro(a) que deseas eliminar esta actividad?',
-      content: 'Si eliminas la actividad nadie podrá verla de nuevo.',
-      onOk: () => {
-        axios.delete(`${HOSTNAME}/api/activity/${id}/`)
-        .then(() => 
-          history.push('/list')
-        )
-      },
-      onCancel() {},
-    });
-  }
 
   Favorite = () => {
     const id = this.state.activityInfo.id;
@@ -147,17 +130,16 @@ componentDidMount(){
       });
     } 
   }
-
+  
   showConfirm(id) {
 
     confirm({
       title: '¿Estás seguro(a) que deseas eliminar esta actividad?',
-      content: 'Si eliminas la actividad nadie podrá volver a verla.',
+      content: 'Si eliminas la actividad nadie podrá verla de nuevo.',
       onOk: () => {
-        console.log(this.state)
         axios.delete(`${HOSTNAME}/api/activity/${id}/`)
         .then(() => 
-          history.push('/')
+          history.push('/list')
         )
       },
       onCancel() {},

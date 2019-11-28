@@ -67,7 +67,7 @@ class ViewActivity extends React.Component {
     const { data } = this.props;
     return (
       <div>
-        <BackTop />
+        <BackTop/>
         {data.length > 0 ? (
           <List
             itemLayout="horizontal"
@@ -82,7 +82,7 @@ class ViewActivity extends React.Component {
               onChange: page => {
                 console.log(page);
               },
-              pageSize: 20
+              pageSize: 6
             }}
             dataSource={this.props.data}
             renderItem={item => (
