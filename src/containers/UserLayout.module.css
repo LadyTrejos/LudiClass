@@ -1,6 +1,6 @@
 aside {
   min-height: 100vh;
-  min-width: 17vw!important;
+  min-width: 17vw !important;
 }
 
 .brand {
@@ -12,11 +12,11 @@ aside {
 }
 
 .header {
-  padding: 0 1rem!important;
+  padding: 0 1rem !important;
   position: fixed;
   z-index: 1;
   width: 100vw;
-  min-height: 10vh ;
+  min-height: 10vh;
   background: linear-gradient(
     to right,
     rgba(36, 17, 144, 1) 0%,
@@ -31,9 +31,9 @@ aside {
 }
 
 .logout {
-  background: white; 
-  border-color:white; 
-  margin-left:2.5rem;
+  background: white;
+  border-color: white;
+  margin-left: 2.5rem;
   color: #271496;
   align-self: a;
   bottom: 10px;
@@ -46,15 +46,17 @@ aside {
   font-weight: bold;
   margin: 2vh 0 0 0;
   text-align: center;
-  
 }
 
 .option {
-  color: white!important;
+  color: white !important;
 }
-
+.title {
+  color: white !important;
+  margin: 10px 10px;
+}
 .option:hover {
-  color: white!important;
+  color: white !important;
   background: rgba(70, 42, 213, 1);
   text-decoration: none;
 }
@@ -75,30 +77,28 @@ aside {
 }
 
 .username {
-  margin-top: 2vh; 
-  font-size: 1.5rem; 
+  margin-top: 2vh;
+  font-size: 1.5rem;
   color: white;
 }
 
 .username::before {
-  content: '😀  ';
+  content: "😀  ";
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
   aside {
-    min-width: 0px!important;
+    min-width: 0px !important;
   }
-  
+
   .layout {
     margin-left: 0;
   }
 
-  .logout{
-    position: relative
-    ;
+  .logout {
+    position: relative;
   }
   .username {
     visibility: hidden;
   }
-
 }

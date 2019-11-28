@@ -1,12 +1,24 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import axios from 'axios';
-import { Form, Button, Input, Upload, Icon, Modal, Select, message, Row, Col } from 'antd';
-import { withRouter,} from 'react-router-dom';
+import React from "react";
+import "antd/dist/antd.css";
+import axios from "axios";
+import {
+  Form,
+  Button,
+  Input,
+  Upload,
+  Icon,
+  Modal,
+  Select,
+  message,
+  Row,
+  Col,
+  Alert
+} from "antd";
+import { withRouter } from "react-router-dom";
 
-import history from '.././helpers/history';
-import HOSTNAME from '../helpers/hostname';
-import styles from './CreateActivity.module.css';
+import history from ".././helpers/history";
+import HOSTNAME from "../helpers/hostname";
+import styles from "./CreateActivity.module.css";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -26,52 +38,51 @@ function getBase64(file) {
 class ActivityClass extends React.Component {
   constructor(props) {
     super(props);
-      this.state = {
-        activityInfo:{
-            name:'',
-            description:'',
-            owner:localStorage.getItem('user'),
-            topics:[],
-            image:'',
-        },
-        topic:[],
-        submitting: false,
-        previewVisible: false,
-        previewImage: '',
-        fileList: [],
-      };
-      this.imageRef = React.createRef();
+    this.state = {
+      activityInfo: {
+        name: "",
+        description: "",
+        owner: localStorage.getItem("user"),
+        topics: [],
+        image: ""
+      },
+      topic: [],
+      submitting: false,
+      previewVisible: false,
+      previewImage: "",
+      fileList: [],
+      fileOk: true
+    };
+    this.imageRef = React.createRef();
   }
 
-  componentDidMount(){
-
-    axios.get(`${HOSTNAME}/api/topic/`)
-    .then( res => {
-        this.setState({ topic: res.data})
-    })
-    .catch( err => console.log(err.message))
+  componentDidMount() {
+    axios
+      .get(`${HOSTNAME}/api/topic/`)
+      .then(res => {
+        this.setState({ topic: res.data });
+      })
+      .catch(err => console.log(err.message));
   }
 
-  handleTopicsChange = (value) => {
+  handleTopicsChange = value => {
     this.setState({
-        activityInfo: { ...this.state.activityInfo, topics: value}
-    })
-    
-  }
-    
+      activityInfo: { ...this.state.activityInfo, topics: value }
+    });
+  };
+
   // Inicio imagenes
   handleCancel = () => this.setState({ previewVisible: false });
 
   handlePreview = async file => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
-
     }
 
     this.setState({
       previewImage: file.url || file.preview,
       previewVisible: true,
-      activityInfo:{...this.state.activityInfo, image: file.originFileObj}
+      activityInfo: { ...this.state.activityInfo, image: file.originFileObj }
     });
   };
 
@@ -79,7 +90,7 @@ class ActivityClass extends React.Component {
 
   // Fin imagenes
 
-  handleSubmit = (topics) => {
+  handleSubmit = topics => {
     if (!this.state.description && this.state.fileList.length === 0) {
       return;
     }
@@ -87,91 +98,111 @@ class ActivityClass extends React.Component {
     this.setState({ submitting: true });
     let postData = new FormData();
     const image = this.state.fileList[0];
-    postData.append('picture', image.originFileObj);
-    postData.append('name', this.state.activityInfo.name);
-    postData.append('description', this.state.activityInfo.description);
-    topics.map(topic => postData.append('topics', topic));
-    postData.append('owner', this.state.activityInfo.owner);
 
-    axios.post(`${HOSTNAME}/api/activity/`,
-        postData,
-        { headers: {"Content-type": 'multipart/form-data'}}
-    )
-    .then(res => this.setState({
-        activityInfo:{
-            name:'',
-            description: '',
-            owner:'',
-            topics:'',
-            image:'',
-        },
-        submitting: false,
-        fileList:[]
-        }, ()=>{
-          history.push(`/activity/${res.data.id}`)
-        } )
-    )
+    if (image.type.includes("image/")) {
+      this.setState({ fileOk: true });
+      postData.append("picture", image.originFileObj);
+      postData.append("name", this.state.activityInfo.name);
+      postData.append("description", this.state.activityInfo.description);
+      topics.map(topic => postData.append("topics", topic));
+      postData.append("owner", this.state.activityInfo.owner);
+      axios
+        .post(`${HOSTNAME}/api/activity/`, postData, {
+          headers: { "Content-type": "multipart/form-data" }
+        })
+        .then(res =>
+          this.setState(
+            {
+              activityInfo: {
+                name: "",
+                description: "",
+                owner: "",
+                topics: "",
+                image: ""
+              },
+              submitting: false,
+              fileList: [],
+              fileOk: false
+            },
+            () => {
+              history.push(`/activity/${res.data.id}`);
+            }
+          )
+        );
+    } else {
+      this.setState({ submitting: false, fileOk: false });
+      return;
+    }
   };
 
-  handleCreate = (e) => {
+  handleCreate = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        let topics = [], promises = [];
-        let data = ''
+        let topics = [],
+          promises = [];
+        let data = "";
         this.state.activityInfo.topics.forEach((topic, i) => {
-            if(topic.includes('>')) {
-                data = topic.split('>')
-                topics.push(data[0])
-                
-                //window.location.reload(true);
-                
-            } else {
-                promises.push(axios.post(`${HOSTNAME}/api/topic/`,
-                            `{"name": "${topic}"}`,
-                            { headers: {"Content-type": "application/json"}}
-                            )
-                )
-                //window.location.reload(true);
-            }
-        })
-        axios.all(promises)
-        .then(results => {
-          results.forEach(item => topics.push(item.data.id))
-          this.handleSubmit(topics)
-        }
-        )
+          if (topic.includes(">")) {
+            data = topic.split(">");
+            topics.push(data[0]);
+
+            //window.location.reload(true);
+          } else {
+            promises.push(
+              axios.post(`${HOSTNAME}/api/topic/`, `{"name": "${topic}"}`, {
+                headers: { "Content-type": "application/json" }
+              })
+            );
+            //window.location.reload(true);
+          }
+        });
+        axios.all(promises).then(results => {
+          results.forEach(item => topics.push(item.data.id));
+          this.handleSubmit(topics);
+        });
       }
     });
-  }
+  };
 
-  handleDeletePost = (id) => {
-    axios.delete(`${HOSTNAME}/api/activity/${id}/`)
-    .then(() => {
-        window.location.reload();
-        message.success('La publicación ha sido eliminada.')
-        
-    })
-  }
+  handleDeletePost = id => {
+    axios.delete(`${HOSTNAME}/api/activity/${id}/`).then(() => {
+      window.location.reload();
+      message.success("La publicación ha sido eliminada.");
+    });
+  };
 
   validateName = (rule, value, callback) => {
-    if(value.length > 40){
-      callback("El nombre de la actividad no debe contener más de 40 caracteres.")
-    } 
+    if (value.length > 40) {
+      callback(
+        "El nombre de la actividad no debe contener más de 40 caracteres."
+      );
+    }
     callback();
   };
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { submitting } = this.state;
+    const { submitting, fileOk } = this.state;
     const { previewVisible, previewImage, fileList } = this.state;
 
-    const topicItems = []
+    const topicItems = [];
 
-      this.state.topic.map( (item) =>
-          topicItems.push(<Option key={item.id} value={`${item.id}>${item.name}`}>{item.name}</Option>)
-      );
-    
+    let status = true;
+    console.log("FIle OK", fileOk);
+
+    if (fileList[0] !== undefined) {
+      status = fileList[0].status !== "done" ? true : false;
+    }
+
+    this.state.topic.map(item =>
+      topicItems.push(
+        <Option key={item.id} value={`${item.id}>${item.name}`}>
+          {item.name}
+        </Option>
+      )
+    );
+
     const uploadButton = (
       <div>
         <Icon type="plus" />
@@ -180,115 +211,168 @@ class ActivityClass extends React.Component {
     );
 
     return (
-      <div >
-        <div >
+      <div>
+        <div>
           <h1 className={styles.title}>Crear actividad</h1>
         </div>
         <Form className={styles.form}>
           <Row gutter={50}>
             <Col md={12}>
               <Row>
-
-  
-                <Form.Item label='Nombre de la actividad'>
-                  {getFieldDecorator('nombre', {
-                      rules: [
-                        { required: true, message: 'Ponle un nombre a tu actividad', type: 'string' },
-                        { validator: this.validateName }],
-                    })(
-                    <Input placeholder='Nombre de la actividad'
-                      size='large'
-                      onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, name: e.target.value } })}>
-                    </Input>
-                    )}
+                <Form.Item label="Nombre de la actividad">
+                  {getFieldDecorator("nombre", {
+                    rules: [
+                      {
+                        required: true,
+                        message: "Ponle un nombre a tu actividad",
+                        type: "string"
+                      },
+                      { validator: this.validateName }
+                    ]
+                  })(
+                    <Input
+                      placeholder="Nombre de la actividad"
+                      size="large"
+                      onChange={e =>
+                        this.setState({
+                          activityInfo: {
+                            ...this.state.activityInfo,
+                            name: e.target.value
+                          }
+                        })
+                      }
+                    ></Input>
+                  )}
                 </Form.Item>
               </Row>
               <Row>
-                  <Form.Item label='Descripción de la actividad'>
-                    {getFieldDecorator('descripcion',{
-                        rules: [
-                          { required: true, message: 'Ponle una descripción a tu actividad', type: 'string' },
-                          ],
-                      })(
-                      <TextArea 
-                        placeholder='Cuéntanos de qué trata tu actividad, qué materiales necesita...' 
-                        rows={8} 
-                        style={{whiteSpace:'pre-line'}}
-                        onChange={e => this.setState({activityInfo: { ...this.state.activityInfo, description: e.target.value } })} 
-                      />
-                    )}
-                      
-                  </Form.Item>
+                <Form.Item label="Descripción de la actividad">
+                  {getFieldDecorator("descripcion", {
+                    rules: [
+                      {
+                        required: true,
+                        message: "Ponle una descripción a tu actividad",
+                        type: "string"
+                      }
+                    ]
+                  })(
+                    <TextArea
+                      placeholder="Cuéntanos de qué trata tu actividad, qué materiales necesita..."
+                      rows={8}
+                      style={{ whiteSpace: "pre-line" }}
+                      onChange={e =>
+                        this.setState({
+                          activityInfo: {
+                            ...this.state.activityInfo,
+                            description: e.target.value
+                          }
+                        })
+                      }
+                    />
+                  )}
+                </Form.Item>
               </Row>
             </Col>
             <Col md={8}>
               <Row>
-                <Form.Item label="Imagen de portada" >
-                  {getFieldDecorator('archivo', {
-                      rules: [
-                      { required: true, message: 'Sube una foto de la actividad que deseas publicar'},
-                      ],
+                <Form.Item label="Imagen de portada">
+                  {getFieldDecorator("archivo", {
+                    rules: [
+                      {
+                        required: true,
+                        message:
+                          "Sube una foto de la actividad que deseas publicar"
+                      }
+                    ]
                   })(
-                      <div className={"clearfix"}>
+                    <div className={"clearfix"}>
                       <Upload
-                      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                      listType="picture-card"
-                      fileList={fileList}
-                      onPreview={this.handlePreview}
-                      onChange={this.handleChange}
+                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                        listType="picture-card"
+                        fileList={fileList}
+                        onPreview={this.handlePreview}
+                        onChange={this.handleChange}
                       >
-                      {fileList.length >= 1 ? null : uploadButton}
+                        {fileList.length >= 1 ? null : uploadButton}
                       </Upload>
-                      <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-                      <img alt="example" style={{ width: '150%' }} src={previewImage} />
+                      <Modal
+                        visible={previewVisible}
+                        footer={null}
+                        onCancel={this.handleCancel}
+                      >
+                        <img
+                          alt="example"
+                          style={{ width: "150%" }}
+                          src={previewImage}
+                        />
                       </Modal>
-                      </div>
+                    </div>
                   )}
                 </Form.Item>
               </Row>
+              {!fileOk ? (
+                <Alert
+                  message="El formato que subiste no es el correcto!"
+                  description="Recuerda que solo debes subir imágenes."
+                  type="warning"
+                  closable
+                  showIcon
+                />
+              ) : (
+                <div></div>
+              )}
               <Row md={6}>
                 <p className={styles.highlight}>
-                  Recuerda usar una imagen que se relacione con la actividad que estás publicando.
+                  Recuerda usar una imagen que se relacione con la actividad que
+                  estás publicando.
                 </p>
-                <p>Esta imagen, las palabras claves y el nombre que le pongas a tu actividad, ayudarán a los demás usuarios a 
-                  identificar con facilidad el tema que desarrolla. 
+                <p>
+                  Esta imagen, las palabras claves y el nombre que le pongas a
+                  tu actividad, ayudarán a los demás usuarios a identificar con
+                  facilidad el tema que desarrolla.
                 </p>
               </Row>
             </Col>
           </Row>
-          
-{/*---------------------------------------------------------------------------------------------------------------*/}
-          <Form.Item 
-            label="Palabras clave" 
-            extra="Para añadir una nueva palabra clave escribe el nombre en este espacio y finaliza con la tecla Enter">
-            {getFieldDecorator('topics', {
-                rules: [
-                { required: true, message: 'Usa al menos una palabra clave para que los demás usuarios puedan encontrar tu actividad más fácil', type: 'array' },
-                ],
+
+          {/*---------------------------------------------------------------------------------------------------------------*/}
+          <Form.Item
+            label="Palabras clave"
+            extra="Para añadir una nueva palabra clave escribe el nombre en este espacio y finaliza con la tecla Enter"
+          >
+            {getFieldDecorator("topics", {
+              rules: [
+                {
+                  required: true,
+                  message:
+                    "Usa al menos una palabra clave para que los demás usuarios puedan encontrar tu actividad más fácil",
+                  type: "array"
+                }
+              ]
             })(
-                <Select 
-                size='large'
+              <Select
+                size="large"
                 mode="tags"
                 placeholder="Selecciona palabras clave que identifiquen tu actividad"
                 tokenSeparators={[","]}
-                onChange={(e) => this.handleTopicsChange(e)}
-                >
-                    {topicItems}
-                </Select>,
+                onChange={e => this.handleTopicsChange(e)}
+              >
+                {topicItems}
+              </Select>
             )}
           </Form.Item>
-{/*---------------------------------------------------------------------------------------------------------------*/}
-          
+          {/*---------------------------------------------------------------------------------------------------------------*/}
 
-          <Button 
-            htmlType="submit" 
-            loading={submitting} 
-            onClick={this.handleCreate} 
-            style={{backgroundColor:'#25b334', borderColor: '#25b334'}}
+          <Button
+            htmlType="submit"
+            loading={submitting}
+            onClick={this.handleCreate}
+            style={{ backgroundColor: "#25b334", borderColor: "#25b334" }}
             type="primary"
-            size='large'
-            >
-                Publicar
+            size="large"
+            disabled={status}
+          >
+            Publicar
           </Button>
         </Form>
       </div>
@@ -296,6 +380,6 @@ class ActivityClass extends React.Component {
   }
 }
 
-const Activity = Form.create({ name: 'Activity' })(ActivityClass);
+const Activity = Form.create({ name: "Activity" })(ActivityClass);
 
 export default withRouter(Activity);
